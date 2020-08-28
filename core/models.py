@@ -1,3 +1,5 @@
+import os
+from django.utils import timezone
 from django.conf import settings
 from django.db import models
 
@@ -27,3 +29,41 @@ class Glossary(models.Model):
     class Meta:
         ordering = ['-created_at']
         get_latest_by = ['-created_at']
+
+
+def get_upload_blog(instance, filename):
+    return os.path.join("Content", instance.title, filename)
+
+
+class BlogCategory(models.Model):
+    name = models.CharField(max_length=250, unique=True)
+
+    def __str__(self):
+        return self.name
+
+
+class Blog(models.Model):
+    STATUS_CHOICES = (
+        (0, 'Draft'),
+        (1, 'Publish'),
+        (2, 'UnPublish'),
+    )
+    title = models.CharField(max_length=250)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL,
+                               on_delete=models.CASCADE,
+                               related_name='content_author')
+    content = models.TextField()
+    publish = models.DateTimeField(default=timezone.now, blank=True, null=True)
+    status = models.IntegerField(choices=STATUS_CHOICES,
+                                 default=0)
+    category = models.ForeignKey('BlogCategory', on_delete=models.CASCADE,
+                                 related_name='article_categories', blank=True,
+                                 null=True)
+    photo = models.FileField(upload_to=get_upload_blog, blank=True)
+    tag = models.TextField()
+    """
+        For seo purpose
+    """
+    meta_title = models.TextField(null=True, blank=True)
+    meta_keywords = models.TextField(null=True, blank=True)
+    meta_description = models.TextField(null=True, blank=True)
