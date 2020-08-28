@@ -67,3 +67,36 @@ class Blog(models.Model):
     meta_title = models.TextField(null=True, blank=True)
     meta_keywords = models.TextField(null=True, blank=True)
     meta_description = models.TextField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True, editable=False)
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True,
+                                   db_index=True,
+                                   editable=False, on_delete=models.SET_NULL,
+                                   related_name="blog_admin")
+    updated_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True,
+                                   db_index=True,
+                                   editable=False, on_delete=models.SET_NULL,
+                                   related_name="blogs")
+    updated_at = models.DateTimeField(auto_now=True, editable=False)
+    is_active = models.BooleanField(default=True)
+
+
+class Information(models.Model):
+    TYPE_CHOICES = (('mission', 'Our Mission'),
+                    ('about', 'About Us'),
+                    ('connect', 'Connect with Us'),
+                    ('terms', 'Terms & Condition'),
+                    ('privacy', 'Privacy'))
+    info_type = models.CharField(max_length=75, choices=TYPE_CHOICES,
+                                 unique=True)
+    description = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True, editable=False)
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True,
+                                   db_index=True,
+                                   editable=False, on_delete=models.SET_NULL,
+                                   related_name="information_admin")
+    updated_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True,
+                                   db_index=True,
+                                   editable=False, on_delete=models.SET_NULL,
+                                   related_name="information")
+    updated_at = models.DateTimeField(auto_now=True, editable=False)
+    is_active = models.BooleanField(default=True)

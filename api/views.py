@@ -1,8 +1,8 @@
 from rest_framework import viewsets
 from django.db.models import Q
-from core.models import Glossary, Blog, BlogCategory
+from core.models import Glossary, Blog, BlogCategory, Information
 from api.serializers.core_serializers import GlossarySerializer, \
-    BlogSerializer, BlogCategorySerializer
+    BlogSerializer, BlogCategorySerializer, InformationSerializer
 
 
 class GlossaryViewSet(viewsets.ModelViewSet):
@@ -28,3 +28,8 @@ class BlogViewSet(viewsets.ModelViewSet):
 class BlogCategoryViewSet(viewsets.ModelViewSet):
     queryset = BlogCategory.objects.all()
     serializer_class = BlogCategorySerializer
+
+
+class InformationViewSet(viewsets.ModelViewSet):
+    queryset = Information.objects.all()
+    serializer_class = InformationSerializer
