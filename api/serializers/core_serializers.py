@@ -1,4 +1,4 @@
-from core.models import Glossary, Blog, BlogCategory, Information
+from core.models import Glossary, Blog, BlogCategory, Information, Province
 from rest_framework import serializers
 
 
@@ -27,4 +27,11 @@ class InformationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Information
+        fields = '__all__'
+
+
+class ProvinceSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Province
         fields = '__all__'

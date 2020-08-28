@@ -100,3 +100,10 @@ class Information(models.Model):
                                    related_name="information")
     updated_at = models.DateTimeField(auto_now=True, editable=False)
     is_active = models.BooleanField(default=True)
+
+
+class Province(models.Model):
+    name = models.CharField(max_length=250, unique=True)
+
+    def __str__(self):
+        return self.name
