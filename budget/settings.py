@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'api',
     'core',
+    'django_filters',
+    'import_export',
 ]
 
 MIDDLEWARE = [
@@ -77,11 +79,18 @@ WSGI_APPLICATION = 'budget.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'nepalbudget1',
+        'USER': 'superuser',
+        "PASSWORD": '1234',
+        'HOST': 'localhost',
+        'PORT': '5432'
     }
 }
 
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
