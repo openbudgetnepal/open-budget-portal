@@ -2,6 +2,8 @@ import os
 from django.utils import timezone
 from django.conf import settings
 from django.db import models
+import pandas as pd
+from django.contrib import messages
 
 
 class ActiveCommonManager(models.Manager):
@@ -103,7 +105,66 @@ class Information(models.Model):
 
 
 class Province(models.Model):
-    name = models.CharField(max_length=250, unique=True)
+    name = models.CharField(max_length=250, unique=True, blank=True, null=True)
+    code = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
         return self.name
+
+
+class Year(models.Model):
+    year = models.CharField(max_length=250, unique=True)
+
+    def __str__(self):
+        return self.year
+
+
+class ProvinceSource(models.Model):
+    province_name = models.ForeignKey(Province, on_delete=models.CASCADE, related_name='data6', blank=True,
+                                      null=True)
+    source = models.CharField(max_length=500, blank=True, null=True)
+    budget = models.BigIntegerField(blank=True, null=True)
+    year = models.ForeignKey(Year, on_delete=models.CASCADE, blank=True, null=True, related_name='data7')
+
+    def __str__(self):
+        return self.source
+
+
+class ActualExpenditure(models.Model):
+    province_name = models.ForeignKey(Province, on_delete=models.CASCADE, related_name='data5', blank=True,
+                                      null=True)
+    year = models.ForeignKey(Year, on_delete=models.CASCADE, related_name='data8', blank=True, null=True)
+    total = models.BigIntegerField(blank=True, null=True)
+    current = models.BigIntegerField(blank=True, null=True)
+    capital = models.BigIntegerField(blank=True, null=True)
+
+    def __str__(self):
+        return self.province_name.name
+
+
+class TotalBudget(models.Model):
+    province_name = models.ForeignKey(Province, on_delete=models.CASCADE, related_name='data3', blank=True,
+                                      null=True)
+    year = models.ForeignKey(Year, on_delete=models.CASCADE, related_name='data1', blank=True, null=True)
+    total = models.BigIntegerField(blank=True, null=True)
+    current = models.BigIntegerField(blank=True, null=True)
+    capital = models.BigIntegerField(blank=True, null=True)
+
+    def __str__(self):
+        return self.province_name.name
+
+
+class ProvinceBudget(models.Model):
+    province_name = models.ForeignKey(Province, on_delete=models.CASCADE, related_name='data4', blank=True,
+                                      null=True)
+    office_name = models.CharField(max_length=500, blank=True, null=True)
+    actual_expenditure = models.ManyToManyField(ActualExpenditure)
+    total_budget = models.ManyToManyField(TotalBudget)
+
+    def __str__(self):
+        return self.province_name.name
+
+
+
+
+

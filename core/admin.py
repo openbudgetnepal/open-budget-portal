@@ -1,5 +1,6 @@
 from django.contrib import admin
-from core.models import Glossary
+from core.models import Glossary, Year, Province, ProvinceSource, TotalBudget, ActualExpenditure, ProvinceBudget
+from import_export.admin import ImportExportModelAdmin
 
 
 class GlossaryAdmin(admin.ModelAdmin):
@@ -9,4 +10,28 @@ class GlossaryAdmin(admin.ModelAdmin):
     list_filter = ['title', 'created_at']
 
 
+admin.site.register(Year)
+
+
+class ProvinceAdmin(ImportExportModelAdmin):
+    pass
+
+
+admin.site.register(Province, ProvinceAdmin)
+
+
+class ProvinceSourceAdmin(ImportExportModelAdmin):
+    pass
+
+
+admin.site.register(ProvinceSource, ProvinceSourceAdmin)
+admin.site.register(TotalBudget)
+admin.site.register(ActualExpenditure)
+
+
+class ProvinceBudgetAdmin(ImportExportModelAdmin):
+    pass
+
+
+admin.site.register(ProvinceBudget, ProvinceBudgetAdmin)
 admin.site.register(Glossary, GlossaryAdmin)
