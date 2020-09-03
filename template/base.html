@@ -31,69 +31,33 @@
 
     <!-- stylesheet start -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href='{% static "css/bootstrap.min.css" %}' />
+    <link rel="stylesheet" type="text/css" href='{% static "css/style.css" %}'>
     {% block link %}
+
     {% endblock %}
 </head>
 
-<body class="one-pg-web">
+<body class="">
+        <div>
+            {% for messages in messages %}
 
-    <div class="smooth-scroll">
+            <script>
+                window.onload = startcountdown;
+                 function startcountdown(){
+                    alert({
+                        message: '{{messages}}'
 
-        <!-- header -->
-        <header class="site-header is-bg">
-            <div class="container">
-                <div class="wrap-header">
-                    <div class="header-in">
-                        <a href="#" class="logo">
-                            <img class="logo-white" src="img/logo-white.svg" alt="logo">
-                            <img class="logo-black" src="img/logo-black.svg" alt="logo">
-                        </a>
-                        <div class="menu-wrap">
-                            <div class="menu">
-                                <ul>
-                                    <li>
-                                        <a href="visualization.html" class="active">Budget Visualization</a>
-                                    </li>
-                                    <li>
-                                        <a href="glossary.html" class="">Glossary</a>
-                                    </li>
-                                    <li>
-                                        <a href="blog.html" class="">Blogs</a>
-                                    </li>
-                                    <li>
-                                        <a href="about.html" class="">About</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="toggle-button">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
-
+                    })
+                }
+                </script>
+            {%endfor%}
+        </div>
 
         {% block body_part %}
         {% endblock %}
 
 
-
-                    <footer>
-                        <p class="footer-para is-dark">
-                            <a href="#contact"><i class="material-icons">expand_more</i></a>
-                            Contact
-                        </p>
-                    </footer>
-                </div>
-            </div>
-        </section>
 
         <!-- contact -->
         <section class="contact_section" id="contact">
@@ -117,10 +81,10 @@
                                             </ul>
                                         </div>
                                         <ul class="social-media-grp">
-                                            <li class="social-item"><a href="https://www.facebook.com/"><img src="./img/facebook.svg" alt="facebook"></a></li>
-                                            <li class="social-item"><a href="https://twitter.com"><img src="./img/twitter.svg" alt="twitter"></a></li>
-                                            <li class="social-item"><a href="https://www.instagram.com"><img src="./img/instagram.svg" alt="instagram"></a></li>
-                                            <li class="social-item"><a href="https://www.youtube.com/"><img src="./img/youtube.svg" alt="youtube"></a></li>
+                                            <li class="social-item"><a href="https://www.facebook.com/"><img src='{% static "./img/facebook.svg" %}' alt="facebook"></a></li>
+                                            <li class="social-item"><a href="https://twitter.com"><img src='{% static "./img/twitter.svg" %}' alt="twitter"></a></li>
+                                            <li class="social-item"><a href="https://www.instagram.com"><img src='{% static "./img/instagram.svg" %}' alt="instagram"></a></li>
+                                            <li class="social-item"><a href="https://www.youtube.com/"><img src='{% static "./img/youtube.svg" %}' alt="youtube"></a></li>
                                         </ul>
                                    </div>
                                 </div>
@@ -128,7 +92,8 @@
                                 <div class="col-md-8">
                                     <div class="contact">
                                         <h5 class="title">Contact form</h5>
-                                        <form action="">
+                                        <form id="contactd" action="/contact" method="post">
+                                            {% csrf_token %}
                                             <div class="form-group">
                                                 <input type="text" name="name" id="inputname" class="form-control" placeholder="" required="">
                                                 <label for="inputname">Name</label>
@@ -172,7 +137,7 @@
                                 Top
                             </p>
                             <div class="web-footer">
-                                <div class="logo-center"><img src="./img/logo-white.svg" alt="logo"></div>
+                                <div class="logo-center"><img src='{% static "./img/logo-white.svg" %}' alt="logo"></div>
                                 <ul class="footer-links">
                                     <li class="link-item"><a href="#home">budget visualization</a></li>
                                     <li class="link-item"><a href="#about">About</a></li>
@@ -190,16 +155,36 @@
             </div>
         </section>
 
-    </div>
-
 
 
 
     <!-- Jquery Core Js -->
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/baffle@0.3.6/dist/baffle.min.js"></script>
-    <script src="js/viz.js"></script>
+    <script src='{% static "js/bootstrap.min.js" %}'></script>
+    <script src='{% static "js/jquery-3.4.1.min.js" %}'></script>
+    <script src='{% static "https://cdn.jsdelivr.net/npm/baffle@0.3.6/dist/baffle.min.js" %}'></script>
+    <script src='{% static "js/viz.js" %}'></script>
+        <script>
+            $(document).ready(function() {
+                $('#contactd').submit(function(event) {
+                    event.preventDefault();
+
+                    $.ajax ({
+                        url : '/contact',
+                        type: 'POST',
+                        data: $(this).serialize()
+                    }).done(function(resp) {
+                        if(resp.result=='success') {
+                            alert('Message Sent')
+
+                        } else {
+                            alert('Email Not Matched')
+                        }
+                    });
+
+                });
+            });
+
+    </script>
     {% block script %}
     {% endblock %}
 

@@ -1,0 +1,308 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block link %}
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href='{% static "css/apexcharts.css" %}'>
+<link rel="stylesheet" href='{% static "css/custom-charts.css" %}'>
+<link rel="stylesheet" type="text/css" href='{% static "css/bootstrap-grid.min.css" %}'>
+{% endblock %}
+{% block body_part %}
+<body class="">
+<div class="pg-wrap viz-wrap">
+    <header class="site-header is-bg">
+        <div class="container">
+            <div class="wrap-header">
+                <div class="header-in">
+                    <a href="/" class="logo">
+                        <img class="logo-white" src='{% static "img/logo-white.svg" %}' alt="logo">
+                        <img class="logo-black" src='{% static "img/logo-black.svg" %}' alt="logo">
+                    </a>
+                    <div class="menu-wrap">
+                        <div class="menu">
+                            <ul>
+                                <li>
+                                    <a href="/budgetvisualization/{{ object.id }}" class="active">Budget
+                                        Visualization</a>
+                                </li>
+                                <li>
+                                    <a href="glossary.html" class="">Glossary</a>
+                                </li>
+                                <li>
+                                    <a href="blog.html" class="">Blogs</a>
+                                </li>
+                                <li>
+                                    <a href="about.html" class="">About</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="toggle-button">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    {% for topdata in topdata %}
+    <section class="viz-header background-dark">
+        <div class="container">
+            <div class="wrapper">
+                <h3 class="title">{{ topdata.name }}</span></h3>
+                <div class="row gx-2 gy-2 viz-row">
+                    <div class="col-lg-3 col-md-12">
+                        <figure><img src='{% static "./img/Province1.svg" alt="Province1" %}'></figure>
+                    </div>
+                    <div class="col-lg-9 col-md-12">
+                        <div class="viz-info">
+                            <div class="info-category">
+                                <div class="category-column">
+                                    <span class="data-label">Population</span>
+                                    <h4 class="data">{{ topdata.total_population }}</h4>
+                                </div>
+
+                                <div class="category-column">
+                                    <span class="data-label">Male</span>
+                                    <h4 class="data">{{ percentage_male }} <span>%</span></h4>
+                                </div>
+
+                                <div class="category-column">
+                                    <span class="data-label">Female</span>
+                                    <h4 class="data">{{ percentage_female }} <span>%</span></h4>
+                                </div>
+
+                                <div class="category-column">
+                                    <span class="data-label">Economic Growth</span>
+                                    <h4 class="data">{{ topdata.economic_growth }}</span></h4>
+                                </div>
+                            </div>
+
+                            <div class="info-budget">
+                                <div class="budget-column">
+                                    <span class="data-label">Share in Gross Domestic Product</span>
+                                    <h4 class="data">{{ topdata.share_in_domestic_product }} </span></h4>
+                                </div>
+
+                                <div class="budget-column">
+                                    <span class="data-label">Human Development Index</span>
+                                    <h4 class="data">{{ topdata.human_development_index }} </span></h4>
+                                </div>
+
+                                <div class="budget-column">
+                                    <span class="data-label">Multidimensional Poverty Index</span>
+                                    <h4 class="data">{{ topdata.multidimensional_poverty_index }} <span>%</span></h4>
+                                </div>
+
+                                <div class="budget-column">
+                                    <span class="data-label">Total Gross Domestic Product</span>
+                                    <span class="rate">NRP</span>
+                                    <h4 class="data">{{ topdata.total_gross_domestic_product }}</h4>
+                                </div>
+
+                                <div class="budget-column">
+                                    <span class="data-label">Per Capita income</span>
+                                    <span class="rate">USD$</span>
+                                    <h4 class="data">{{ topdata.per_capital_income }}</h4>
+                                </div>
+
+                                <div class="budget-column">
+                                    <span class="data-label">Revenue collected</span>
+                                    <span class="rate">NRP</span>
+                                    <h4 class="data">{{ topdata.revenue_collected }}</span></h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endfor %}
+
+    <section class="viz-body">
+        <div class="container-fluid">
+            <div class="viz-content">
+                <div class="row g-0 gy-md-4 gy-sm-4">
+                    <div class="col-xl-4 col-lg-3 col-md-12">
+                        <div class="chart-section">
+                            <div class="contents">
+                                <h4 class="data is-dark">Budget Source</h4>
+                                <div class="chart">
+                                    <canvas id="myChart"></canvas>
+
+                                </div>
+                                <div class="chart-info">
+                                    {% for data in source %}
+                                    <div class="chart-data">
+                                        <span class="data-label is-dark">{{ data.source }}</span>
+                                        <span class="rate is-dark">NRP</span>
+                                        <h4 class="data">{{ data.budget }} </span></h4>
+                                    </div>
+                                    {% endfor %}
+
+                                </div>
+                                <div class="chart-note">
+                                    <p><strong>Note:</strong>&nbsp; All Rupees amounts shown here represent province
+                                        reported obligated amounts.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-8 col-lg-9 col-md-12">
+                        <div class="info-section">
+                            <div class="contents">
+                                <h4 class="data is-dark">You are viewing Provincial Budget of <span>{{object.name}}</span></h4>
+                                <h6 class="data-subtitle">Choose an option below to start your exploration.</h6>
+                                <div class="budget-info-contents">
+                                    <form method="post" action='/budgetvisualization/{{ object1 }}'>{% csrf_token %}
+                                    <div class="select-content">
+                                        <div class="sel-dropdown">
+                                            <label for="budget">Budget</label>
+
+                                            <select id="budget" name="budget">
+                                                <option value="1">Total Budget</option>
+                                                <option value="2">Actual Expenditure</option>
+                                            </select>
+                                        </div>
+                                        <div class="sel-dropdown">
+                                            <label for="year">Year</label>
+
+                                            <select id="year" name="year">
+                                                {% for data in date %}
+                                                <option value="{{ data.year }}">{{ data.year }}</option>
+                                                {% endfor %}
+
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <button type="submit" class="success">Submit</button>
+                                        </div>
+                                    </div>
+                                    </form>
+
+                                        <div id='datarec'>
+                                            <ul class="budget-ul">
+                                                {% for data in budget %}
+                                                    {% if val == '1' %}
+                                                        {% if data.total_budget__year__year == first_date %}
+                                                            <li class="budget-li-items" >
+
+                                                                <span class="label">
+
+                                                                    {{ data.office_name }}<strong>{{ data.total_budget__total }}</strong>
+
+                                                                </span>
+
+                                                            </li>
+                                                        {% endif %}
+                                                    {% elif val == '2' %}
+                                                        {% if data.actual_expenditure__year__year == first_date %}
+                                                            <li class="budget-li-items" >
+
+                                                                <span class="label">
+
+                                                                    {{ data.office_name }}<strong>{{ data.actual_expenditure__total }}</strong>
+
+                                                                </span>
+
+                                                            </li>
+                                                        {% endif %}
+
+                                                    {% elif val is None %}
+                                                        {% if data.total_budget__year__year == first_date %}
+                                                            <li class="budget-li-items" >
+
+                                                                <span class="label">
+
+                                                                    {{ data.office_name }}<strong>{{ data.total_budget__total }}</strong>
+
+                                                                </span>
+
+                                                            </li>
+                                                        {% endif %}
+                                                        {% endif %}
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+
+                                    <p class="note">All Rupees amounts shown here represent province reported obligated
+                                        amounts.</p>
+                                    <div class="btn-wrap">
+                                        <button class="common-button is-bg">Export</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+</div>
+</div>
+</body>
+{% endblock %}
+{% block script %}
+
+<!-- Jquery Core Js -->
+<script src='{% static "js/bootstrap.min.js" %}'></script>
+<script src='{% static "js/jquery-3.4.1.min.js" %}'></script>
+<script src='{% static "js/apexcharts.min.js" %}'></script>
+<script src='{% static "js/viz.js" %}'></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'pie',
+
+    // The data for our dataset
+    data: {
+        labels: [{% for data in source %} '{{ data.source }}',{% endfor %} ],
+        datasets: [{
+            label: 'My First dataset',
+            backgroundColor: ['#22264D', '#7CB5EC'],
+            data: [{% for data in source %} {{ data.budget }},{% endfor %}]
+        }]
+    },
+
+    // Configuration options go here
+    options: {}
+});
+
+</script>
+<!-- <script>
+    $(document).ready(function() {
+        $('#djfilter').submit(function(event) {
+            event.preventDefault();
+            var yrs = $('#year').val()
+            $.ajax ({
+                url : '/budgetvisualization/{{ object.id }}',
+                type: 'POST',
+                data: $(this).serialize(),
+            }).done(function(resp) {
+                var src = '<ul class="budget-ul"> {% for data in budget %}{% if data.actual_expenditure__year__year == yands %} <li class="budget-li-items" > <span class="label">{{ data.office_name }}<strong>{{ data.actual_expenditure__total }}</strong></span> </li> {% endif %}{% endfor %} </ul>'
+
+                var yr = resp.year
+                var source = src.replace('yands', '2077');
+
+                if(resp.result=='actual') {
+                    $("#datarec").html(source);
+                    alert(yr);
+                } else if(resp.result=='total') {
+                    $("#datarec").html('<ul class="budget-ul"> {% for data in budget %}{% if data.total_budget__year__year == yr %} <li class="budget-li-items" > <span class="label">{{ data.office_name }}<strong>{{ data.total_budget__total }}</strong></span> </li> {% endif %}{% endfor %} </ul>');
+
+                    alert('internal error456');
+                } else {
+                    alert('internal error');
+                };
+            });
+
+        });
+    });
+</script> -->
+{% endblock %}

@@ -1,0 +1,276 @@
+.contact_section{
+    background: $secondary-color;
+    .contact-content{
+        margin-top: 35px;
+        @media #{$breakpoint-desktop}{
+            margin-top: 25px;
+        }
+    }
+    .contact-row{
+        margin-top: 30px;
+        @media #{$breakpoint-desktop}{
+            margin-top: 25px;
+        }
+        @media #{$breakpoint-sm}{
+            margin-top: 40px;
+        }
+        h5.title{
+            color: $white-color;
+            font-size: 28px;
+            line-height: 40px;
+            font-weight: 400;
+            margin-bottom: 30px;
+            @media #{$breakpoint-lg-desktop}{
+                font-size: 22px;
+                line-height: 34px;
+                margin-bottom: 22px;
+            }
+            @media #{$breakpoint-desktop}{
+                font-size: 18px;
+                line-height: 30px;
+                margin-bottom: 17px;
+            }
+            @media #{$breakpoint-sm}{
+                text-align: center;
+            }
+        }
+        .info{
+            @media #{$breakpoint-sm}{
+                @include flex_hr_center;
+                text-align: center;
+            }
+            .info-addr{
+                margin-bottom: 55px;
+                @media #{$breakpoint-lg-desktop}{
+                    margin-bottom: 30px;
+                }
+                @media #{$breakpoint-desktop}{
+                    margin-bottom: 20px;
+                }
+                span.company-addr{
+                    font-size: 13.75px;
+                    line-height: 24px;
+                    color: $white-color;
+                    display: block;
+                    max-width: 150px;
+                    @media #{$breakpoint-lg-desktop}{
+                        font-size: 10px;
+                        line-height: 20px;
+                    }
+                    @media #{$breakpoint-desktop}{
+                        font-size: 8px;
+                        line-height: 17px;
+                        max-width: 100px;
+                    }
+                    @media #{$breakpoint-sm}{
+                        display: inline-block;
+                    }
+                }
+                ul{
+                    margin-top: 12px;
+                    @media #{$breakpoint-lg-desktop}{
+                        margin-top: 5px;
+                    }
+                    li{
+                        &:not(:last-child){
+                            margin-bottom: 10px;
+                            @media #{$breakpoint-lg-desktop}{
+                                margin-bottom: 0;
+                            }
+                            @media #{$breakpoint-desktop}{
+                                line-height: 20px;
+                            }
+                        }
+                        span, a{
+                            display: inline;
+                            font-size: 13px;
+                            line-height: 16px;
+                            @media #{$breakpoint-lg-desktop}{
+                                font-size: 10px;
+                                line-height: 12px;
+                            }
+                            @media #{$breakpoint-desktop}{
+                                font-size: 8px;
+                                line-height: 10px;
+                            }
+                        }
+                        span{
+                            color: $primary-color;
+                            font-family: $nav-fonts;
+                            width: 40px;
+                            margin-right: 8px;
+                            text-transform: uppercase;
+                            letter-spacing: .9px;
+                            display: inline-block;
+                            @media #{$breakpoint-lg-desktop}{
+                                width: 36px;
+                                margin-right: 5px;
+                            }
+                            @media #{$breakpoint-desktop}{
+                                width: 30px;  
+                            }
+                        }
+                        a{
+                            font-size: 13.75px;
+                            cursor: pointer;
+                            @include transition(all .4s ease);
+                            color: $white-color;
+                            &:hover{
+                                text-decoration: underline;
+                            }
+                            @media #{$breakpoint-lg-desktop}{
+                                font-size: 10.75px;
+                            }
+                            @media #{$breakpoint-desktop}{
+                                font-size: 8.75px;
+                            }
+                        }
+                    }
+                }
+            }
+            ul.social-media-grp{
+                @include display-flex(flex);
+                @include align-items-center;
+                @media #{$breakpoint-sm}{
+                    @include justify-content-center;
+                }
+                li.social-item{
+                    &:not(:last-child){
+                        margin-right: 30px;
+                        @media #{$breakpoint-desktop}{
+                            margin-right: 22px;
+                        }
+                    }
+                    a{
+                        width: 22px;
+                        height: 22px;
+                        cursor: pointer;
+                        display: inline-block;
+                        @media #{$breakpoint-lg-desktop}{
+                            width: 18px;
+                            height: 18px;
+                        }
+                        @media #{$breakpoint-desktop}{
+                            width: 14px;
+                            height: 14px;
+                        }
+                        img{
+                            width: 100%;
+                            height: 100%;
+                        }
+                    }
+                }
+            }
+        }
+        .contact{
+            @media #{$breakpoint-md}{
+               margin: 50px 0 30px;
+            }
+            form{
+                @media #{$breakpoint-lg-desktop}{
+                    margin-top: -6px;
+                }
+                @media #{$breakpoint-md}{
+                    margin-top: 10px;
+                }
+                .form-group{
+                    margin-bottom: 30px;
+                    @media #{$breakpoint-lg-desktop}{
+                        margin-bottom: 18px;
+                    }
+                    position: relative;
+                    width: 100%;
+                    .form-control{
+                        position: relative;
+                        cursor: pointer;
+                        color: $white-color;
+                        padding: 2px 0px;
+                        background-color: transparent;
+                        outline: none;
+                        border: none;
+                        border-bottom: .5px solid darken($body-color, 10%);
+                        @include radius(0px);
+                        ~label{
+                            @include transition(all 0.4s ease-in);
+                            font-size: 14px;
+                            font-weight: 400;
+                            line-height: 24px;
+                            color: $white-color;
+                            position: absolute; 
+                            left: 0;
+                            top: 8px; 
+                            @media #{$breakpoint-lg-desktop}{
+                                font-size: 10px;
+                            }
+                            @media #{$breakpoint-desktop}{
+                                font-size: 8px;
+                                top: 6px;
+                            }
+                        }
+                        ~.border-span{
+                            position: absolute;
+                            bottom: 0;
+                            left: 0;
+                            width: 0;
+                            height: .5px;
+                            background-color: $primary-color;
+                            transition:all 0.5s linear;
+                        }
+                        &:focus{
+                            color: darken($primary-color, 30%);
+                            box-shadow: none;
+                            outline: none;
+                            ~label{
+                                top: -5px; 
+                                color: $primary-color; 
+                                transform: translate(-12%, -50%) scale(0);
+                            }
+                            ~.border-span{
+                                width: 100%;
+                                background: darken($primary-color, 30%);
+                            }
+                        }
+                        &:valid{
+                            color: $primary-color;
+                            box-shadow: none;
+                            outline: none;
+                            border-bottom: .5px solid darken($body-color, 10%);
+                            ~label{
+                                top: -5px; 
+                                color: $white-color; 
+                                transform: translate(-12%, -50%) scale(0);
+                            }
+                            ~.border-span{
+                                background-color: $primary-color;
+                                width: 100%;
+                            }
+                        }
+                    }
+                }
+                button{
+                    margin-top: 15px;
+                    @media #{$breakpoint-desktop}{
+                        margin-top: 12px;
+                        min-height: 28px;
+                        height: 28px;
+                        font-size: 9px;;
+                    }
+                    @media #{$breakpoint-md}{
+                       margin-top: 20px;
+                    }
+                    @media #{$breakpoint-sm}{
+                        margin: 40px auto 0;
+                        display: block;
+                    }
+                    &.is-border{
+                        border-color:  darken($body-color, 10%);
+                        &:hover{
+                            background: $primary-color;
+                            color: $white-color;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

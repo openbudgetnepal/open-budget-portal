@@ -1,0 +1,107 @@
+.features_section{
+    .features-content{
+        padding-left: 140px;
+        margin-top: 100px;
+        @media #{$breakpoint-lg-desktop}{
+            margin-top: 90px;
+            padding-left: 100px;
+        }
+        @media #{$breakpoint-desktop}{
+            margin-top: 75px;
+        }
+        @media #{$breakpoint-lg}{
+          padding-left: 0;
+        }
+        @media #{$breakpoint-md}{
+            margin-top: 60px;
+        }   
+    }
+    .features-row{
+        margin-top: 80px;
+        @media #{$breakpoint-lg-desktop}{
+            margin-top: 70px;
+        }
+        @media #{$breakpoint-desktop}{
+            margin-top: 50px;
+        }
+        .col-wrap{
+            margin-bottom: 80px;
+            @include display-flex(flex);
+            @media #{$breakpoint-lg-desktop}{
+                margin-bottom: 60px;
+            }
+            @media #{$breakpoint-desktop}{
+                margin-bottom: 45px;
+            }
+            @media #{$breakpoint-md}{
+                @include flex_hr_center;
+                text-align: center;
+            }
+            .fig-content{
+                flex: 0 0 18%;
+                max-width: 18%;
+                @media #{$breakpoint-lg-desktop}{
+                    flex: 0 0 16%;
+                    max-width: 16%;
+                }
+                @media #{$breakpoint-desktop}{
+                    flex: 0 0 14%;
+                    max-width: 14%;
+                }
+                @media #{$breakpoint-lg}{
+                    flex: 0 0 20%;
+                    max-width: 20%;
+                }
+                img{
+                    margin-top: 5px;
+                    max-width: 65px;
+                    @media #{$breakpoint-lg-desktop}{
+                        max-width: 50px;
+                    }
+                    @media #{$breakpoint-desktop}{
+                        max-width: 40px;
+                    }
+                    @media #{$breakpoint-md}{
+                        margin-top: 0;
+                        margin-bottom: 10px;
+                    }
+                }
+            }
+            .text-content{
+                h5{
+                    color: $heading-color;
+                    font-size: 30px;
+                    line-height: 40px;
+                    font-weight: 400;
+                    @media #{$breakpoint-lg-desktop}{
+                        font-size: 24px;
+                        line-height: 35px;
+                    }
+                    @media #{$breakpoint-desktop}{
+                        font-size: 19px;
+                        line-height: 30px;
+                    }
+                }
+                p{
+                    font-size: 15px;
+                    line-height: 24px;
+                    color: $heading-color;
+                    margin-top: 20px;
+                    max-width: 380px;
+                    @media #{$breakpoint-lg-desktop} {
+                        font-size: 13px;
+                        line-height: 22px;
+                        margin-top: 15px;
+                        max-width: 330px;
+                    }
+                    @media #{$breakpoint-desktop}{
+                        font-size: 10px;
+                        line-height: 15px;
+                        margin-top: 10px;
+                        max-width: 255px;
+                    }
+                }
+            }
+        }
+    }
+}

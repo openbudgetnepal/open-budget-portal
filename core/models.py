@@ -107,6 +107,17 @@ class Information(models.Model):
 class Province(models.Model):
     name = models.CharField(max_length=250, unique=True, blank=True, null=True)
     code = models.IntegerField(blank=True, null=True)
+    total_budget = models.BigIntegerField(blank=True, null=True)
+    male_population = models.BigIntegerField(blank=True, null=True)
+    female_population = models.BigIntegerField(blank=True, null=True)
+    total_population = models.BigIntegerField(blank=True, null=True)
+    revenue_collected = models.BigIntegerField(blank=True, null=True)
+    economic_growth = models.CharField(max_length=100, blank=True, null=True)
+    share_in_domestic_product = models.CharField(max_length=100, blank=True, null=True)
+    human_development_index = models.CharField(max_length=100, blank=True, null=True)
+    multidimensional_poverty_index = models.CharField(max_length=100, blank=True, null=True)
+    total_gross_domestic_product = models.CharField(max_length=100, blank=True, null=True)
+    per_capital_income = models.BigIntegerField(blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -133,25 +144,28 @@ class ProvinceSource(models.Model):
 class ActualExpenditure(models.Model):
     province_name = models.ForeignKey(Province, on_delete=models.CASCADE, related_name='data5', blank=True,
                                       null=True)
+
     year = models.ForeignKey(Year, on_delete=models.CASCADE, related_name='data8', blank=True, null=True)
     total = models.BigIntegerField(blank=True, null=True)
     current = models.BigIntegerField(blank=True, null=True)
     capital = models.BigIntegerField(blank=True, null=True)
 
     def __str__(self):
-        return self.province_name.name
+        return self.province_name.name + ' '  + str(self.year.year)
 
 
 class TotalBudget(models.Model):
     province_name = models.ForeignKey(Province, on_delete=models.CASCADE, related_name='data3', blank=True,
                                       null=True)
+
+
     year = models.ForeignKey(Year, on_delete=models.CASCADE, related_name='data1', blank=True, null=True)
     total = models.BigIntegerField(blank=True, null=True)
     current = models.BigIntegerField(blank=True, null=True)
     capital = models.BigIntegerField(blank=True, null=True)
 
     def __str__(self):
-        return self.province_name.name
+        return self.province_name.name + ' '  + str(self.year.year)
 
 
 class ProvinceBudget(models.Model):
@@ -162,9 +176,10 @@ class ProvinceBudget(models.Model):
     total_budget = models.ManyToManyField(TotalBudget)
 
     def __str__(self):
-        return self.province_name.name
+        return self.province_name.name + ' ' + self.office_name
 
 
-
-
-
+class Contact(models.Model):
+    name = models.CharField(max_length=100, blank=True, null=True)
+    email = models.EmailField(blank=True, null=True)
+    message = models.TextField(blank=True, null=True)

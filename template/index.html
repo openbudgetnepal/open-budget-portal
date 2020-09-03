@@ -1,0 +1,418 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- SOCIAL MEDIA META -->
+    <meta property="og:description" content="Budget Viz">
+    <meta property="og:image" content="preview.html">
+    <meta property="og:site_name" content="Budget Viz">
+    <meta property="og:title" content="Budget Viz">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="http://naxa.com.np">
+
+    <!-- TWITTER META -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@Budget Viz">
+    <meta name="twitter:creator" content="@Budget Viz">
+    <meta name="twitter:title" content="Budget Viz">
+    <meta name="twitter:description" content="Budget Viz">
+    <meta name="twitter:image" content="preview.html">
+
+    <!--title-->
+    <title>Budget Viz</title>
+
+    <!-- faveicon start   -->
+    <!-- <link rel="icon" type="image/png" href="img/favicon.png" sizes="32x32"> -->
+
+    <!-- stylesheet start -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href='{% static "css/bootstrap.min.css" %}' />
+    <link rel="stylesheet" type="text/css" href='{% static "css/style.css" %}'>
+</head>
+
+<body class="one-pg-web">
+        <div>
+            {% for messages in messages %}
+
+            <script>
+                window.onload = startcountdown;
+                 function startcountdown(){
+                    alert({
+                        message: '{{messages}}'
+
+                    })
+                }
+                </script>
+            {%endfor%}
+        </div>
+
+    <div class="smooth-scroll">
+
+        <!-- header -->
+        <header class="site-header is-bg">
+            <div class="container">
+                <div class="wrap-header">
+                    <div class="header-in">
+                        <a href="#" class="logo">
+                            <img class="logo-white" src='{% static "img/logo-white.svg" %}' alt="logo">
+                            <img class="logo-black" src='{% static "img/logo-black.svg" %}' alt="logo">
+                        </a>
+                        <div class="menu-wrap">
+                            <div class="menu">
+                                <ul>
+                                    <li>
+                                        <a href="/budgetvisualization/9" class="active">Budget Visualization</a>
+                                    </li>
+                                    <li>
+                                        <a href="glossary.html" class="">Glossary</a>
+                                    </li>
+                                    <li>
+                                        <a href="/blog" class="">Blogs</a>
+                                    </li>
+                                    <li>
+                                        <a href="about.html" class="">About</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="toggle-button">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- hone -->
+        <section class="home_section" id="home">
+            <div class="container">
+                <div class="wrapper h-wrap">
+                    <div class="home-content">
+                        <div class="common-title">
+                            <h2 class="title">
+                                The total budget of Nepal for the year 2020/21 is
+                                <span class="title-span"><span class="is-white">NRP </span><span class="is-lg">{{ total_budget_nepal }}</span></span>
+                            </h2>
+                        </div>
+                        <ul class="budget-list-wrap">
+                            {% for data in province_data %}
+                            <li class="budget-items">
+                                <span>NRP</span>
+                                <span><a style="color:#DF6D45" href="budgetvisualization/{{data.id}}">{{data.total_budget}}</a></span>
+                                <span><a style="color:white" href="budgetvisualization/{{data.id}}">{{data.name}}</a></span>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <footer>
+                        <p class="footer-para">
+                            <a href="#about"><i class="material-icons">expand_more</i></a>
+                            About Open Budget Nepal
+                        </p>
+                    </footer>
+                </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- about -->
+        <section class="about_section" id="about">
+            <div class="container">
+                <div class="wrapper h-wrap">
+                    <div class="about-content">
+                        <div class="row row-wrap">
+                            <div class="col-md-10">
+                                <div class="common-title">
+                                    <h2 class="title is-dark">What is Provincial Open<br/>
+                                        Budget Visualization Portal?</h2>
+                                </div>
+                                <p class="para">As Nepal has moved to a new federal structure the provinces are a very important and integral part of governance, but they currently lack attention, also as we witnessed very less people are aware about the provincial budget. The budget is published but not easily accessible and understandable. How are the provinces allocating and spending the budget in terms of achieving the development targets? This project aims to inform people and the policy makers how the budgets have been allocated and spent in the provinces. Are the provinces doing enough to achieve the overall development goals, and what are their status? What area should be prioritized? This system will include a set of provincial budget data, which will be disseminated through the website. This will be considered as an important step towards transparency, corruption and avoiding waste of public resources, especially in the provinces of Nepal.
+                                    <br>
+                                    <br>
+                                     This tool is an interactive visualisation enabling you to drill-down into the major expenses and revenues for major offices and ministries of the provinces, for each financial year. This makes it easy to see where provincial funds are generated, as well as distributed and spent.
+                                    <br>
+                                    <br>
+                                    Where reported, the expenses are split into capital and current expenses, with expenses further divided into the expense types of employee; other operating; grants and subsidies; and other expenses.</p>
+                                <a href="about.html" class="visit_link">Explore<i class="material-icons">chevron_right</i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <footer>
+                        <p class="footer-para is-dark">
+                            <a href="#features"><i class="material-icons">expand_more</i></a>
+                            Features
+                        </p>
+                    </footer>
+                </div>
+            </div>
+        </section>
+
+        <!-- features -->
+        <section class="features_section" id="features">
+            <div class="container">
+                <div class="wrapper h-wrap">
+                    <div class="features-content">
+                        <div class="common-title">
+                            <h2 class="title is-dark">Features</h2>
+                        </div>
+                        <div class="features-row">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="col-wrap">
+                                        <div class="fig-content"><img src='{% static "./img/icon.png" %}' alt="info-icon"/></div>
+                                        <div class="text-content">
+                                            <h5>Keep tasks in one place</h5>
+                                            <p>Save time, avoid losing work and information, delegate, and track tasks to stay on schedule</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="col-wrap">
+                                        <div class="fig-content"><img src='{% static "./img/search.png" %}' alt="search"/></div>
+                                        <div class="text-content">
+                                            <h5>Prioritize your work</h5>
+                                            <p>Tracking tasks allows everyone to understand which are more important or require more time,</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="col-wrap">
+                                        <div class="fig-content"><img src='{% static "./img/research.png" %}' alt="research"/></div>
+                                        <div class="text-content">
+                                            <h5>Improve collaboration</h5>
+                                            <p>Tracking tasks allows everyone to understand which are more important or require more time,</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="col-wrap">
+                                        <div class="fig-content"><img src='{% static "./img/computer.png" %}' alt="computer"/></div>
+                                        <div class="text-content">
+                                            <h5>Get the Customer</h5>
+                                            <p>Save time, avoid losing work and information, delegate, and track tasks to stay on schedule</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <footer>
+                        <p class="footer-para is-dark">
+                            <a href="#blogs"><i class="material-icons">expand_more</i></a>
+                            Blogs
+                        </p>
+                    </footer>
+                </div>
+            </div>
+        </section>
+
+        <!-- blogs -->
+        <section class="blog_section" id="blogs">
+            <div class="container">
+                <div class="wrapper h-wrap">
+                    <div class="blog-content">
+                        <div class="common-title">
+                            <h2 class="title is-dark">Popular Blogs</h2>
+                        </div>
+                        <div class="blogs-row">
+                            <div class="row row-wrap">
+                                <div class="col-md-4 col-wrap">
+                                    <div class="main-card">
+                                        <div class="card-header">
+                                            <figure>
+                                                <img src='{% static "./img/blog-img1.png" %}' alt="blog-image">
+                                            </figure>
+                                        </div>
+                                        <div class="card-body">
+                                            <span class="date">13 Feb 2020</span>
+                                            <h5>Nepal budget 2020/21: Seven things you should know</h5>
+                                            <p>Finance Minister Yuba Raj Katiwada on Thursday presented the annual budget plan for the next fiscal year 2020/21.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 col-wrap">
+                                    <div class="main-card">
+                                        <div class="card-header">
+                                            <figure>
+                                                <img src='{% static "./img/blog-img2.png" %}' alt="blog-image">
+                                            </figure>
+                                        </div>
+                                        <div class="card-body">
+                                            <span class="date">05 Jun 2020</span>
+                                            <h5>Seven things you should know about Nepal finance</h5>
+                                            <p>Finance Minister Yuba Raj Katiwada on Thursday presented the annual budget plan for the next fiscal year 2020/21.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 col-wrap">
+                                    <div class="main-card">
+                                        <div class="card-header">
+                                            <figure>
+                                                <img src='{% static "./img/blog-img3.png" %}' alt="blog-image">
+                                            </figure>
+                                        </div>
+                                        <div class="card-body">
+                                            <span class="date">5 Jun 2020</span>
+                                            <h5>Seven things you should know about Nepal finance</h5>
+                                            <p>Finance Minister Yuba Raj Katiwada on Thursday presented the annual budget plan for the next fiscal year 2020/21.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="visit-link">
+                            <a href="#/">See all <i class="material-icons">chevron_right</i> </a>
+                        </div>
+                    </div>
+                    <footer>
+                        <p class="footer-para is-dark">
+                            <a href="#contact"><i class="material-icons">expand_more</i></a>
+                            Contact
+                        </p>
+                    </footer>
+                </div>
+            </div>
+        </section>
+
+        <!-- contact -->
+        <section class="contact_section" id="contact">
+            <div class="container">
+                <div class="wrapper h-wrap">
+                    <div class="contact-content">
+                        <div class="common-title">
+                            <h2 class="title">Contact</h2>
+                        </div>
+                        <div class="contact-row">
+                            <div class="row">
+                                <div class="col-md-4">
+                                   <div class="info">
+                                        <h5 class="title">Information</h5>
+                                        <div class="info-addr">
+                                            <span class="company-addr">Alankar Innovations <span> Kathmandu, Nepal</span> </span>
+                                            <ul>
+                                                <li><span class="label">Phone</span><a class="label-info">+977 01-4329 504, 01-4329 504</a></li>
+                                                <li><span class="label">Email</span><a class="label-info">matthew.mendez@mail.com</a></li>
+                                                <li><span class="label">Web</span><a class="label-info">Info@alankar.com</a></li>
+                                            </ul>
+                                        </div>
+                                        <ul class="social-media-grp">
+                                            <li class="social-item"><a href="https://www.facebook.com/"><img src='{% static "./img/facebook.svg" %}' alt="facebook"></a></li>
+                                            <li class="social-item"><a href="https://twitter.com"><img src='{% static "./img/twitter.svg" %}' alt="twitter"></a></li>
+                                            <li class="social-item"><a href="https://www.instagram.com"><img src='{% static "./img/instagram.svg" %}' alt="instagram"></a></li>
+                                            <li class="social-item"><a href="https://www.youtube.com/"><img src='{% static "./img/youtube.svg" %}' alt="youtube"></a></li>
+                                        </ul>
+                                   </div>
+                                </div>
+
+                                <div class="col-md-8">
+                                    <div class="contact">
+                                        <h5 class="title">Contact form</h5>
+                                        <form id="contactd" action="/contact" method="post">
+                                            {% csrf_token %}
+                                            <div class="form-group">
+                                                <input type="text" name="name" id="inputname" class="form-control" placeholder="" required="">
+                                                <label for="inputname">Name</label>
+                                                <span class="border-span"></span>
+                                            </div>
+
+                                            <div class="row row-wrap">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <input type="text" name="email" id="inputemail" class="form-control" placeholder="" required="">
+                                                        <label for="inputemail">Email</label>
+                                                        <span class="border-span"></span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <input type="text" name="email1" id="inputemai1" class="form-control" placeholder="" required="">
+                                                        <label for="inputemail1">Email</label>
+                                                        <span class="border-span"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                             <div class="form-group">
+                                                <input type="text" name="message" id="inputmsg" class="form-control" placeholder="" required="">
+                                                <label for="inputmsg">Message</label>
+                                                <span class="border-span"></span>
+                                            </div>
+                                            <button class="common-button is-border">Send</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <footer>
+                        <div class="footer-wrap">
+                            <p class="footer-para is-icon-reverse">
+                                <a href="#home"><i class="material-icons">expand_less</i></a>
+                                Top
+                            </p>
+                            <div class="web-footer">
+                                <div class="logo-center"><img src='{% static "./img/logo-white.svg" %}' alt="logo"></div>
+                                <ul class="footer-links">
+                                    <li class="link-item"><a href="/budgetvisualization/9">budget visualization</a></li>
+                                    <li class="link-item"><a href="#about">About</a></li>
+                                    <li class="link-item"><a href="#/">News</a></li>
+                                    <li class="link-item"><a href="#/">Glossary</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="footer-copyright">
+                            <span>Copyright 2020, Open Budget Nepal. All Rights Reserved.</span>
+                            <span>Designed by <a href="http://naxa.com.np">Naxa</a></span>
+                        </div>
+                    </footer>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+
+
+    <!-- Jquery Core Js -->
+    <script src='{% static "js/bootstrap.min.js" %}'></script>
+    <script src='{% static "js/jquery-3.4.1.min.js" %}'></script>
+    <script src="https://cdn.jsdelivr.net/npm/baffle@0.3.6/dist/baffle.min.js"></script>
+    <script src='{% static "js/viz.js" %}'></script>
+        <script>
+            $(document).ready(function() {
+                $('#contactd').submit(function(event) {
+                    event.preventDefault();
+
+                    $.ajax ({
+                        url : '/contact',
+                        type: 'POST',
+                        data: $(this).serialize()
+                    }).done(function(resp) {
+                        if(resp.result=='success') {
+                            alert('Message Sent')
+
+                        } else {
+                            alert('Email Not Matched')
+                        }
+                    });
+
+                });
+            });
+
+    </script>
+
+
+</body>
+
+</html>

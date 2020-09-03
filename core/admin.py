@@ -1,5 +1,6 @@
 from django.contrib import admin
-from core.models import Glossary, Year, Province, ProvinceSource, TotalBudget, ActualExpenditure, ProvinceBudget
+from core.models import Glossary, Year, Province, ProvinceSource, TotalBudget, ActualExpenditure, ProvinceBudget, \
+    Contact
 from import_export.admin import ImportExportModelAdmin
 
 
@@ -35,3 +36,4 @@ class ProvinceBudgetAdmin(ImportExportModelAdmin):
 
 admin.site.register(ProvinceBudget, ProvinceBudgetAdmin)
 admin.site.register(Glossary, GlossaryAdmin)
+admin.site.register(Contact)
