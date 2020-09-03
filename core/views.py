@@ -47,12 +47,18 @@ class BudgetVisualization(LoginRequiredMixin, DetailView):
         context['tot_bug'] = tot_bug
         context['act_exp'] = act_exp
         context['object1'] = self.kwargs['pk']
+        context['datatosend1'] = 'Total Budget'
+        context['data1'] = '2015/2016'
 
         return context
 
     def post(self, request, *args, **kwargs):
         data1 = self.request.POST['year']
         data2 = self.request.POST['budget']
+        if str(data2) == str(2):
+            datatosend1 = 'Actual Expenditure'
+        if str(data2) == str(1):
+            datatosend1 = 'Total Budget'
         calculation = Province.objects.order_by('id')
         topdata = Province.objects.filter(id=self.kwargs['pk'])
         date = Year.objects.all()
@@ -70,6 +76,8 @@ class BudgetVisualization(LoginRequiredMixin, DetailView):
         if data2 == str(1):
 
             context = {
+                'datatosend1': datatosend1,
+                'data1': data1,
                 'topdata': topdata,
                 'source': source,
                 'budget': budget,
@@ -86,6 +94,8 @@ class BudgetVisualization(LoginRequiredMixin, DetailView):
         elif data2 == str(2):
 
             context = {
+                'datatosend1': datatosend1,
+                'data1': data1,
                 'topdata': topdata,
                 'source': source,
                 'budget': budget,
