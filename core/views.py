@@ -110,7 +110,7 @@ class HomePage(LoginRequiredMixin, TemplateView):
         for data in province_data:
             total_budget_nepal = data.total_budget + total_budget_nepal
         context = {
-            'provincefilter':provincefilter,
+            'provincefilter': provincefilter,
             'province_data': province_data,
             'total_budget_nepal': total_budget_nepal
         }
@@ -140,4 +140,8 @@ def contact(request):
 
 class Blog(LoginRequiredMixin, TemplateView):
     def get(self, request, *args, **kwargs):
-        return render(request, 'blogs.html')
+        provincefilter = Province.objects.filter().first()
+        context = {
+            'provincefilter': provincefilter
+        }
+        return render(request, 'blogs.html', context)
