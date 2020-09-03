@@ -105,10 +105,12 @@ class HomePage(LoginRequiredMixin, TemplateView):
 
     def get(self, request, *args, **kwargs):
         province_data = Province.objects.order_by('id')
+        provincefilter = Province.objects.filter().first()
         total_budget_nepal = 0
         for data in province_data:
             total_budget_nepal = data.total_budget + total_budget_nepal
         context = {
+            'provincefilter':provincefilter,
             'province_data': province_data,
             'total_budget_nepal': total_budget_nepal
         }

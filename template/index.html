@@ -66,7 +66,7 @@
                             <div class="menu">
                                 <ul>
                                     <li>
-                                        <a href="/budgetvisualization/1" class="active">Budget Visualization</a>
+                                        <a href="/budgetvisualization/{{ provincefilter.id }}" class="active">Budget Visualization</a>
                                     </li>
                                     <li>
                                         <a href="glossary.html" class="">Glossary</a>
@@ -364,7 +364,7 @@
                             <div class="web-footer">
                                 <div class="logo-center"><img src='{% static "./img/logo-white.svg" %}' alt="logo"></div>
                                 <ul class="footer-links">
-                                    <li class="link-item"><a href="/budgetvisualization/1">budget visualization</a></li>
+                                    <li class="link-item"><a href="/budgetvisualization/{{ provincefilter.id }}">budget visualization</a></li>
                                     <li class="link-item"><a href="#about">About</a></li>
                                     <li class="link-item"><a href="#/">News</a></li>
                                     <li class="link-item"><a href="#/">Glossary</a></li>
