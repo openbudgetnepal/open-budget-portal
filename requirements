@@ -10,5 +10,5 @@ Pygments==2.3.1
 requests==2.22.0
 sqlparse==0.3.1
 sshtunnel==0.1.4
-mysqlclient==2.0.1
+
 
