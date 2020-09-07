@@ -176,8 +176,10 @@ class ProvinceBudget(models.Model):
     province_name = models.ForeignKey(Province, on_delete=models.CASCADE, related_name='data4', blank=True,
                                       null=True)
     office_name = models.CharField(max_length=500, blank=True, null=True)
-    actual_expenditure = models.ManyToManyField(ActualExpenditure, help_text='<p style="color:blue;font-size:25px;">Please select only one value at a time <p>')
-    total_budget = models.ManyToManyField(TotalBudget, help_text='<p style="color:blue;font-size:25px;">Please select only one value at a time <p>')
+    actual_expenditure = models.ManyToManyField(ActualExpenditure,
+                                                help_text='<p style="color:blue;font-size:25px;">Please select only one value at a time <p>')
+    total_budget = models.ManyToManyField(TotalBudget,
+                                          help_text='<p style="color:blue;font-size:25px;">Please select only one value at a time <p>')
 
     def __str__(self):
         return self.province_name.name + ' ' + self.office_name
@@ -186,6 +188,7 @@ class ProvinceBudget(models.Model):
 class Contact(models.Model):
     name = models.CharField(max_length=100, blank=True, null=True)
     email = models.EmailField(blank=True, null=True)
+    phone = models.CharField(max_length=250, blank=True, null=True)
     message = RichTextField(blank=True, null=True)
 
     def __str__(self):

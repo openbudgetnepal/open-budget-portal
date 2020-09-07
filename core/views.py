@@ -157,11 +157,11 @@ def contact(request):
     if request.method == 'POST':
         name = request.POST['name']
         email1 = request.POST['email']
-        email2 = request.POST['email1']
+        phone = request.POST['phone']
         message = request.POST['message']
 
-        if email1 == email2:
-            data = Contact.objects.create(name=name, email=email1, message=message)
+        if email1:
+            data = Contact.objects.create(name=name, email=email1, phone=phone, message=message)
             data.save()
             resp = {
                 'result': 'success'
