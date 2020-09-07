@@ -4,6 +4,7 @@ from django.conf import settings
 from django.db import models
 import pandas as pd
 from django.contrib import messages
+from ckeditor.fields import RichTextField
 
 
 class ActiveCommonManager(models.Manager):
@@ -13,7 +14,7 @@ class ActiveCommonManager(models.Manager):
 
 class Glossary(models.Model):
     title = models.CharField(max_length=200)
-    description = models.TextField(blank=True, null=True)
+    description = RichTextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True,
                                    db_index=True,
@@ -50,11 +51,11 @@ class Blog(models.Model):
         (1, 'Publish'),
         (2, 'UnPublish'),
     )
-    title = models.CharField(max_length=250)
+    title = RichTextField(max_length=250)
     author = models.ForeignKey(settings.AUTH_USER_MODEL,
                                on_delete=models.CASCADE,
                                related_name='content_author')
-    content = models.TextField()
+    content = RichTextField()
     publish = models.DateTimeField(default=timezone.now, blank=True, null=True)
     status = models.IntegerField(choices=STATUS_CHOICES,
                                  default=0)
@@ -62,13 +63,13 @@ class Blog(models.Model):
                                  related_name='article_categories', blank=True,
                                  null=True)
     photo = models.FileField(upload_to=get_upload_blog, blank=True)
-    tag = models.TextField()
+    tag = RichTextField()
     """
         For seo purpose
     """
-    meta_title = models.TextField(null=True, blank=True)
-    meta_keywords = models.TextField(null=True, blank=True)
-    meta_description = models.TextField(null=True, blank=True)
+    meta_title = RichTextField(null=True, blank=True)
+    meta_keywords = RichTextField(null=True, blank=True)
+    meta_description = RichTextField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True,
                                    db_index=True,
@@ -106,6 +107,7 @@ class Information(models.Model):
 
 class Province(models.Model):
     name = models.CharField(max_length=250, unique=True, blank=True, null=True)
+    image = models.FileField(upload_to='pics', blank=True, null=True)
     code = models.IntegerField(blank=True, null=True)
     total_budget = models.BigIntegerField(blank=True, null=True)
     male_population = models.BigIntegerField(blank=True, null=True)
@@ -135,7 +137,8 @@ class ProvinceSource(models.Model):
                                       null=True)
     source = models.CharField(max_length=500, blank=True, null=True)
     budget = models.BigIntegerField(blank=True, null=True)
-    year = models.ForeignKey(Year, on_delete=models.CASCADE, blank=True, null=True, related_name='data7')
+    year = models.ForeignKey(Year, on_delete=models.CASCADE, blank=True, null=True, related_name='data7',
+                             help_text='Please select a recent year... ')
 
     def __str__(self):
         return self.source
@@ -144,6 +147,7 @@ class ProvinceSource(models.Model):
 class ActualExpenditure(models.Model):
     province_name = models.ForeignKey(Province, on_delete=models.CASCADE, related_name='data5', blank=True,
                                       null=True)
+    office_name = models.CharField(max_length=500, blank=True, null=True)
 
     year = models.ForeignKey(Year, on_delete=models.CASCADE, related_name='data8', blank=True, null=True)
     total = models.BigIntegerField(blank=True, null=True)
@@ -151,13 +155,13 @@ class ActualExpenditure(models.Model):
     capital = models.BigIntegerField(blank=True, null=True)
 
     def __str__(self):
-        return self.province_name.name + ' '  + str(self.year.year)
+        return self.province_name.name + ' ' + self.office_name + ' ' + str(self.year.year)
 
 
 class TotalBudget(models.Model):
     province_name = models.ForeignKey(Province, on_delete=models.CASCADE, related_name='data3', blank=True,
                                       null=True)
-
+    office_name = models.CharField(max_length=500, blank=True, null=True)
 
     year = models.ForeignKey(Year, on_delete=models.CASCADE, related_name='data1', blank=True, null=True)
     total = models.BigIntegerField(blank=True, null=True)
@@ -165,7 +169,7 @@ class TotalBudget(models.Model):
     capital = models.BigIntegerField(blank=True, null=True)
 
     def __str__(self):
-        return self.province_name.name + ' '  + str(self.year.year)
+        return self.province_name.name + ' ' + self.office_name + ' ' + str(self.year.year)
 
 
 class ProvinceBudget(models.Model):
@@ -182,4 +186,11 @@ class ProvinceBudget(models.Model):
 class Contact(models.Model):
     name = models.CharField(max_length=100, blank=True, null=True)
     email = models.EmailField(blank=True, null=True)
-    message = models.TextField(blank=True, null=True)
+    message = RichTextField(blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+
+class AboutMission(models.Model):
+    missions = RichTextField(blank=True, null=True)

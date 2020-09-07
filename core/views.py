@@ -1,13 +1,15 @@
 from django.shortcuts import render, redirect
-
+from django.core.paginator import Paginator
 # Create your views here.
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.views.generic import TemplateView, DetailView
+from django.views.generic.list import MultipleObjectMixin
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
-from .models import Province, ProvinceSource, ProvinceBudget, Contact, Year, TotalBudget, ActualExpenditure
+from .models import Province, ProvinceSource, ProvinceBudget, Contact, Year, TotalBudget, ActualExpenditure, Blog, \
+    AboutMission, Glossary
 
 
 class BudgetVisualization(LoginRequiredMixin, DetailView):
@@ -18,6 +20,7 @@ class BudgetVisualization(LoginRequiredMixin, DetailView):
         # Call the base implementation first to get a context
         context = super(BudgetVisualization, self).get_context_data(**kwargs)
         calculation = Province.objects.order_by('id')
+        test5 = ProvinceSource.objects.all()
         for data in calculation:
             percentage_male = (data.male_population) / (data.male_population + data.female_population)
             percentage_female = (data.female_population) / (data.male_population + data.female_population)
@@ -26,14 +29,16 @@ class BudgetVisualization(LoginRequiredMixin, DetailView):
         budget = ProvinceBudget.objects.filter(province_name=self.kwargs['pk']).values('province_name__name',
                                                                                        'office_name',
                                                                                        'total_budget__total',
+                                                                                       'total_budget__current',
+                                                                                       'total_budget__capital',
                                                                                        'actual_expenditure__total',
+                                                                                       'actual_expenditure__current',
+                                                                                       'actual_expenditure__capital',
                                                                                        'total_budget__year__year',
                                                                                        'actual_expenditure__year__year')
         tot_bug = TotalBudget.objects.filter(province_name=self.kwargs['pk'])
         act_exp = ActualExpenditure.objects.filter(province_name=self.kwargs['pk'])
         topdata = Province.objects.filter(id=self.kwargs['pk'])
-        for bug in budget:
-            print(bug['total_budget__year__year'])
         date = Year.objects.all()
         first_date = Year.objects.filter().first()
         context['source'] = source
@@ -70,7 +75,11 @@ class BudgetVisualization(LoginRequiredMixin, DetailView):
         budget = ProvinceBudget.objects.filter(province_name=self.kwargs['pk']).values('province_name__name',
                                                                                        'office_name',
                                                                                        'total_budget__total',
+                                                                                       'total_budget__current',
+                                                                                       'total_budget__capital',
                                                                                        'actual_expenditure__total',
+                                                                                       'actual_expenditure__current',
+                                                                                       'actual_expenditure__capital',
                                                                                        'total_budget__year__year',
                                                                                        'actual_expenditure__year__year')
         if data2 == str(1):
@@ -119,12 +128,30 @@ class HomePage(LoginRequiredMixin, TemplateView):
         total_budget_nepal = 0
         for data in province_data:
             total_budget_nepal = data.total_budget + total_budget_nepal
+        blog = Blog.objects.all()
+        paginator = Paginator(blog, 3)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+
         context = {
+            'blog': page_obj,
             'provincefilter': provincefilter,
             'province_data': province_data,
             'total_budget_nepal': total_budget_nepal
         }
         return render(request, 'index.html', context)
+
+
+class AboutView(LoginRequiredMixin, TemplateView):
+
+    def get(self, request, *args, **kwargs):
+        provincefilter = Province.objects.filter().first()
+        aboutmission = AboutMission.objects.order_by('id')
+        context = {
+            'provincefilter': provincefilter,
+            'aboutmission': aboutmission
+        }
+        return render(request, 'about.html', context)
 
 
 def contact(request):
@@ -148,10 +175,51 @@ def contact(request):
             return JsonResponse(resp)
 
 
-class Blog(LoginRequiredMixin, TemplateView):
+class BlogData(LoginRequiredMixin, TemplateView):
+    template_name = 'blogs.html'
+
     def get(self, request, *args, **kwargs):
+        blog = Blog.objects.order_by('id')
         provincefilter = Province.objects.filter().first()
+        paginator = Paginator(blog, 6)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
         context = {
+            'paginator': paginator,
+            'page_obj': page_obj,
             'provincefilter': provincefilter
         }
         return render(request, 'blogs.html', context)
+
+
+class GlossaryView(LoginRequiredMixin, TemplateView):
+    template_name = 'glossary.html'
+
+    def get(self, request, *args, **kwargs):
+        provincefilter = Province.objects.filter().first()
+        glossarydate = Glossary.objects.latest('updated_at')
+        findletter = Glossary.objects.order_by('id')
+
+        context = {
+            'findletter': findletter,
+            'glossary': glossarydate,
+            'provincefilter': provincefilter
+        }
+        return render(request, 'glossary.html', context)
+
+
+class BlogDetailView(LoginRequiredMixin, DetailView, MultipleObjectMixin):
+    model = Blog
+    template_name = 'blogitems.html'
+    paginate_by = 3
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        object_list = Blog.objects.order_by('id')
+        context = super(BlogDetailView, self).get_context_data(object_list=object_list, **kwargs)
+
+        provincefilter = Province.objects.filter().first()
+
+        context['provincefilter'] = provincefilter
+
+        return context

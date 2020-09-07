@@ -5,6 +5,13 @@
 <link rel="stylesheet" href='{% static "css/apexcharts.css" %}'>
 <link rel="stylesheet" href='{% static "css/custom-charts.css" %}'>
 <link rel="stylesheet" type="text/css" href='{% static "css/bootstrap-grid.min.css" %}'>
+<style>
+    .canvas-holder{
+	width:100%;
+	margin: auto;
+}
+</style>
+
 {% endblock %}
 {% block body_part %}
 <body class="">
@@ -21,7 +28,7 @@
                         <div class="menu">
                             <ul>
                                 <li>
-                                    <a href="/budgetvisualization/{{ object.id }}" class="active">Budget
+                                    <a href="/budgetvisualization/{{ object1 }}" class="active">Budget
                                         Visualization</a>
                                 </li>
                                 <li>
@@ -46,21 +53,25 @@
             </div>
         </div>
     </header>
-    {% for topdata in topdata %}
+    {% for data in topdata %}
     <section class="viz-header background-dark">
         <div class="container">
             <div class="wrapper">
-                <h3 class="title">{{ topdata.name }}</span></h3>
+                <h3 class="title">{{ data.name }}</span></h3>
                 <div class="row gx-2 gy-2 viz-row">
                     <div class="col-lg-3 col-md-12">
-                        <figure><img src='{% static "./img/Province1.svg" alt="Province1" %}'></figure>
+                        <figure><img src='{{ data.image.url }}' alt="Province1" ></figure>
                     </div>
                     <div class="col-lg-9 col-md-12">
                         <div class="viz-info">
                             <div class="info-category">
                                 <div class="category-column">
                                     <span class="data-label">Population</span>
-                                    <h4 class="data">{{ topdata.total_population }}</h4>
+                                    <script>
+                                                var x = {{ data.total_population }}
+                                                document.write('<h4 class="data">'.concat(x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),'</h4>'));
+
+                                    </script>
                                 </div>
 
                                 <div class="category-column">
@@ -75,42 +86,42 @@
 
                                 <div class="category-column">
                                     <span class="data-label">Economic Growth</span>
-                                    <h4 class="data">{{ topdata.economic_growth }}</span></h4>
+                                    <h4 class="data">{{ data.economic_growth }}</span></h4>
                                 </div>
                             </div>
 
                             <div class="info-budget">
                                 <div class="budget-column">
                                     <span class="data-label">Share in Gross Domestic Product</span>
-                                    <h4 class="data">{{ topdata.share_in_domestic_product }} </span></h4>
+                                    <h4 class="data">{{ data.share_in_domestic_product }} </span></h4>
                                 </div>
 
                                 <div class="budget-column">
                                     <span class="data-label">Human Development Index</span>
-                                    <h4 class="data">{{ topdata.human_development_index }} </span></h4>
+                                    <h4 class="data">{{ data.human_development_index }} </span></h4>
                                 </div>
 
                                 <div class="budget-column">
                                     <span class="data-label">Multidimensional Poverty Index</span>
-                                    <h4 class="data">{{ topdata.multidimensional_poverty_index }} <span>%</span></h4>
+                                    <h4 class="data">{{ data.multidimensional_poverty_index }} <span>%</span></h4>
                                 </div>
 
                                 <div class="budget-column">
                                     <span class="data-label">Total Gross Domestic Product</span>
                                     <span class="rate">NRP</span>
-                                    <h4 class="data">{{ topdata.total_gross_domestic_product }}</h4>
+                                    <h4 class="data">{{ data.total_gross_domestic_product }}</h4>
                                 </div>
 
                                 <div class="budget-column">
                                     <span class="data-label">Per Capita income</span>
                                     <span class="rate">USD$</span>
-                                    <h4 class="data">{{ topdata.per_capital_income }}</h4>
+                                    <h4 class="data">{{ data.per_capital_income }}</h4>
                                 </div>
 
                                 <div class="budget-column">
                                     <span class="data-label">Revenue collected</span>
                                     <span class="rate">NRP</span>
-                                    <h4 class="data">{{ topdata.revenue_collected }}</span></h4>
+                                    <h4 class="data">{{ data.revenue_collected }}</span></h4>
                                 </div>
                             </div>
                         </div>
@@ -138,14 +149,18 @@
                                     <div class="chart-data">
                                         <span class="data-label is-dark">{{ data.source }}</span>
                                         <span class="rate is-dark">NRP</span>
-                                        <h4 class="data">{{ data.budget }} </span></h4>
+                                        <script>
+                                                var x = {{ data.budget }}
+                                                document.write('<h4 class="data">'.concat(x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),'</h4>'));
+
+                                        </script>
                                     </div>
                                     {% endfor %}
 
                                 </div>
                                 <div class="chart-note">
                                     <p><strong>Note:</strong>&nbsp; All Rupees amounts shown here represent province
-                                        reported obligated amounts.</p>
+                                        reported obligated amounts for Year </p>
                                 </div>
                             </div>
                         </div>
@@ -153,17 +168,19 @@
                     <div class="col-xl-8 col-lg-9 col-md-12">
                         <div class="info-section">
                             <div class="contents">
-                                <h4 class="data is-dark">You are viewing Provincial Budget of <span>{{object.name}}</span></h4>
+                                {% for data in topdata %}
+                                <h4 class="data is-dark">You are viewing Provincial Budget of <span>{{data.name}}</span></h4>
+                                {% endfor %}
                                 <h6 class="data-subtitle">Choose an option below to start your exploration.</h6>
                                 <div class="budget-info-contents">
-                                    <form method="post" action='/budgetvisualization/{{ object1 }}'>{% csrf_token %}
+                                <form method="post" action='/budgetvisualization/{{ object1 }}'>{% csrf_token %}
                                     <div class="select-content">
                                         <div class="sel-dropdown">
                                             <label for="budget">Budget</label>
 
                                             <select id="budget" name="budget">
-                                                <option value="1">Total Budget</option>
-                                                <option value="2">Actual Expenditure</option>
+                                                <option value="1" {% if val == '1' %}selected{% endif %}>Total Budget</option>
+                                                <option value="2" {% if val == '2' %}selected{% endif %}>Actual Expenditure</option>
                                             </select>
                                         </div>
                                         <div class="sel-dropdown">
@@ -171,7 +188,7 @@
 
                                             <select id="year" name="year">
                                                 {% for data in date %}
-                                                <option value="{{ data.year }}">{{ data.year }}</option>
+                                                <option value="{{ data.year }}" {% if data.year == first_date %}selected{% endif %}>{{ data.year }}</option>
                                                 {% endfor %}
 
                                             </select>
@@ -183,6 +200,10 @@
                                     </form>
 
                                         <div id='datarec'>
+                                            <div class="canvas-holder">
+                                                <canvas id="chart-area1" width="800" height="400"></canvas>
+                                              </div>
+                                            <!--
                                             <ul class="budget-ul">
                                                 {% for data in budget %}
                                                     {% if val == '1' %}
@@ -225,10 +246,12 @@
                                                         {% endif %}
                                                 {% endfor %}
                                             </ul>
+                                        -->
                                         </div>
-
-                                    <p class="note">All Rupees amounts shown here represent province reported obligated
-                                        amounts of {{ datatosend1 }} for {{ data1 }}</p>
+                                    {% for data in topdata %}
+                                    <p class="note">All Rupees amounts shown here represent {{ data.name }} reported Total
+                                        amounts.</p>
+                                    {% endfor %}
                                     <div class="btn-wrap">
                                         <button class="common-button is-bg">Export</button>
                                     </div>
@@ -242,6 +265,7 @@
     </section>
 
 
+
 </div>
 </div>
 </body>
@@ -253,7 +277,11 @@
 <script src='{% static "js/jquery-3.4.1.min.js" %}'></script>
 <script src='{% static "js/apexcharts.min.js" %}'></script>
 <script src='{% static "js/viz.js" %}'></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/apexcharts%22%3E"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-treemap@0.2.3"></script>
+
 <script>
     var ctx = document.getElementById('myChart').getContext('2d');
 var chart = new Chart(ctx, {
@@ -271,7 +299,11 @@ var chart = new Chart(ctx, {
     },
 
     // Configuration options go here
-    options: {}
+    options: {
+      legend: {
+      display: false,
+    }
+    }
 });
 
 </script>
@@ -281,7 +313,7 @@ var chart = new Chart(ctx, {
             event.preventDefault();
             var yrs = $('#year').val()
             $.ajax ({
-                url : '/budgetvisualization/{{ object.id }}',
+                url : '/budgetvisualization/{{ object1 }}',
                 type: 'POST',
                 data: $(this).serialize(),
             }).done(function(resp) {
@@ -305,4 +337,147 @@ var chart = new Chart(ctx, {
         });
     });
 </script> -->
+<script>
+function colorFromValue(value, border) {
+  var alpha = (1 + Math.log(value)) / 5;
+  var color = "purple";
+  if (border) {
+    alpha += 0.01;
+  }
+  return Chart.helpers.color(color)
+    .alpha(alpha)
+    .rgbString();
+}
+
+
+var provincestats = [
+    {% for data in budget %} {% if val == '1' %}
+            {% if data.total_budget__year__year == first_date %}
+            {
+
+                title:'{{data.office_name}}',
+                Budget: {{data.total_budget__total}},
+
+            },
+            {% endif %}
+        {% elif val == '2' %}
+            {% if data.actual_expenditure__year__year == first_date %}
+            {
+
+                title:'{{data.office_name}}',
+                Budget: {{data.actual_expenditure__total}},
+
+            },
+            {% endif %}
+        {% elif val is None %}
+            {% if data.total_budget__year__year == first_date %}
+            {
+
+                title:'{{data.office_name}}',
+                Budget: {{data.total_budget__total}},
+
+            },
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+
+];
+var provincest = [
+    {% for das in budget %} {% if val == '1' %}
+        {% if das.total_budget__year__year == first_date %}
+            [
+
+                'Total      :         ' + {{das.total_budget__total}},
+                'Capital  :         ' + {{das.total_budget__capital}},
+                'Current  :         ' + {{das.total_budget__current}},
+
+            ],
+            {% endif %}
+        {% elif val == '2' %}
+            {% if das.actual_expenditure__year__year == first_date %}
+            [
+
+                'Total      :         ' + {{das.actual_expenditure__total}},
+                'Capital  :         ' + {{das.actual_expenditure__capital}},
+                'Current  :         ' + {{das.actual_expenditure__current}},
+
+            ],
+            {% endif %}
+        {% elif val is None %}
+            {% if das.total_budget__year__year == first_date %}
+            [
+
+                'Total      :         ' + {{das.total_budget__total}},
+                'Capital  :         ' + {{das.total_budget__capital}},
+                'Current  :         ' + {{das.total_budget__current}},
+
+            ],
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+
+];
+
+ctx = document.getElementById("chart-area1").getContext("2d");
+window.chart1b = new Chart(ctx, {
+  type: "treemap",
+
+  data: {
+    datasets: [
+      {
+        label: "Sample with labels",
+        tree: provincestats,
+        key1: ['Total', 'Current', 'Capital'],
+
+        key: 'Budget',
+        groups: ['title'],
+        fontColor: 'Black',
+        fontFamily: 'Optima',
+        fontSize: 10,
+        backgroundColor: function(ctx) {
+          return colorFromValue(ctx.dataset.data[ctx.dataIndex]);
+        },
+        borderColor: function(ctx) {
+          return colorFromValue(ctx.dataset.data[ctx.dataIndex], true);
+        },
+        spacing: 0.1,
+        borderWidth: 2,
+        borderColor: "rgba(180,180,180, 0.15)",
+        backgroundColor:  ['#BEDAF6', '#DEEDFA','#CEE3F8','#D2E5F8','#C7DFF7','#ADD1F3','#9DC8F1','#EFF6FD','#000033'],
+        hoverBackgroundColor: [],
+
+      }
+    ]
+  },
+  options: {
+    maintainAspectRatio: false,
+    title: {
+      display: true,
+      text: "Budget for province: "
+    },
+    legend: {
+      display: false,
+      textDirection: 'canvas'
+    },
+    tooltips: {
+      callbacks: {
+        title: function(item, data) {
+          return  data.datasets[item[0].datasetIndex].key;
+        },
+        label: function(item, data) {
+          var dataset = data.datasets[item.datasetIndex];
+          var dataItem = dataset.data[item.index];
+          var obj = dataItem._data;
+          var label = obj.capital ;
+          return provincest[item.index];
+        }
+      }
+    }
+  }
+});
+
+
+
+</script>
+
 {% endblock %}

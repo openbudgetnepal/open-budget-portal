@@ -11,10 +11,12 @@
       $(".smooth-scroll").scroll(function(){
         if($(".smooth-scroll").scrollTop() > 200){
             $("header").addClass("scroll-header");
+            $("header").addClass("scroll-shadow");
             $("footer").addClass("scroll-footer");
         }
         else{
             $("header").removeClass("scroll-header");
+            $("header").removeClass("scroll-shadow");
             $("footer").addClass("scroll-footer");
         }
       })
@@ -26,9 +28,11 @@
       $(window).scroll(function(){
         if($(window).scrollTop() > 100){
             $("header").addClass("scroll-header");
+            $("header").addClass("scroll-shadow");
         }
         else{
             $("header").removeClass("scroll-header");
+            $("header").removeClass("scroll-shadow");
         }
       })
     }
@@ -75,6 +79,19 @@
     text.reveal(10000);
   }
   shuffle_text(); */
+  function glossary_index(){
+    $('.index-search a').on('click', function(){
+    if($(this).closest('a').next().hasClass('current')){
+        $('.index-search a').removeClass('current');
+    }
+    else{
+      $('.index-search a').removeClass('current');
+    }
+    $(this).closest('a').addClass('current');
+    })
+  }
+  glossary_index();
+
   function pagination(){
     $('.pagination').on('click', 'a', function(){
       if($(this).closest('a').next().hasClass('current')){

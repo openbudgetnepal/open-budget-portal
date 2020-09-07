@@ -58,7 +58,7 @@
             <div class="container">
                 <div class="wrap-header">
                     <div class="header-in">
-                        <a href="#" class="logo">
+                        <a href="/" class="logo">
                             <img class="logo-white" src='{% static "img/logo-white.svg" %}' alt="logo">
                             <img class="logo-black" src='{% static "img/logo-black.svg" %}' alt="logo">
                         </a>
@@ -66,16 +66,16 @@
                             <div class="menu">
                                 <ul>
                                     <li>
-                                        <a href="/budgetvisualization/{{ provincefilter.id }}" class="active">Budget Visualization</a>
+                                        <a href="/budgetvisualization/{{ provincefilter.id }}" >Budget Visualization</a>
                                     </li>
                                     <li>
-                                        <a href="glossary.html" class="">Glossary</a>
+                                        <a href="/glossary" class="">Glossary</a>
                                     </li>
                                     <li>
                                         <a href="/blog" class="">Blogs</a>
                                     </li>
                                     <li>
-                                        <a href="about.html" class="">About</a>
+                                        <a href="/about" class="">About</a>
                                     </li>
                                 </ul>
                             </div>
@@ -99,14 +99,24 @@
                         <div class="common-title">
                             <h2 class="title">
                                 The total budget of Nepal for the year 2020/21 is
-                                <span class="title-span"><span class="is-white">NRP </span><span class="is-lg">{{ total_budget_nepal }}</span></span>
+                                        <script>
+                                                var x = {{ total_budget_nepal }}
+                                                document.write('<span class="title-span"><span class="is-white">NRP </span><span class="is-lg">'.concat(x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),'</span></span>'));
+
+                                        </script>
                             </h2>
                         </div>
                         <ul class="budget-list-wrap">
                             {% for data in province_data %}
                             <li class="budget-items">
                                 <span>NRP</span>
-                                <span><a style="color:#DF6D45" href="budgetvisualization/{{data.id}}">{{data.total_budget}}</a></span>
+                                <span>
+                                <script>
+                                                var x = {{ data.total_budget }}
+                                                document.write('<a style="color:#DF6D45;font-size:20" href="budgetvisualization/{{data.id}}">'.concat(x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),'</a>'));
+
+                                </script>
+                                </span>
                                 <span><a style="color:white" href="budgetvisualization/{{data.id}}">{{data.name}}</a></span>
                             </li>
                             {% endfor %}
@@ -141,7 +151,7 @@
                                     <br>
                                     <br>
                                     Where reported, the expenses are split into capital and current expenses, with expenses further divided into the expense types of employee; other operating; grants and subsidies; and other expenses.</p>
-                                <a href="about.html" class="visit_link">Explore<i class="material-icons">chevron_right</i></a>
+                                <a href="/about" class="visit_link">Explore<i class="material-icons">chevron_right</i></a>
                             </div>
                         </div>
                     </div>
@@ -224,54 +234,26 @@
                         </div>
                         <div class="blogs-row">
                             <div class="row row-wrap">
-                                <div class="col-md-4 col-wrap">
+                                {% for data in blog %}
+                                <div class="col-md-4 col-wrap" >
                                     <div class="main-card">
                                         <div class="card-header">
-                                            <figure>
-                                                <img src='{% static "./img/blog-img1.png" %}' alt="blog-image">
-                                            </figure>
-                                        </div>
-                                        <div class="card-body">
-                                            <span class="date">13 Feb 2020</span>
-                                            <h5>Nepal budget 2020/21: Seven things you should know</h5>
-                                            <p>Finance Minister Yuba Raj Katiwada on Thursday presented the annual budget plan for the next fiscal year 2020/21.</p>
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <div class="col-md-4 col-wrap">
-                                    <div class="main-card">
-                                        <div class="card-header">
-                                            <figure>
-                                                <img src='{% static "./img/blog-img2.png" %}' alt="blog-image">
+                                            <a href="/blogdetail/{{ data.id }}"> <img  src="{{ data.photo.url }}" alt="blog-image"></a>
                                             </figure>
                                         </div>
                                         <div class="card-body">
-                                            <span class="date">05 Jun 2020</span>
-                                            <h5>Seven things you should know about Nepal finance</h5>
-                                            <p>Finance Minister Yuba Raj Katiwada on Thursday presented the annual budget plan for the next fiscal year 2020/21.</p>
+                                            <a href="/blogdetail/{{ data.id }}"><span class="date">{{ data.publish }}</span></a>
+                                            <a href="/blogdetail/{{ data.id }}"><h5>{{ data.meta_title }}</h5></a>
+                                            <a href="/blogdetail/{{ data.id }}"><p>{{ data.meta_description }}</p></a>
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="col-md-4 col-wrap">
-                                    <div class="main-card">
-                                        <div class="card-header">
-                                            <figure>
-                                                <img src='{% static "./img/blog-img3.png" %}' alt="blog-image">
-                                            </figure>
-                                        </div>
-                                        <div class="card-body">
-                                            <span class="date">5 Jun 2020</span>
-                                            <h5>Seven things you should know about Nepal finance</h5>
-                                            <p>Finance Minister Yuba Raj Katiwada on Thursday presented the annual budget plan for the next fiscal year 2020/21.</p>
-                                        </div>
-                                    </div>
-                                </div>
+                                {% endfor %}
                             </div>
                         </div>
                         <div class="visit-link">
-                            <a href="#/">See all <i class="material-icons">chevron_right</i> </a>
+                            <a href="/blog"> See More<i class="material-icons">chevron_right</i> </a>
                         </div>
                     </div>
                     <footer>
@@ -366,7 +348,7 @@
                                 <ul class="footer-links">
                                     <li class="link-item"><a href="/budgetvisualization/{{ provincefilter.id }}">budget visualization</a></li>
                                     <li class="link-item"><a href="#about">About</a></li>
-                                    <li class="link-item"><a href="#/">News</a></li>
+                                    <li class="link-item"><a href="/blog">News</a></li>
                                     <li class="link-item"><a href="#/">Glossary</a></li>
                                 </ul>
                             </div>
@@ -401,6 +383,7 @@
                     }).done(function(resp) {
                         if(resp.result=='success') {
                             alert('Message Sent')
+                            $('#contactd').trigger('reset')
 
                         } else {
                             alert('Email Not Matched')

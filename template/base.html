@@ -132,16 +132,27 @@
                     </div>
                     <footer>
                         <div class="footer-wrap">
+                            {% if object1 %}
                             <p class="footer-para is-icon-reverse">
-                                <a href="#home"><i class="material-icons">expand_less</i></a>
+                                <a href="/budgetvisualization/{{object1 }}"><i class="material-icons">expand_less</i></a>
                                 Top
                             </p>
+                            {% elif 'blog' in request.path %}
+                            <p class="footer-para is-icon-reverse">
+                                <a href="/blog"><i class="material-icons">expand_less</i></a>
+                                Top
+                            </p>
+                            {% endif %}
                             <div class="web-footer">
                                 <div class="logo-center"><img src='{% static "./img/logo-white.svg" %}' alt="logo"></div>
                                 <ul class="footer-links">
-                                    <li class="link-item"><a href="#home">budget visualization</a></li>
+                                    {% if object1 %}
+                                    <li class="link-item"><a href="/budgetvisualization/{{ object1 }}">budget visualization</a></li>
+                                    {% else %}
+                                    <li class="link-item"><a href="/budgetvisualization/{{ provincefilter.id }}">budget visualization</a></li>
+                                    {% endif %}
                                     <li class="link-item"><a href="#about">About</a></li>
-                                    <li class="link-item"><a href="#/">News</a></li>
+                                    <li class="link-item"><a href="/blog">News</a></li>
                                     <li class="link-item"><a href="#/">Glossary</a></li>
                                 </ul>
                             </div>
@@ -163,6 +174,7 @@
     <script src='{% static "js/jquery-3.4.1.min.js" %}'></script>
     <script src='{% static "https://cdn.jsdelivr.net/npm/baffle@0.3.6/dist/baffle.min.js" %}'></script>
     <script src='{% static "js/viz.js" %}'></script>
+
         <script>
             $(document).ready(function() {
                 $('#contactd').submit(function(event) {
@@ -175,6 +187,7 @@
                     }).done(function(resp) {
                         if(resp.result=='success') {
                             alert('Message Sent')
+                            $('#contactd').trigger('reset')
 
                         } else {
                             alert('Email Not Matched')

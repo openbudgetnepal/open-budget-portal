@@ -1,0 +1,276 @@
+.glossary{
+    padding: 180px 0 110px;
+    @media #{$breakpoint-lg-desktop}{
+        padding: 155px 0 90px;
+    }
+    @media #{$breakpoint-desktop}{
+        padding: 130px 0 70px;
+    }
+    @media #{$breakpoint-sm}{
+        padding: 115px 0 70px;
+    }
+    .row-wrap{
+        @include justify-content-center;
+        @include align-items-center;
+    }
+    .section-title-wrap{
+        @include display-flex(flex);
+        @include justify-content-between;
+        @include align-items-center;
+        margin-bottom: 70px;
+        @media #{$breakpoint-lg-desktop}{
+            margin-bottom: 60px;
+        }
+        @media #{$breakpoint-desktop}{
+            margin-bottom: 50px;
+        }
+        .date{
+            span{
+                font-size: 13px;
+                color: $heading-color;
+                font-family: $nav-fonts;
+                text-transform: uppercase;
+                letter-spacing: .8px;
+                @media #{$breakpoint-lg-desktop}{
+                    font-size: 11px;
+                }
+                @media #{$breakpoint-desktop}{
+                    font-size: 9px;
+                }
+            }
+        }
+    }
+    .section-content{
+        .search-title-bar{
+            .form-group{
+                position: relative;
+                input{
+                    color: $body-color;
+                    @include radius(0);
+                    border: 0;
+                    border-bottom: 1px solid $border-dark;
+                    padding: 10px 0;
+                    padding-left: 30px;
+                    height: 34px;
+                    min-height: 34px;
+                    @media #{$breakpoint-lg-desktop}{
+                        padding-left: 25px;
+                        height: 30px;
+                        min-height: 30px;
+                    }
+                    @media #{$breakpoint-desktop}{
+                        height: 28px;
+                        min-height: 28px;
+                    }
+                    &:focus{
+                        border-bottom: 1px solid $primary-color;
+                        color: $primary-color;
+                        &~i{
+                            color: $primary-color;
+                        }
+                    }
+                    &~i{
+                        @include transition(all .4s ease);
+                        font-size: 18px;
+                        color: lighten($body-color, 10%);
+                        position: absolute;
+                        top: 8px;
+                        left: 0;
+                        @media #{$breakpoint-lg-desktop}{
+                           font-size: 16px;
+                        }
+                        @media #{$breakpoint-desktop}{
+                           font-size: 14px;
+                           top: 5px;
+                        }
+                    }
+                }
+            }
+        }
+        .search-content{
+            margin-top: 35px;
+            background:$bg-color;
+            padding: 0 40px;
+            padding-right: 0;
+            @include display-flex(flex);
+            @media #{$breakpoint-lg-desktop}{
+                margin-top: 25px;
+                padding: 0 30px;
+                padding-right: 0;
+            }
+            @media #{$breakpoint-desktop}{
+               margin-top: 20px;
+               padding-right: 0;
+            }
+            @media #{$breakpoint-sm}{
+                padding: 0 20px;
+                padding-right: 0;
+            }
+            .index-search{
+                padding: 50px 0;
+                flex: 0 0 14%;
+                @include display-flex(flex);
+                @include flex-direction-column(column);
+                @media #{$breakpoint-desktop}{
+                    padding: 30px 0;
+                }
+                a{
+                    font-size: 16px;
+                    line-height: 28px;
+                    font-weight: 600;
+                    color: $body-light;
+                    text-transform:uppercase;
+                    @include transition(all .4s ease);
+                    width: 26px;
+                    height: 26px;
+                    text-align: center;
+                    &:not(:last-child){
+                        margin-bottom: 25px;
+                    }
+                    &:active{
+                        background: rgba($primary-color, .2);
+                        color: $primary-color;
+                        @include radius(50%);
+                    }
+                    &:hover,
+                    &.current{
+                        color: $primary-color;
+                    }
+                    @media #{$breakpoint-lg-desktop}{
+                        font-size: 12px;
+                        &:not(:last-child){
+                            margin-bottom: 15px;
+                        }
+                    }
+                    @media #{$breakpoint-desktop}{
+                        font-size: 10px;
+                        line-height: 20px;
+                        width: 20px;
+                        height: 20px;
+                        &:not(:last-child){
+                            margin-bottom: 10px;
+                        }
+                    }
+                }
+            }
+            .index-content{
+                padding: 50px 0;
+                height: 1700px;
+                overflow-y: scroll;
+                scroll-behavior: smooth;
+                &::-webkit-scrollbar{
+                    width: 4px;
+                    @media #{$breakpoint-desktop}{
+                        width: 3px;
+                    }
+                }
+                &::-webkit-scrollbar-track{
+                    background: lighten($border-light, 8%);
+                }
+                &::-webkit-scrollbar-thumb{
+                    background: $border-light;
+                    @include radius(10px);
+                } 
+                @media #{$breakpoint-lg-desktop}{
+                    padding: 40px 0;
+                }
+                @media #{$breakpoint-desktop}{
+                    padding: 30px 0;
+                }
+                @media #{$breakpoint-lg}{
+                    height: 1500px;
+                }
+                ul.index-li{
+                    padding-right: 80px;
+                    @media #{$breakpoint-xl}{
+                        padding-right: 30px;
+                    }
+                    @media #{$breakpoint-xs}{
+                        padding-right: 20px;
+                    }
+                    li.index-item{
+                        &:not(:last-child){
+                            margin-bottom: 80px;
+                            @media #{$breakpoint-lg-desktop}{
+                               margin-bottom: 60px;
+                            }
+                            @media #{$breakpoint-desktop}{
+                                margin-bottom: 40px;
+                            }
+                        }
+                        a{
+                             display: block;
+                            .index-letter{
+                                text-transform: uppercase;
+                                font-size: 55px;
+                                line-height: 40px;
+                                font-weight: 400;
+                                color: $heading-color;
+                                font-family: $heading-fonts;
+                                @media #{$breakpoint-lg-desktop}{
+                                    font-size: 40px;
+                                    line-height: 60px;
+                                }
+                                @media #{$breakpoint-desktop}{
+                                    font-size: 34px;
+                                    line-height: 32px;
+                                }
+                                @media #{$breakpoint-lg}{
+                                    text-align: center;
+                                    font-size: 26px;
+                                }
+                            }
+                            ul.inner-list{
+                                margin-top: 40px;
+                                @media #{$breakpoint-lg-desktop}{
+                                    margin-top: 30px;
+                                }
+                                @media #{$breakpoint-desktop}{
+                                    margin-top: 20px;
+                                }
+                                li{
+                                    margin-bottom: 40px;
+                                    b{
+                                        text-transform: capitalize;
+                                        font-size: 16px;
+                                        line-height: 28px;
+                                        font-weight: 600;
+                                    }
+                                    p{
+                                        text-transform: capitalize;
+                                        margin-top: 12px;
+                                        font-size: 14px;
+                                        line-height: 24px;
+                                    }
+                                    @media #{$breakpoint-lg-desktop}{
+                                        margin-bottom: 30px;
+                                        b{
+                                            font-size: 13px;
+                                            line-height: 24px;
+                                        }
+                                        p{
+                                            margin-top: 8px;
+                                            font-size: 11px;
+                                            line-height: 20px;
+                                        }
+                                    }
+                                    @media #{$breakpoint-desktop}{
+                                        margin-bottom: 20px;
+                                        b{
+                                            font-size: 10px;
+                                            line-height: 20px;
+                                        }
+                                        p{
+                                            font-size: 9px;
+                                            line-height: 16px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'core',
     'django_filters',
     'import_export',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [
@@ -78,12 +79,10 @@ WSGI_APPLICATION = 'budget.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'nepalbudget1',
         'USER': 'superuser',
         "PASSWORD": '1234',
-        'HOST': 'localhost',
-        'PORT': '5432'
     }
 }
 
@@ -114,7 +113,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kathmandu'
 
 USE_I18N = True
 

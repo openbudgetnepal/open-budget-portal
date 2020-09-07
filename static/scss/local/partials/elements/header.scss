@@ -5,12 +5,14 @@ header{
     left: 0;
     z-index: 1111;
     width: 100%;
-    // mix-blend-mode: luminosity;
     @include transition(all .4s ease);
+    &.scroll-shadow{
+        @include box-shadow(0 0 10px 2px lighten($shadow-bg, 50%));
+    }
+    &.header-dark,
     &.scroll-header{
         background: $white-color;
         padding: 10px 1rem !important;
-        @include box-shadow(0 0 10px 2px lighten($shadow-bg, 50%));
         .header-in{
             a.logo{
                 img{
@@ -28,6 +30,9 @@ header{
                     li {
                         a {
                             color: $secondary-color !important;
+                            @media #{$breakpoint-md}{
+                                color: $white-color !important;
+                            }
                             &:hover,
                             &.active{
                                 color: $primary-color !important;
@@ -74,7 +79,7 @@ header{
                         max-width: 160px;
                     }
                     @media #{$breakpoint-pt}{
-                        max-width: 120px;
+                        max-width: 140px;
                     }
                     @include transition(all .4s ease);
                     &.logo-white{
@@ -134,9 +139,6 @@ header{
                                 font-size: .6rem;
                                 letter-spacing: .6px;
                             }
-                            @media #{$breakpoint-md}{
-                                font-size: .75rem;
-                            }
                         }
                     }
                 }
@@ -188,8 +190,8 @@ header{
             }
             .toggle-button {
                 position: relative;
-                width: 24px;
-                height: 24px;
+                width: 22px;
+                height: 22px;
                 @include transition(all .5s ease-in-out);
                 display: none;
                 cursor: pointer;
@@ -253,10 +255,12 @@ header{
                     max-width: 280px;
                     padding: 15px;
                     width: 100%;
-                    background-color: $secondary-light;
+                    background-color: $secondary-color;
+                    opacity: 0;
+                    @include box-shadow(0 0 10px 0 lighten($heading-color, 10%));
                     z-index: 999;
                     top: 0;
-                    right: -100%;
+                    right: -20%;
                     left: auto;
                     bottom: 0;
                     @include transition(all .6s ease);
@@ -264,6 +268,7 @@ header{
                         display: block;
                         li{
                             display: block;
+                            margin-bottom: 15px;
                             a{
                                 color:$white-color;
                                 padding:.5rem .6125rem;
@@ -275,6 +280,7 @@ header{
             }
         }
     }
+    
 }
 @media #{$breakpoint-md}{
     .Is-toggle {
@@ -282,7 +288,8 @@ header{
             .header-in{
                 .menu{
                     right: 0;
-                    @include transition(all .6s ease);
+                    opacity: 1;;
+                    @include transition(all .4s ease);
                     ul{
                         margin-top: 40px;
                     }

@@ -14,13 +14,13 @@
                             <div class="menu">
                                 <ul>
                                     <li>
-                                        <a href="/budgetvisualization/{{ provincefilter.id }}" class="active">Budget Visualization</a>
+                                        <a href="/budgetvisualization/{{ provincefilter.id }}" >Budget Visualization</a>
                                     </li>
                                     <li>
-                                        <a href="/Glossary" class="">Glossary</a>
+                                        <a href="/glossary" class="">Glossary</a>
                                     </li>
                                     <li>
-                                        <a href="/blog" class="">Blogs</a>
+                                        <a href="/blog" class="active">Blogs</a>
                                     </li>
                                     <li>
                                         <a href="/about" class="">About</a>
@@ -63,114 +63,65 @@
                     <div class="row row-wrap">
                         <div class="col-md-10 col-wrap">
                             <ul class="budget-list">
+                                {% for data in page_obj %}
+                                {% if data.status == 1 %}
+                                {% if forloop.counter != 3 and forloop.counter != 6 and forloop.counter != 9 and forloop.counter != 12 and forloop.counter != 15 and forloop.counter != 18%}
                                 <li class="budget-items">
                                     <figure>
-                                        <img src='{% static "img/blog-img1.png" %}'alt="blog-img">
+                                        <a href="/blogdetail/{{data.id }}" style="color:black"> <img src='{{ data.photo.url }}'alt="blog-img"></a>
                                     </figure>
                                     <div class="info">
-                                        <span class="date">13 Feb 2020</span>
+                                        <a href="/blogdetail/{{data.id }}" style="color:black"><span class="date">{{ data.publish }}</span></a>
                                         <div class="common-title">
-                                            <h4 class="section-title">Nepal budget 2020/21: Seven things you should know</h4>
+                                            <a href="/blogdetail/{{data.id }}" style="color:black"><h4 class="section-title">{{ data.meta_title }}</h4></a>
                                         </div>
-                                        <p class="news-para">Finance Minister Yuba Raj Katiwada on Thursday presented the annual budget plan for the next fiscal year 2020/21.</p>
+                                        <a href="/blogdetail/{{data.id }}" style="color:black"><p class="news-para">{{ data.meta_description }}</p></a>
                                     </div>
                                 </li>
+                                {% else  %}
 
-                                <li class="budget-items">
-                                    <figure>
-                                        <img src='{% static "img/man-device-img.png"  %}'alt="man&device">
-                                    </figure>
-                                    <div class="info">
-                                        <span class="date">13 Feb 2020</span>
-                                        <div class="common-title">
-                                            <h4 class="section-title">Building a more transparent government.</h4>
-                                        </div>
-                                        <p class="news-para">Visualization tools lets you explore the entire federal budget in increasing granularity, illustrating how awards derive from federal accounts. [..]</p>
-                                    </div>
-                                </li>
 
-                                <li class="budget-items mainbudget-items" style="background-image: url(img/gov_asset.png)">
+                                <a href="/blogdetail/{{data.id }}" style="color:black"><li class="budget-items mainbudget-items" style="background-image: url('{{ data.photo.url }}')"></a>
                                     <div class="info">
-                                        <span class="date">13 Feb 2020</span>
+                                        <a href="/blogdetail/{{data.id }}" style="color:black"><span class="date">13 Feb 2020</span></a>
                                         <div class="common-title">
-                                            <h4 class="section-title">Nepal Budget 2077/78: Lots of Promises to Make Nepal Digital  </h4>
+                                            <a href="/blogdetail/{{data.id }}" style="color:black"><h4 class="section-title">Nepal Budget 2077/78: Lots of Promises to Make Nepal Digital  </h4></a>
                                         </div>
                                     </div>
                                 </li>
+                                {% endif %}
+                                {% endif %}
+                                {% endfor %}
 
-                                <li class="budget-items">
-                                    <figure>
-                                        <img src='{% static "img/budget-collection.png" %}' alt="budget_collection">
-                                    </figure>
-                                    <div class="info">
-                                        <span class="date">13 Feb 2020</span>
-                                        <div class="common-title">
-                                            <h4 class="section-title">Nepal budget 2020/21: Seven things you should know</h4>
-                                        </div>
-                                        <p class="news-para">Finance Minister Yuba Raj Katiwada on Thursday presented the annual budget plan for the next fiscal year 2020/21.</p>
-                                    </div>
-                                </li>
-
-                                <li class="budget-items">
-                                    <figure>
-                                        <img src='{% static "img/budget_news.png" %}' alt="budget-news">
-                                    </figure>
-                                    <div class="info">
-                                        <span class="date">13 Feb 2020</span>
-                                        <div class="common-title">
-                                            <h4 class="section-title">Zwei flinke Boxer jagen die quirlige Eva und ihren Mops durch Sylt. Franz jagt im komplett</h4>
-                                        </div>
-                                        <p class="news-para">Visualization tools lets you explore the entire federal budget in increasing granularity, illustrating how awards derive from federal accounts. [..]</p>
-                                    </div>
-                                </li>
-
-                                <li class="budget-items mainbudget-items" style="background-image: url(img/bussiness_budget_bg.png)">
-                                    <div class="info">
-                                        <span class="date">13 Feb 2020</span>
-                                        <div class="common-title">
-                                            <h4 class="section-title">Zwei flinke Boxer jagen die quirlige Eva und ihren Mops durch Sylt. Franz jagt im komplett.</h4>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li class="budget-items">
-                                    <figure>
-                                        <img src='{% static "img/blog-img1.png" %}' alt="blog-img">
-                                    </figure>
-                                    <div class="info">
-                                        <span class="date">13 Feb 2020</span>
-                                        <div class="common-title">
-                                            <h4 class="section-title">Nepal budget 2020/21: Seven things you should know</h4>
-                                        </div>
-                                        <p class="news-para">Finance Minister Yuba Raj Katiwada on Thursday presented the annual budget plan for the next fiscal year 2020/21.</p>
-                                    </div>
-                                </li>
-
-                                <li class="budget-items">
-                                    <figure>
-                                        <img src='{% static "img/man-device-img.png" %}' alt="man&device">
-                                    </figure>
-                                    <div class="info">
-                                        <span class="date">13 Feb 2020</span>
-                                        <div class="common-title">
-                                            <h4 class="section-title">Building a more transparent government.</h4>
-                                        </div>
-                                        <p class="news-para">Visualization tools lets you explore the entire federal budget in increasing granularity, illustrating how awards derive from federal accounts. [..]</p>
-                                    </div>
-                                </li>
 
                             </ul>
 
                             <div class="pagination-wrap">
                                 <div class="pagination">
-                                    <a href="#/" class="current">1</a>
-                                    <a href="#/">2</a>
+                                    {% for page in paginator.page_range %}
+                                    <a href="?page={{ page }}" {% if page == page_obj.number %} class="current" {% endif %}>{{ page }}</a>
+                                    {% endfor %}
+                                    {% if page_obj.has_previous %}
+                                    <span style="padding-left:640px">
+                                    <div class="page-nav-btn">
+                                        <a href="?page={{ page_obj.previous_page_number }}">
+                                        <button class="common-button is-border">
+                                            Previous Page
+                                        </button>
+                                        </a>
+                                    </div>
+                                    </span>
+                                    {% endif %}
                                 </div>
+                                {% if page_obj.has_next %}
                                 <div class="page-nav-btn">
+                                    <a href="?page={{ page_obj.next_page_number }}">
                                     <button class="common-button is-border">
                                         Next Page
                                     </button>
+                                    </a>
                                 </div>
+                                {% endif %}
                             </div>
                         </div>
                     </div>

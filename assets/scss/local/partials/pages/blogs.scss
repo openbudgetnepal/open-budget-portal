@@ -1,5 +1,11 @@
 .blog_section{
-  
+    &.bg-grey{
+        background: $grey-color;
+        padding: 50px 0 60px;
+        @media #{$breakpoint-desktop}{
+            padding: 40px 0 50px;
+        }
+    }
     .blog-content{
         margin-top: 35px;
         @media #{$breakpoint-desktop}{
@@ -203,8 +209,17 @@
                     margin-bottom: 30px;
                 }
             }
-            @include display-flex(flex);
-            @include align-items-center;
+            a{
+                cursor: pointer;
+                display: block;
+                @include display-flex(flex);
+                @include align-items-center;
+                @include transition(all .4s ease);
+                &:hover{
+                    transform: translateY(-4px);
+                    @include box-shadow(10px 10px 10px 0 rgba($body-color, .1));
+                }
+            }
             figure{
                 flex: 0 0 325px;
                 img{
@@ -227,16 +242,19 @@
             &.budget-items{
                 .info{
                     padding-left: 25px;
+                    
                     span.date{
                         font-family: $nav-fonts;
                         font-size: 14px;
                         letter-spacing: .8px;
                         text-transform: uppercase;
+                        color: $heading-color;
                     }
                     .common-title{
                         margin: 15px 0 20px;
                     }
                     p.news-para{
+                        color: $heading-color;
                         max-width: 690px;
                         @include line-clamp(2);
                     }
@@ -277,10 +295,13 @@
                    margin: 80px 0;
                    padding: 40px 20px;
                 }
-                .info{
+                a.info{
+                    display: block;
                     background: $white-color;
                     max-width: 420px;
                     padding: 35px;
+                    @include transition(all .4s ease);
+                    cursor: pointer;
                     @media #{$breakpoint-lg-desktop}{
                         padding: 30px;
                         max-width: 380px;
@@ -288,6 +309,11 @@
                     @media #{$breakpoint-desktop}{
                         padding: 20px;
                         max-width:  320px;
+                    }
+                    &:hover{
+                        transform: translateY(0);
+                        background: $bg-color;
+                        @include box-shadow(0 0 10px 0 lighten($body-color, 10%) inset);
                     }
                 }
             }
