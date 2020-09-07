@@ -71,11 +71,11 @@
                                         <a href="/blogdetail/{{data.id }}" style="color:black"> <img src='{{ data.photo.url }}'alt="blog-img"></a>
                                     </figure>
                                     <div class="info">
-                                        <a href="/blogdetail/{{data.id }}" style="color:black"><span class="date">{{ data.publish }}</span></a>
+                                        <a href="/blogdetail/{{data.id }}" style="color:black"><span class="date">{% autoescape off %}{{ data.publish }}{% endautoescape %}</span></a>
                                         <div class="common-title">
-                                            <a href="/blogdetail/{{data.id }}" style="color:black"><h4 class="section-title">{{ data.meta_title }}</h4></a>
+                                            <a href="/blogdetail/{{data.id }}" style="color:black"><h4 class="section-title">{% autoescape off %}{{ data.meta_title }}{% endautoescape %}</h4></a>
                                         </div>
-                                        <a href="/blogdetail/{{data.id }}" style="color:black"><p class="news-para">{{ data.meta_description }}</p></a>
+                                        <a href="/blogdetail/{{data.id }}" style="color:black"><p class="news-para">{% autoescape off %}{{ data.meta_description }}{% endautoescape %}</p></a>
                                     </div>
                                 </li>
                                 {% else  %}

@@ -386,7 +386,8 @@ var provincest = [
     {% for das in budget %} {% if val == '1' %}
         {% if das.total_budget__year__year == first_date %}
             [
-
+                {{das.total_budget__total}},
+                '{{das.office_name}}',
                 'Total      :         ' + {{das.total_budget__total}},
                 'Capital  :         ' + {{das.total_budget__capital}},
                 'Current  :         ' + {{das.total_budget__current}},
@@ -396,7 +397,8 @@ var provincest = [
         {% elif val == '2' %}
             {% if das.actual_expenditure__year__year == first_date %}
             [
-
+                {{das.actual_expenditure__total}},
+                '{{das.office_name}}',
                 'Total      :         ' + {{das.actual_expenditure__total}},
                 'Capital  :         ' + {{das.actual_expenditure__capital}},
                 'Current  :         ' + {{das.actual_expenditure__current}},
@@ -406,7 +408,8 @@ var provincest = [
         {% elif val is None %}
             {% if das.total_budget__year__year == first_date %}
             [
-
+                {{das.total_budget__total}},
+                '{{das.office_name}}',
                 'Total      :         ' + {{das.total_budget__total}},
                 'Capital  :         ' + {{das.total_budget__capital}},
                 'Current  :         ' + {{das.total_budget__current}},
@@ -431,7 +434,7 @@ window.chart1b = new Chart(ctx, {
 
         key: 'Budget',
         groups: ['title'],
-        fontColor: 'Black',
+        fontColor: 'black',
         fontFamily: 'Optima',
         fontSize: 10,
         backgroundColor: function(ctx) {
@@ -443,7 +446,7 @@ window.chart1b = new Chart(ctx, {
         spacing: 0.1,
         borderWidth: 2,
         borderColor: "rgba(180,180,180, 0.15)",
-        backgroundColor:  ['#BEDAF6', '#DEEDFA','#CEE3F8','#D2E5F8','#C7DFF7','#ADD1F3','#9DC8F1','#EFF6FD','#000033'],
+        backgroundColor:  ['#BEDAF6', '#DEEDFA','#CEE3F8','#D2E5F8','#C7DFF7','#ADD1F3','#9DC8F1','#9DC8F1','#C7DFF7','#DEEDFA','#9DC8F1','#D2E5F8','#BEDAF6'],
         hoverBackgroundColor: [],
 
       }
@@ -456,20 +459,27 @@ window.chart1b = new Chart(ctx, {
       text: "Budget for province: "
     },
     legend: {
-      display: false,
-      textDirection: 'canvas'
+      display: false
     },
     tooltips: {
       callbacks: {
+
         title: function(item, data) {
-          return  data.datasets[item[0].datasetIndex].key;
+            let srta = provincest.sort(function(a, b) {
+                return b[0]-a[0];
+            });
+
+            return srta[item[0].index].slice(1, 2);
+
+
         },
         label: function(item, data) {
-          var dataset = data.datasets[item.datasetIndex];
-          var dataItem = dataset.data[item.index];
-          var obj = dataItem._data;
-          var label = obj.capital ;
-          return provincest[item.index];
+            let srta = provincest.sort(function(a, b) {
+                return b[0]-a[0];
+            });
+
+            return srta[item.index].slice(2, 5);
+
         }
       }
     }
