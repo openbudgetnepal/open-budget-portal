@@ -5,14 +5,13 @@ from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.views.generic import TemplateView, DetailView
 from django.views.generic.list import MultipleObjectMixin
 from django.urls import reverse_lazy
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 from .models import Province, ProvinceSource, ProvinceBudget, Contact, Year, TotalBudget, ActualExpenditure, Blog, \
     AboutMission, Glossary
 
 
-class BudgetVisualization(LoginRequiredMixin, DetailView):
+class BudgetVisualization(DetailView):
     model = Province
     template_name = 'budgetvisualization.html'
 
@@ -120,7 +119,7 @@ class BudgetVisualization(LoginRequiredMixin, DetailView):
             return render(request, 'budgetvisualization.html', context)
 
 
-class HomePage(LoginRequiredMixin, TemplateView):
+class HomePage(TemplateView):
 
     def get(self, request, *args, **kwargs):
         province_data = Province.objects.order_by('id')
@@ -142,7 +141,7 @@ class HomePage(LoginRequiredMixin, TemplateView):
         return render(request, 'index.html', context)
 
 
-class AboutView(LoginRequiredMixin, TemplateView):
+class AboutView(TemplateView):
 
     def get(self, request, *args, **kwargs):
         provincefilter = Province.objects.filter().first()
@@ -175,7 +174,7 @@ def contact(request):
             return JsonResponse(resp)
 
 
-class BlogData(LoginRequiredMixin, TemplateView):
+class BlogData(TemplateView):
     template_name = 'blogs.html'
 
     def get(self, request, *args, **kwargs):
@@ -192,7 +191,7 @@ class BlogData(LoginRequiredMixin, TemplateView):
         return render(request, 'blogs.html', context)
 
 
-class GlossaryView(LoginRequiredMixin, TemplateView):
+class GlossaryView(TemplateView):
     template_name = 'glossary.html'
 
     def get(self, request, *args, **kwargs):
@@ -208,7 +207,7 @@ class GlossaryView(LoginRequiredMixin, TemplateView):
         return render(request, 'glossary.html', context)
 
 
-class BlogDetailView(LoginRequiredMixin, DetailView, MultipleObjectMixin):
+class BlogDetailView(DetailView, MultipleObjectMixin):
     model = Blog
     template_name = 'blogitems.html'
     paginate_by = 3
