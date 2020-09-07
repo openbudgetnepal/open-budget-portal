@@ -1,0 +1,537 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block link %}
+
+    <link rel="stylesheet" href='{% static "css/apexcharts.css" %}'>
+    <link rel="stylesheet" href='{% static "css/custom-charts.css" %}'>
+    <link rel="stylesheet" type="text/css" href='{% static "css/bootstrap-grid.min.css" %}'>
+{% endblock %}
+{% block body_part %}
+
+    <div class="pg-wrap viz-wrap">
+        <header class="header-dark site-header is-bg">
+            <div class="container">
+                <div class="wrap-header">
+                    <div class="header-in">
+                        <a href="/" class="logo">
+                            <img class="logo-black" src='{% static "img/logo-black.svg" %}' alt="logo">
+                        </a>
+                        <div class="menu-wrap">
+                            <div class="menu">
+                                <ul>
+                                    <li>
+                                        <a href="budgetvisualization/{{ provincefilter.id }}" >Budget Visualization</a>
+                                    </li>
+                                    <li>
+                                        <a href="/glossary" class="active">Glossary</a>
+                                    </li>
+                                    <li>
+                                        <a href="/blog" class="">Blogs</a>
+                                    </li>
+                                    <li>
+                                        <a href="/about" class="">About</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="toggle-button">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section class="glossary">
+            <div class="container">
+                <div class="wrapper">
+                    <div class="row row-wrap">
+                        <div class="col-lg-9 col-md-10">
+
+                            <div class="section-title-wrap">
+                                <div class="common-title">
+                                    <h3 class="title is-dark">Glossary</h3>
+                                </div>
+                                <div class="date">
+                                    <span>LAST UPDATED: {{ glossary.updated_at }}</span>
+                                </div>
+                            </div>
+
+                            <div class="section-content">
+                                <div class="search-title-bar">
+                                    <div class="form-group">
+                                        <input type="search" class="form-control" onkeyup="filter(this)"  placeholder="Search for a term">
+                                        <i class="material-icons">search</i>
+                                    </div>
+                                </div>
+                                <div class="search-content">
+                                    <div class="index-search">
+                                        <a href="#0">0</a>
+                                        <a href="#a" class="current">A</a>
+                                        <a href="#b">B</a>
+                                        <a href="#c">C</a>
+                                        <a href="#d">D</a>
+                                        <a href="#e">E</a>
+                                        <a href="#f">F</a>
+                                        <a href="#g">G</a>
+                                        <a href="#h">H</a>
+                                        <a href="#i">I</a>
+                                        <a href="#j">j</a>
+                                        <a href="#k">k</a>
+                                        <a href="#l">l</a>
+                                        <a href="#m">m</a>
+                                        <a href="#n">n</a>
+                                        <a href="#o">o</a>
+                                        <a href="#p">p</a>
+                                        <a href="#q">q</a>
+                                        <a href="#r">r</a>
+                                        <a href="#s">s</a>
+                                        <a href="#t">t</a>
+                                        <a href="#u">u</a>
+                                        <a href="#v">v</a>
+                                        <a href="#w">w</a>
+                                        <a href="#x">x</a>
+                                        <a href="#y">y</a>
+                                        <a href="#z">z</a>
+                                    </div>
+                                    <div class="index-content">
+                                        <ul class="index-li" id="theList">
+                                            <li class="index-item">
+                                                <a id="a">
+                                                    <span class="index-letter">A</span>
+                                                    <ul class="inner-list" >
+                                                        {% for data in findletter %}
+                                                        {% if data.title|make_list|first == 'A' or data.title|make_list|first == 'a' %}
+                                                        <li>
+                                                            <b>{{ data.title }}</b>
+                                                            <p>{{ data.description }}</p>
+                                                        </li>
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                    </ul>
+                                                </a>
+                                            </li>
+                                            <li class="index-item">
+                                                <a id="b">
+                                                    <span class="index-letter">B</span>
+                                                    <ul class="inner-list">
+                                                        {% for data in findletter %}
+                                                        {% if data.title|make_list|first == 'B' or data.title|make_list|first == 'b' %}
+                                                        <li>
+                                                            <b>{{ data.title }}</b>
+                                                            <p>{{ data.description }}</p>
+                                                        </li>
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                    </ul>
+                                                </a>
+                                            </li>
+                                            <li class="index-item">
+                                                <a id="c">
+                                                    <span class="index-letter">C</span>
+                                                    <ul class="inner-list">
+                                                        {% for data in findletter %}
+                                                        {% if data.title|make_list|first == 'C' or data.title|make_list|first == 'c'%}
+                                                        <li>
+                                                            <b>{{ data.title }}</b>
+                                                            <p>{{ data.description }}</p>
+                                                        </li>
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                    </ul>
+                                                </a>
+                                            </li>
+                                            <li class="index-item">
+                                                <a id="d">
+                                                    <span class="index-letter">D</span>
+                                                    <ul class="inner-list">
+                                                        {% for data in findletter %}
+                                                        {% if data.title|make_list|first == 'D' or data.title|make_list|first == 'd'%}
+                                                        <li>
+                                                            <b>{{ data.title }}</b>
+                                                            <p>{{ data.description }}</p>
+                                                        </li>
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                    </ul>
+                                                </a>
+                                            </li>
+                                            <li class="index-item">
+                                                <a id="e">
+                                                    <span class="index-letter">E</span>
+                                                    <ul class="inner-list">
+                                                        {% for data in findletter %}
+                                                        {% if data.title|make_list|first == 'E' or data.title|make_list|first == 'e'%}
+                                                        <li>
+                                                            <b>{{ data.title }}</b>
+                                                            <p>{{ data.description }}</p>
+                                                        </li>
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                    </ul>
+                                                </a>
+                                            </li>
+                                            <li class="index-item">
+                                                <a id="f">
+                                                    <span class="index-letter">F</span>
+                                                    <ul class="inner-list">
+                                                        {% for data in findletter %}
+                                                        {% if data.title|make_list|first == 'F' or data.title|make_list|first == 'f' %}
+                                                        <li>
+                                                            <b>{{ data.title }}</b>
+                                                            <p>{{ data.description }}</p>
+                                                        </li>
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                    </ul>
+                                                </a>
+                                            </li>
+                                            <li class="index-item">
+                                                <a id="g">
+                                                    <span class="index-letter">G</span>
+                                                    <ul class="inner-list">
+                                                        {% for data in findletter %}
+                                                        {% if data.title|make_list|first == 'G' or data.title|make_list|first == 'g' %}
+                                                        <li>
+                                                            <b>{{ data.title }}</b>
+                                                            <p>{{ data.description }}</p>
+                                                        </li>
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                    </ul>
+                                                </a>
+                                            </li>
+                                            <li class="index-item">
+                                                <a id="h">
+                                                    <span class="index-letter">H</span>
+                                                    <ul class="inner-list">
+                                                        {% for data in findletter %}
+                                                        {% if data.title|make_list|first == 'H' or data.title|make_list|first == 'h' %}
+                                                        <li>
+                                                            <b>{{ data.title }}</b>
+                                                            <p>{{ data.description }}</p>
+                                                        </li>
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                    </ul>
+                                                </a>
+                                            </li>
+                                            <li class="index-item">
+                                                <a id="i">
+                                                    <span class="index-letter">I</span>
+                                                    <ul class="inner-list">
+                                                        {% for data in findletter %}
+                                                        {% if data.title|make_list|first == 'I' or data.title|make_list|first == 'i' %}
+                                                        <li>
+                                                            <b>{{ data.title }}</b>
+                                                            <p>{{ data.description }}</p>
+                                                        </li>
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                    </ul>
+                                                </a>
+                                            </li>
+                                            <li class="index-item">
+                                                <a id="j">
+                                                    <span class="index-letter">J</span>
+                                                    <ul class="inner-list">
+                                                        {% for data in findletter %}
+                                                        {% if data.title|make_list|first == 'J' or data.title|make_list|first == 'j' %}
+                                                        <li>
+                                                            <b>{{ data.title }}</b>
+                                                            <p>{{ data.description }}</p>
+                                                        </li>
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                    </ul>
+                                                </a>
+                                            </li>
+                                            <li class="index-item">
+                                                <a id="k">
+                                                    <span class="index-letter">K</span>
+                                                    <ul class="inner-list">
+                                                        {% for data in findletter %}
+                                                        {% if data.title|make_list|first == 'K' or data.title|make_list|first == 'k' %}
+                                                        <li>
+                                                            <b>{{ data.title }}</b>
+                                                            <p>{{ data.description }}</p>
+                                                        </li>
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                    </ul>
+                                                </a>
+                                            </li>
+                                            <li class="index-item">
+                                                <a id="l">
+                                                    <span class="index-letter">L</span>
+                                                    <ul class="inner-list">
+                                                        {% for data in findletter %}
+                                                        {% if data.title|make_list|first == 'L' or data.title|make_list|first == 'l' %}
+                                                        <li>
+                                                            <b>{{ data.title }}</b>
+                                                            <p>{{ data.description }}</p>
+                                                        </li>
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                    </ul>
+                                                </a>
+                                            </li>
+                                            <li class="index-item">
+                                                <a id="m">
+                                                    <span class="index-letter">M</span>
+                                                    <ul class="inner-list">
+                                                        {% for data in findletter %}
+                                                        {% if data.title|make_list|first == 'M' or data.title|make_list|first == 'm' %}
+                                                        <li>
+                                                            <b>{{ data.title }}</b>
+                                                            <p>{{ data.description }}</p>
+                                                        </li>
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                    </ul>
+                                                </a>
+                                            </li>
+                                            <li class="index-item">
+                                                <a id="n">
+                                                    <span class="index-letter">N</span>
+                                                    <ul class="inner-list">
+                                                        {% for data in findletter %}
+                                                        {% if data.title|make_list|first == 'N' or data.title|make_list|first == 'n' %}
+                                                        <li>
+                                                            <b>{{ data.title }}</b>
+                                                            <p>{{ data.description }}</p>
+                                                        </li>
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                    </ul>
+                                                </a>
+                                            </li>
+                                            <li class="index-item">
+                                                <a id="o">
+                                                    <span class="index-letter">O</span>
+                                                    <ul class="inner-list">
+                                                        {% for data in findletter %}
+                                                        {% if data.title|make_list|first == 'O' or data.title|make_list|first == 'o' %}
+                                                        <li>
+                                                            <b>{{ data.title }}</b>
+                                                            <p>{{ data.description }}</p>
+                                                        </li>
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                    </ul>
+                                                </a>
+                                            </li>
+                                            <li class="index-item">
+                                                <a id="p">
+                                                    <span class="index-letter">P</span>
+                                                    <ul class="inner-list">
+                                                        {% for data in findletter %}
+                                                        {% if data.title|make_list|first == 'P' or data.title|make_list|first == 'P' %}
+                                                        <li>
+                                                            <b>{{ data.title }}</b>
+                                                            <p>{{ data.description }}</p>
+                                                        </li>
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                    </ul>
+                                                </a>
+                                            </li>
+                                            <li class="index-item">
+                                                <a id="q">
+                                                    <span class="index-letter">Q</span>
+                                                    <ul class="inner-list">
+                                                        {% for data in findletter %}
+                                                        {% if data.title|make_list|first == 'Q' or data.title|make_list|first == 'q' %}
+                                                        <li>
+                                                            <b>{{ data.title }}</b>
+                                                            <p>{{ data.description }}</p>
+                                                        </li>
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                    </ul>
+                                                </a>
+                                            </li>
+                                            <li class="index-item">
+                                                <a id="r">
+                                                    <span class="index-letter">R</span>
+                                                    <ul class="inner-list">
+                                                        {% for data in findletter %}
+                                                        {% if data.title|make_list|first == 'R' or data.title|make_list|first == 'r' %}
+                                                        <li>
+                                                            <b>{{ data.title }}</b>
+                                                            <p>{{ data.description }}</p>
+                                                        </li>
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                    </ul>
+                                                </a>
+                                            </li>
+                                            <li class="index-item">
+                                                <a id="s">
+                                                    <span class="index-letter">S</span>
+                                                    <ul class="inner-list">
+                                                        {% for data in findletter %}
+                                                        {% if data.title|make_list|first == 'S' or data.title|make_list|first == 's' %}
+                                                        <li>
+                                                            <b>{{ data.title }}</b>
+                                                            <p>{{ data.description }}</p>
+                                                        </li>
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                    </ul>
+                                                </a>
+                                            </li>
+                                            <li class="index-item">
+                                                <a id="t">
+                                                    <span class="index-letter">t</span>
+                                                    <ul class="inner-list">
+                                                        {% for data in findletter %}
+                                                        {% if data.title|make_list|first == 'T' or data.title|make_list|first == 't' %}
+                                                        <li>
+                                                            <b>{{ data.title }}</b>
+                                                            <p>{{ data.description }}</p>
+                                                        </li>
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                    </ul>
+                                                </a>
+                                            </li>
+                                            <li class="index-item">
+                                                <a id="u">
+                                                    <span class="index-letter">U</span>
+                                                    <ul class="inner-list">
+                                                        {% for data in findletter %}
+                                                        {% if data.title|make_list|first == 'U' or data.title|make_list|first == 'u' %}
+                                                        <li>
+                                                            <b>{{ data.title }}</b>
+                                                            <p>{{ data.description }}</p>
+                                                        </li>
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                    </ul>
+                                                </a>
+                                            </li>
+                                            <li class="index-item">
+                                                <a id="v">
+                                                    <span class="index-letter">V</span>
+                                                    <ul class="inner-list">
+                                                        {% for data in findletter %}
+                                                        {% if data.title|make_list|first == 'V' or data.title|make_list|first == 'v' %}
+                                                        <li>
+                                                            <b>{{ data.title }}</b>
+                                                            <p>{{ data.description }}</p>
+                                                        </li>
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                    </ul>
+                                                </a>
+                                            </li>
+                                            <li class="index-item">
+                                                <a id="w">
+                                                    <span class="index-letter">W</span>
+                                                    <ul class="inner-list">
+                                                        {% for data in findletter %}
+                                                        {% if data.title|make_list|first == 'W' or data.title|make_list|first == 'w' %}
+                                                        <li>
+                                                            <b>{{ data.title }}</b>
+                                                            <p>{{ data.description }}</p>
+                                                        </li>
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                    </ul>
+                                                </a>
+                                            </li>
+                                            <li class="index-item">
+                                                <a id="x">
+                                                    <span class="index-letter">X</span>
+                                                    <ul class="inner-list">
+                                                        {% for data in findletter %}
+                                                        {% if data.title|make_list|first == 'X' or data.title|make_list|first == 'x' %}
+                                                        <li>
+                                                            <b>{{ data.title }}</b>
+                                                            <p>{{ data.description }}</p>
+                                                        </li>
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                    </ul>
+                                                </a>
+                                            </li>
+                                            <li class="index-item">
+                                                <a id="y">
+                                                    <span class="index-letter">Y</span>
+                                                    <ul class="inner-list">
+                                                        {% for data in findletter %}
+                                                        {% if data.title|make_list|first == 'Y' or data.title|make_list|first == 'y' %}
+                                                        <li>
+                                                            <b>{{ data.title }}</b>
+                                                            <p>{{ data.description }}</p>
+                                                        </li>
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                    </ul>
+                                                </a>
+                                            </li>
+                                            <li class="index-item">
+                                                <a id="z">
+                                                    <span class="index-letter">z</span>
+                                                    <ul class="inner-list">
+                                                        {% for data in findletter %}
+                                                        {% if data.title|make_list|first == 'Z' or data.title|make_list|first == 'z' %}
+                                                        <li>
+                                                            <b>{{ data.title }}</b>
+                                                            <p>{{ data.description }}</p>
+                                                        </li>
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                    </ul>
+                                                </a>
+                                            </li>
+                                            <li class="index-item">
+                                                <a id="0">
+                                                    <span class="index-letter">#</span>
+                                                    <ul class="inner-list">
+                                                        {% for data in findletter %}
+                                                        {% if data.title|make_list|first == '@' or data.title|make_list|first == '*' or data.title|make_list|first == '$' or data.title|make_list|first == '#' or data.title|make_list|first == '!' or data.title|make_list|first == '%' %}
+                                                        <li>
+                                                            <b>{{ data.title }}</b>
+                                                            <p>{{ data.description }}</p>
+                                                        </li>
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                    </ul>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+{% block script %}
+    <script src='{% static "js/apexcharts.min.js" %}'></script>
+    <script src='{% static "js/viz.js" %}'></script>
+    <script language="javascript" type="text/javascript">
+        function filter(element) {
+            var value = $(element).val().toLowerCase();
+
+            $("#theList > li").each(function() {
+                if ($(this).text().toLowerCase().search(value) > -1) {
+                    $('#theList > li:contains(' + value + ')').show();
+                }
+                else {
+                    $('#theList > li:not(:contains(' + value + '))').hide();
+                }
+            });
+        }
+    </script>
+
+{% endblock %}
+{% endblock %}

@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body_part %}
+    <div class="pg-wrap">
+        <header class="site-header is-bg">
+            <div class="container">
+                <div class="wrap-header">
+                    <div class="header-in">
+                        <a href="/" class="logo">
+                            <img class="logo-white" src='{% static "img/logo-white.svg" %}' alt="logo">
+                            <img class="logo-black" src='{% static "img/logo-black.svg" %}' alt="logo">
+                        </a>
+                        <div class="menu-wrap">
+                            <div class="menu">
+                                <ul>
+                                    <li>
+                                        <a href="/budgetvisualization/{{ provincefilter.id }}" >Budget Visualization</a>
+                                    </li>
+                                    <li>
+                                        <a href="glossary.html" class="">Glossary</a>
+                                    </li>
+                                    <li>
+                                        <a href="/blog" class="">Blogs</a>
+                                    </li>
+                                    <li>
+                                        <a href="/about" class="active">About</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="toggle-button">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section class="page-header about-header">
+            <div class="container">
+                <div class="wrapper">
+                    <span>About</span>
+                    <div class="common-title">
+                        <h2 class="title">
+                            Building a more transparent provincial governments through an open budget portal.
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-info">
+            <div class="container">
+                <div class="wrapper">
+                    <div class="row row-wrap mx-0">
+                        <div class="col-md-6 col-wrap">
+                            <div class="content">
+                                <div class="common-title">
+                                    <h3 class="section-title">
+                                        An Open Data Initiative of Public Procurement Monitoring Office to create a single repository of data on public procurement to the public.
+                                    </h3>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <a href="#"><img src="https://werobotics.org/wp-content/uploads/2018/05/world-bank-logo.jpg" alt="inn_logo"></a>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <a href="#"><img src="https://asiafoundation.org/wp-content/uploads/2016/09/logo.png" alt="ccs_logo"></a>
+                                    </div>
+                                     <div class="col-md-4">
+                                        <a href="#"><img src='{% static "img/d4d.png" alt="ccs_logo" %}'></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-wrap">
+                            <div class="content info-content">
+                                <p class="info">
+                                    The provincial budget portal contains the province level budget allocation and spending data published by the provincial government. The portal aims to create an effective use of public information to demand accountability, geared for institutional improvement, efficient services delivery, and an equitable society.
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="about-obj">
+            <div class="container">
+                <div class="wrapper">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-7">
+                            <div class="common-title">
+                                <h2 class="title is-dark">Our Missions</h2>
+                            </div>
+                            <ul class="obj-list-wrap">
+                                {% for data in aboutmission %}
+                                <li class="obj-items">
+                                    <i class="material-icons">check_circle</i>
+                                    <span>{{ data.missions }} </span>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+{% endblock %}

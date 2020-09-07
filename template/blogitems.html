@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body_part %}
+
+    <div class="pg-wrap">
+        <header class="site-header is-bg">
+            <div class="container">
+                <div class="wrap-header">
+                    <div class="header-in">
+                        <a href="/" class="logo">
+                            <img class="logo-white" src='{% static "img/logo-white.svg" %}' alt="logo">
+                            <img class="logo-black" src='{% static "img/logo-black.svg" %}' alt="logo">
+                        </a>
+                        <div class="menu-wrap">
+                            <div class="menu">
+                                <ul>
+                                    <li>
+                                        <a href="/budgetvisualization/{{ provincefilter.id }}" >Budget Visualization</a>
+                                    </li>
+                                    <li>
+                                        <a href="/glossary" class="">Glossary</a>
+                                    </li>
+                                    <li>
+                                        <a href="/blog" class="active">Blogs</a>
+                                    </li>
+                                    <li>
+                                        <a href="/about" class="">About</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="toggle-button">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section class="page-header blog-items-header">
+            <div class="container">
+                <div class="wrapper">
+                    <div class="row row-wrap">
+                        <div class="col-md-10 col-wrap">
+                            <span>{{ object.publish }}</span>
+                            <div class="common-title is-center">
+                                <h2 class="title">
+                                    {{ object.meta_title }}
+                                </h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="budget-items">
+            <div class="container">
+                <div class="wrapper">
+                    <div class="row row-wrap">
+                        <div class="col-md-10 col-wrap">
+                            <div class="budget-items-info">
+                                <figure><img src='{{ object.photo.url }}' alt="budget-person-computer"></figure>
+
+                                <div class="news-wrap">
+                                    <div class="common-title">
+                                        <h3 class="section-title">{{ object.meta_description }}</h3>
+                                    </div>
+                                    <p>
+                                        {{ meta.content }}
+                                    </p>
+                                </div>
+
+                                <div class="news-wrap">
+                                    <div class="common-title">
+                                        <h3 class="section-title">Expanding digital banking</h3>
+                                    </div>
+                                    <p>
+                                        {{ object.meta_keywords }}
+                                    </p>
+                                </div>
+
+
+                                <div class="share-news">
+                                    <span>Share</span>
+                                    <ul>
+                                        <li><a href="https://www.facebook.com/"><img src='{% static "img/facebook.svg" %}' alt=""></a></li>
+                                        <li><a href="https://www.twitter.com/"><img src='{% static "img/twitter.svg" %}' alt=""></a></li>
+                                        <li><a href="https://www.instagram.com/"><img src='{% static "img/instagram.svg" %}' alt=""></a></li>
+                                        <li><a href="https://www.youtube.com/"><img src='{% static "img/youtube.svg" %}' alt=""></a></li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="blog_section bg-grey" id="blogs">
+            <div class="container">
+                <div class="wrapper">
+                    <div class="blog-content">
+                        <div class="common-title">
+                            <h2 class="title is-dark">Similar news</h2>
+                        </div>
+                        <div class="blogs-row">
+                            <div class="row row-wrap">
+                                {% for data in object_list %}
+                                {% if data.id != object.id %}
+                                <div class="col-md-4 col-wrap" >
+                                    <div class="main-card">
+                                        <div class="card-header">
+
+                                            <a href="/blogdetail/{{ data.id }}"> <img  src="{{ data.photo.url }}" alt="blog-image"></a>
+                                            </figure>
+                                        </div>
+                                        <div class="card-body">
+                                            <a href="/blogdetail/{{ data.id }}"><span class="date">{{ data.publish }}</span></a>
+                                            <a href="/blogdetail/{{ data.id }}"><h5>{{ data.meta_title }}</h5></a>
+                                            <a href="/blogdetail/{{ data.id }}"><p>{{ data.meta_description }}</p></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endif %}
+                                {% endfor %}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}
