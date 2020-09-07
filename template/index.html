@@ -109,7 +109,8 @@
                         <ul class="budget-list-wrap">
                             {% for data in province_data %}
                             <li class="budget-items">
-                                <span>NRP</span>
+
+                                <span><a style="color:white" href="budgetvisualization/{{data.id}}">NRP</a></span>
                                 <span>
                                 <script>
                                                 var x = {{ data.total_budget }}
