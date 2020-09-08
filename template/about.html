@@ -71,7 +71,7 @@
                                         <a href="#"><img src="https://asiafoundation.org/wp-content/uploads/2016/09/logo.png" alt="ccs_logo"></a>
                                     </div>
                                      <div class="col-md-4">
-                                        <a href="#"><img src='{% static "img/d4d.png" alt="ccs_logo" %}'></a>
+                                        <a href="#"><img src='{% static "img/d4d.png" %}' alt="ccs_logo" ></a>
                                     </div>
                                 </div>
                             </div>
@@ -102,7 +102,7 @@
                                 {% for data in aboutmission %}
                                 <li class="obj-items">
                                     <i class="material-icons">check_circle</i>
-                                    <span>{{ data.missions }} </span>
+                                    <span>{% autoescape off %}{{ data.missions }}{% endautoescape %} </span>
                                 </li>
                                 {% endfor %}
                             </ul>

@@ -48,7 +48,7 @@
                             <span>{{ object.publish }}</span>
                             <div class="common-title is-center">
                                 <h2 class="title">
-                                    {{ object.meta_title }}
+                                    {% autoescape off %}{{ object.meta_title }}{% endautoescape %}
                                 </h2>
                             </div>
                         </div>
@@ -68,10 +68,10 @@
 
                                 <div class="news-wrap">
                                     <div class="common-title">
-                                        <h3 class="section-title">{{ object.meta_description }}</h3>
+                                        <h3 class="section-title">{% autoescape off %}{{ object.meta_description }}{% endautoescape %}</h3>
                                     </div>
                                     <p>
-                                        {{ meta.content }}
+                                        {% autoescape off %}{{ object.content }}{% endautoescape %}
                                     </p>
                                 </div>
 
@@ -80,7 +80,7 @@
                                         <h3 class="section-title">Expanding digital banking</h3>
                                     </div>
                                     <p>
-                                        {{ object.meta_keywords }}
+                                       {% autoescape off %}{{ object.meta_keywords }}{% endautoescape %}
                                     </p>
                                 </div>
 
@@ -122,8 +122,8 @@
                                         </div>
                                         <div class="card-body">
                                             <a href="/blogdetail/{{ data.id }}"><span class="date">{{ data.publish }}</span></a>
-                                            <a href="/blogdetail/{{ data.id }}"><h5>{{ data.meta_title }}</h5></a>
-                                            <a href="/blogdetail/{{ data.id }}"><p>{{ data.meta_description }}</p></a>
+                                            <a href="/blogdetail/{{ data.id }}"><h5>{% autoescape off %}{{ data.meta_title }}{% endautoescape %}</h5></a>
+                                            <a href="/blogdetail/{{ data.id }}"><p>{% autoescape off %}{{ data.meta_description }}{% endautoescape %}</p></a>
                                         </div>
                                     </div>
                                 </div>

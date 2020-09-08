@@ -160,7 +160,7 @@
                                 </div>
                                 <div class="chart-note">
                                     <p><strong>Note:</strong>&nbsp; All Rupees amounts shown here represent province
-                                        reported obligated amounts for Year </p>
+                                        reported obligated amounts </p>
                                 </div>
                             </div>
                         </div>
@@ -179,8 +179,9 @@
                                             <label for="budget">Budget</label>
 
                                             <select id="budget" name="budget">
-                                                <option value="1" {% if val == '1' %}selected{% endif %}>Total Budget</option>
                                                 <option value="2" {% if val == '2' %}selected{% endif %}>Actual Expenditure</option>
+                                                <option value="1" {% if val == '1' %}selected{% endif %}>Total Budget</option>
+
                                             </select>
                                         </div>
                                         <div class="sel-dropdown">
@@ -198,62 +199,17 @@
                                         </div>
                                     </div>
                                     </form>
-
                                         <div id='datarec'>
                                             <div class="canvas-holder">
                                                 <canvas id="chart-area1" width="800" height="400"></canvas>
                                               </div>
-                                            <!--
-                                            <ul class="budget-ul">
-                                                {% for data in budget %}
-                                                    {% if val == '1' %}
-                                                        {% if data.total_budget__year__year == first_date %}
-                                                            <li class="budget-li-items" >
-
-                                                                <span class="label">
-
-                                                                    {{ data.office_name }}<strong>{{ data.total_budget__total }}</strong>
-
-                                                                </span>
-
-                                                            </li>
-                                                        {% endif %}
-                                                    {% elif val == '2' %}
-                                                        {% if data.actual_expenditure__year__year == first_date %}
-                                                            <li class="budget-li-items" >
-
-                                                                <span class="label">
-
-                                                                    {{ data.office_name }}<strong>{{ data.actual_expenditure__total }}</strong>
-
-                                                                </span>
-
-                                                            </li>
-                                                        {% endif %}
-
-                                                    {% elif val is None %}
-                                                        {% if data.total_budget__year__year == first_date %}
-                                                            <li class="budget-li-items" >
-
-                                                                <span class="label">
-
-                                                                    {{ data.office_name }}<strong>{{ data.total_budget__total }}</strong>
-
-                                                                </span>
-
-                                                            </li>
-                                                        {% endif %}
-                                                        {% endif %}
-                                                {% endfor %}
-                                            </ul>
-                                        -->
                                         </div>
                                     {% for data in topdata %}
-                                    <p class="note">All Rupees amounts shown here represent {{ data.name }} reported Total
+                                    <p class="note">All Rupees amounts shown here represent {{ data.name }} reported obligated amounts
                                         amounts.</p>
                                     {% endfor %}
                                     <div class="btn-wrap">
-                                        <button class="common-button is-bg">Export</button>
+                                        <button  class="common-button is-bg">Export</button>
                                     </div>
                                 </div>
                             </div>
@@ -282,6 +238,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-treemap@0.2.3"></script>
 
+
 <script>
     var ctx = document.getElementById('myChart').getContext('2d');
 var chart = new Chart(ctx, {
@@ -307,36 +264,6 @@ var chart = new Chart(ctx, {
 });
 
 </script>
-<!-- <script>
-    $(document).ready(function() {
-        $('#djfilter').submit(function(event) {
-            event.preventDefault();
-            var yrs = $('#year').val()
-            $.ajax ({
-                url : '/budgetvisualization/{{ object1 }}',
-                type: 'POST',
-                data: $(this).serialize(),
-            }).done(function(resp) {
-                var src = '<ul class="budget-ul"> {% for data in budget %}{% if data.actual_expenditure__year__year == yands %} <li class="budget-li-items" > <span class="label">{{ data.office_name }}<strong>{{ data.actual_expenditure__total }}</strong></span> </li> {% endif %}{% endfor %} </ul>'
-
-                var yr = resp.year
-                var source = src.replace('yands', '2077');
-
-                if(resp.result=='actual') {
-                    $("#datarec").html(source);
-                    alert(yr);
-                } else if(resp.result=='total') {
-                    $("#datarec").html('<ul class="budget-ul"> {% for data in budget %}{% if data.total_budget__year__year == yr %} <li class="budget-li-items" > <span class="label">{{ data.office_name }}<strong>{{ data.total_budget__total }}</strong></span> </li> {% endif %}{% endfor %} </ul>');
-
-                    alert('internal error456');
-                } else {
-                    alert('internal error');
-                };
-            });
-
-        });
-    });
-</script> -->
 <script>
 function colorFromValue(value, border) {
   var alpha = (1 + Math.log(value)) / 5;
@@ -370,11 +297,11 @@ var provincestats = [
             },
             {% endif %}
         {% elif val is None %}
-            {% if data.total_budget__year__year == first_date %}
+            {% if data.actual_expenditure__year__year == first_date %}
             {
 
                 title:'{{data.office_name}}',
-                Budget: {{data.total_budget__total}},
+                Budget: {{data.actual_expenditure__total}},
 
             },
             {% endif %}
