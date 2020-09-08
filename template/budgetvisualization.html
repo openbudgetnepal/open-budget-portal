@@ -6,9 +6,11 @@
 <link rel="stylesheet" href='{% static "css/custom-charts.css" %}'>
 <link rel="stylesheet" type="text/css" href='{% static "css/bootstrap-grid.min.css" %}'>
 <style>
-    .canvas-holder{
-	width:100%;
-	margin: auto;
+html, body, #container555 {
+    width: 100%;
+    height: 500px;
+    margin: 0;
+    padding: 0;
 }
 </style>
 
@@ -199,11 +201,7 @@
                                         </div>
                                     </div>
                                     </form>
-                                        <div id='datarec'>
-                                            <div class="canvas-holder">
-                                                <canvas id="chart-area1" width="800" height="400"></canvas>
-                                              </div>
-                                        </div>
+                                    <div id='container555'></div>
                                     {% for data in topdata %}
                                     <p class="note">All Rupees amounts shown here represent {{ data.name }} reported obligated amounts
                                         amounts.</p>
@@ -229,6 +227,8 @@
 {% block script %}
 
 <!-- Jquery Core Js -->
+<script src="https://cdn.anychart.com/releases/8.7.1/js/anychart-core.min.js"></script>
+<script src="https://cdn.anychart.com/releases/8.7.1/js/anychart-treemap.min.js"></script>
 <script src='{% static "js/bootstrap.min.js" %}'></script>
 <script src='{% static "js/jquery-3.4.1.min.js" %}'></script>
 <script src='{% static "js/apexcharts.min.js" %}'></script>
@@ -236,7 +236,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/apexcharts%22%3E"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-treemap@0.2.3"></script>
 
 
 <script>
@@ -265,156 +264,82 @@ var chart = new Chart(ctx, {
 
 </script>
 <script>
-function colorFromValue(value, border) {
-  var alpha = (1 + Math.log(value)) / 5;
-  var color = "purple";
-  if (border) {
-    alpha += 0.01;
-  }
-  return Chart.helpers.color(color)
-    .alpha(alpha)
-    .rgbString();
-}
+    anychart.onDocumentReady(function () {
+
+// create data
+    var data = [
+        {name:   "Budget", children: [
+            {% for das in budget %}
+                {% if val == '1' %}
+                    {% if das.total_budget__year__year == first_date %}
+                    {
+
+                        name:'{{das.office_name}}',
+                        value: {{das.total_budget__total}},
+                        cap: {{das.total_budget__capital}},
+                        cur: {{das.total_budget__current}},
+
+                    },
+                    {% endif %}
+                {% elif val == '2' %}
+                    {% if das.actual_expenditure__year__year == first_date %}
+                    {
+
+                        name:'{{das.office_name}}',
+                        value: {{das.actual_expenditure__total}},
+                        cap: {{das.actual_expenditure__capital}},
+                        cur: {{das.actual_expenditure__current}},
+
+                    },
+                    {% endif %}
+                {% elif val is None %}
+                    {% if das.actual_expenditure__year__year == first_date %}
+                    {
 
 
-var provincestats = [
-    {% for data in budget %} {% if val == '1' %}
-            {% if data.total_budget__year__year == first_date %}
-            {
+                        name:'{{das.office_name}}',
+                        value: {{das.actual_expenditure__total}},
+                        cap: {{das.actual_expenditure__capital}},
+                        cur: {{das.actual_expenditure__current}},
 
-                title:'{{data.office_name}}',
-                Budget: {{data.total_budget__total}},
+                    },
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        ]}
+    ];
 
-            },
-            {% endif %}
-        {% elif val == '2' %}
-            {% if data.actual_expenditure__year__year == first_date %}
-            {
+    // create a chart and set the data
+    var chart = anychart.treeMap(data, "as-tree");
 
-                title:'{{data.office_name}}',
-                Budget: {{data.actual_expenditure__total}},
+    // enable HTML for labels
+    chart.labels().useHtml(true);
 
-            },
-            {% endif %}
-        {% elif val is None %}
-            {% if data.actual_expenditure__year__year == first_date %}
-            {
+    // configure labels
+    chart.labels().format(function() {
 
-                title:'{{data.office_name}}',
-                Budget: {{data.actual_expenditure__total}},
+    return "<span style='font-weight:bold'>" + this.name +
+            "</span><br/>" + this.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    });
 
-            },
-            {% endif %}
-        {% endif %}
-    {% endfor %}
+    // configure tooltips
+    chart.tooltip().format(function() {
 
-];
-var provincest = [
-    {% for das in budget %} {% if val == '1' %}
-        {% if das.total_budget__year__year == first_date %}
-            [
-                {{das.total_budget__total}},
-                '{{das.office_name}}',
-                'Total      :         ' + {{das.total_budget__total}},
-                'Capital  :         ' + {{das.total_budget__capital}},
-                'Current  :         ' + {{das.total_budget__current}},
+    return "Total: " + this.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") +
+            "\nCapital: " + this.getData("cap").toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") +
+            '\nCurrent: ' + this.getData("cur").toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    });
 
-            ],
-            {% endif %}
-        {% elif val == '2' %}
-            {% if das.actual_expenditure__year__year == first_date %}
-            [
-                {{das.actual_expenditure__total}},
-                '{{das.office_name}}',
-                'Total      :         ' + {{das.actual_expenditure__total}},
-                'Capital  :         ' + {{das.actual_expenditure__capital}},
-                'Current  :         ' + {{das.actual_expenditure__current}},
+    // set the chart title
+    chart.title().useHtml(true);
 
-            ],
-            {% endif %}
-        {% elif val is None %}
-            {% if das.total_budget__year__year == first_date %}
-            [
-                {{das.total_budget__total}},
-                '{{das.office_name}}',
-                'Total      :         ' + {{das.total_budget__total}},
-                'Capital  :         ' + {{das.total_budget__capital}},
-                'Current  :         ' + {{das.total_budget__current}},
+    // set the container id
+    chart.container("container555");
+    chart.headers(false);
 
-            ],
-            {% endif %}
-        {% endif %}
-    {% endfor %}
-
-];
-
-ctx = document.getElementById("chart-area1").getContext("2d");
-window.chart1b = new Chart(ctx, {
-  type: "treemap",
-
-  data: {
-    datasets: [
-      {
-        label: "Sample with labels",
-        tree: provincestats,
-        key1: ['Total', 'Current', 'Capital'],
-
-        key: 'Budget',
-        groups: ['title'],
-        fontColor: 'black',
-        fontFamily: 'Optima',
-        fontSize: 10,
-        backgroundColor: function(ctx) {
-          return colorFromValue(ctx.dataset.data[ctx.dataIndex]);
-        },
-        borderColor: function(ctx) {
-          return colorFromValue(ctx.dataset.data[ctx.dataIndex], true);
-        },
-        spacing: 0.1,
-        borderWidth: 2,
-        borderColor: "rgba(180,180,180, 0.15)",
-        backgroundColor:  ['#BEDAF6', '#DEEDFA','#CEE3F8','#D2E5F8','#C7DFF7','#ADD1F3','#9DC8F1','#9DC8F1','#C7DFF7','#DEEDFA','#9DC8F1','#D2E5F8','#BEDAF6','#DEEDFA','#9DC8F1'],
-        hoverBackgroundColor: [],
-
-      }
-    ]
-  },
-  options: {
-    maintainAspectRatio: false,
-    title: {
-      display: true,
-      text: "Budget for province: "
-    },
-    legend: {
-      display: false
-    },
-    tooltips: {
-      callbacks: {
-
-        title: function(item, data) {
-            let srta = provincest.sort(function(a, b) {
-                return b[0]-a[0];
-            });
-
-            return srta[item[0].index].slice(1, 2);
-
-
-        },
-        label: function(item, data) {
-            let srta = provincest.sort(function(a, b) {
-                return b[0]-a[0];
-            });
-
-            return srta[item.index].slice(2, 5);
-
-        }
-      }
-    }
-  }
+    // initiate drawing the chart
+    chart.draw();
 });
-
-
-
 </script>
 
 {% endblock %}
