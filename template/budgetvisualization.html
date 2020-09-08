@@ -2,13 +2,19 @@
 {% load static %}
 {% block link %}
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<link rel="stylesheet" href='{% static "css/apexcharts.css" %}'>
-<link rel="stylesheet" href='{% static "css/custom-charts.css" %}'>
 <link rel="stylesheet" type="text/css" href='{% static "css/bootstrap-grid.min.css" %}'>
 <style>
 html, body, #container555 {
     width: 100%;
     height: 500px;
+    margin: 0;
+    padding: 0;
+}
+</style>
+<style>
+    html, body, #container666 {
+    width: 100%;
+    height: 300px;
     margin: 0;
     padding: 0;
 }
@@ -142,10 +148,9 @@ html, body, #container555 {
                         <div class="chart-section">
                             <div class="contents">
                                 <h4 class="data is-dark">Budget Source</h4>
-                                <div class="chart">
-                                    <canvas id="myChart"></canvas>
+                                <br>
+                                    <div id="container666"></div>
 
-                                </div>
                                 <div class="chart-info">
                                     {% for data in source %}
                                     <div class="chart-data">
@@ -229,39 +234,32 @@ html, body, #container555 {
 <!-- Jquery Core Js -->
 <script src="https://cdn.anychart.com/releases/8.7.1/js/anychart-core.min.js"></script>
 <script src="https://cdn.anychart.com/releases/8.7.1/js/anychart-treemap.min.js"></script>
+<script src="https://cdn.anychart.com/releases/8.7.1/js/anychart-pie.min.js"></script>
 <script src='{% static "js/bootstrap.min.js" %}'></script>
 <script src='{% static "js/jquery-3.4.1.min.js" %}'></script>
 <script src='{% static "js/apexcharts.min.js" %}'></script>
 <script src='{% static "js/viz.js" %}'></script>
 
-<script src="https://cdn.jsdelivr.net/npm/apexcharts%22%3E"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3"></script>
+
 
 
 <script>
-    var ctx = document.getElementById('myChart').getContext('2d');
-var chart = new Chart(ctx, {
-    // The type of chart we want to create
-    type: 'pie',
+   var data = [
+       {% for data in source %}
+      {x: "{{ data.source }}", value: {{data.budget}}},
+      {% endfor %}
+    ];
 
-    // The data for our dataset
-    data: {
-        labels: [{% for data in source %} '{{ data.source }}',{% endfor %} ],
-        datasets: [{
-            label: 'My First dataset',
-            backgroundColor: ['#22264D', '#7CB5EC'],
-            data: [{% for data in source %} {{ data.budget }},{% endfor %}]
-        }]
-    },
+    // create a chart and set the data
+    chart = anychart.pie(data);
 
-    // Configuration options go here
-    options: {
-      legend: {
-      display: false,
-    }
-    }
-});
+    // set the container id
+    chart.container("container666");
+    chart.palette(["#7CB5EC","#22264D" ])
+    chart.legend(false);
 
+    // initiate drawing the chart
+    chart.draw();
 </script>
 <script>
     anychart.onDocumentReady(function () {
