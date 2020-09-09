@@ -63,7 +63,7 @@
                             <div class="section-content">
                                 <div class="search-title-bar">
                                     <div class="form-group">
-                                        <input type="search" class="form-control" onkeyup="filter(this)"  placeholder="Search for a term">
+                                        <input type="search" class="form-control" id="searchText"  placeholder="Search for a term">
                                         <i class="material-icons">search</i>
                                     </div>
                                 </div>
@@ -518,19 +518,27 @@
 {% block script %}
     <script src='{% static "js/apexcharts.min.js" %}'></script>
     <script src='{% static "js/viz.js" %}'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js" integrity="sha512-s/XK4vYVXTGeUSv4bRPOuxSDmDlTedEpMEcAQk0t/FMd9V6ft8iXdwSBxV0eD60c6w/tjotSlKu9J2AAW1ckTA==" crossorigin="anonymous"></script>
     <script language="javascript" type="text/javascript">
-        function filter(element) {
-            var value = $(element).val().toLowerCase();
 
-            $("#theList > li").each(function() {
-                if ($(this).text().toLowerCase().search(value) > -1) {
-                    $('#theList > li:contains(' + value + ')').show();
-                }
-                else {
-                    $('#theList > li:not(:contains(' + value + '))').hide();
-                }
-            });
-        }
+
+            $('#searchText').bind('keyup', function() {
+
+                var searchString = $(this).val();
+
+                $("ul li").each(function(index, value) {
+
+                    currentName = $(value).text()
+                    if( currentName.toUpperCase().indexOf(searchString.toUpperCase()) > -1) {
+                       $(value).show();
+                    } else {
+                        $(value).hide();
+                    }
+
+
+                });
+});
+
     </script>
 
 {% endblock %}

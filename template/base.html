@@ -45,7 +45,7 @@
             <script>
                 window.onload = startcountdown;
                  function startcountdown(){
-                    alert({
+                    bootbox.alert({
                         message: '{{messages}}'
 
                     })
@@ -171,6 +171,7 @@
 
     <!-- Jquery Core Js -->
     <script src='{% static "js/bootstrap.min.js" %}'></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"></script>
     <script src='{% static "js/jquery-3.4.1.min.js" %}'></script>
     <script src='{% static "https://cdn.jsdelivr.net/npm/baffle@0.3.6/dist/baffle.min.js" %}'></script>
     <script src='{% static "js/viz.js" %}'></script>

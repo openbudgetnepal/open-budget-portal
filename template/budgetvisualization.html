@@ -173,13 +173,14 @@ html, body, #container555 {
                         </div>
                     </div>
                     <div class="col-xl-8 col-lg-9 col-md-12">
-                        <div class="info-section">
-                            <div class="contents">
+                        {% if val %}
+                        <div id="content555"  class="info-section">
+                            <div  class="contents">
                                 {% for data in topdata %}
                                 <h4 class="data is-dark">You are viewing Provincial Budget of <span>{{data.name}}</span></h4>
                                 {% endfor %}
                                 <h6 class="data-subtitle">Choose an option below to start your exploration.</h6>
-                                <div class="budget-info-contents">
+                                <div  class="budget-info-contents">
                                 <form method="post" action='/budgetvisualization/{{ object1 }}'>{% csrf_token %}
                                     <div class="select-content">
                                         <div class="sel-dropdown">
@@ -206,17 +207,63 @@ html, body, #container555 {
                                         </div>
                                     </div>
                                     </form>
-                                    <div id='container555'></div>
+                                    <div  id='container555'></div>
                                     {% for data in topdata %}
                                     <p class="note">All Rupees amounts shown here represent {{ data.name }} reported obligated amounts
                                         amounts.</p>
                                     {% endfor %}
-                                    <div class="btn-wrap">
-                                        <button  class="common-button is-bg">Export</button>
+                                    <div   class="btn-wrap">
+                                        <button id="export63"  class="common-button is-bg">Export</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        {% else %}
+                        <div  class="info-section">
+                            <div  class="contents">
+                                {% for data in topdata %}
+                                <h4 class="data is-dark">You are viewing Provincial Budget of <span>{{data.name}}</span></h4>
+                                {% endfor %}
+                                <h6 class="data-subtitle">Choose an option below to start your exploration.</h6>
+                                <div  class="budget-info-contents">
+                                <form method="post" action='/budgetvisualization/{{ object1 }}'>{% csrf_token %}
+                                    <div class="select-content">
+                                        <div class="sel-dropdown">
+                                            <label for="budget">Budget</label>
+
+                                            <select id="budget" name="budget">
+                                                <option value="2" {% if val == '2' %}selected{% endif %}>Actual Expenditure</option>
+                                                <option value="1" {% if val == '1' %}selected{% endif %}>Total Budget</option>
+
+                                            </select>
+                                        </div>
+                                        <div class="sel-dropdown">
+                                            <label for="year">Year</label>
+
+                                            <select id="year" name="year">
+                                                {% for data in date %}
+                                                <option value="{{ data.year }}" {% if data.year == first_date %}selected{% endif %}>{{ data.year }}</option>
+                                                {% endfor %}
+
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <button type="submit" class="success">Submit</button>
+                                        </div>
+                                    </div>
+                                    </form>
+                                    <div  id='container555'></div>
+                                    {% for data in topdata %}
+                                    <p class="note">All Rupees amounts shown here represent {{ data.name }} reported obligated amounts
+                                        amounts.</p>
+                                    {% endfor %}
+                                    <div   class="btn-wrap">
+                                        <button id="export63"  class="common-button is-bg">Export</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -230,21 +277,41 @@ html, body, #container555 {
 </body>
 {% endblock %}
 {% block script %}
+<script>
+     function export63(){
+      setTimeout(() => {
+    html2canvas(document.querySelector('#container555'), {
+      allowTaint: false,
+      scale : 5,
+    }).then(canvas => {
+      canvas.toBlob(function(blob) {
+        saveAs(blob, 'test.png');
+      });
+
+    });
+  }, 500);
+  }
+</script>
 
 <!-- Jquery Core Js -->
 <script src="https://cdn.anychart.com/releases/8.7.1/js/anychart-core.min.js"></script>
 <script src="https://cdn.anychart.com/releases/8.7.1/js/anychart-treemap.min.js"></script>
 <script src="https://cdn.anychart.com/releases/8.7.1/js/anychart-pie.min.js"></script>
+<script src="https://cdn.anychart.com/releases/8.7.1/js/anychart-exports.min.js"></script>
 <script src='{% static "js/bootstrap.min.js" %}'></script>
+<script src='{% static "js/filesaver.js" %}'></script>
 <script src='{% static "js/jquery-3.4.1.min.js" %}'></script>
 <script src='{% static "js/apexcharts.min.js" %}'></script>
 <script src='{% static "js/viz.js" %}'></script>
+<script src='{% static "js/html2canvas.js" %}'></script>
 
 
 
 
 <script>
-   var data = [
+
+
+  var data = [
        {% for data in source %}
       {x: "{{ data.source }}", value: {{data.budget}}},
       {% endfor %}
@@ -276,7 +343,6 @@ html, body, #container555 {
                         value: {{das.total_budget__total}},
                         cap: {{das.total_budget__capital}},
                         cur: {{das.total_budget__current}},
-
                     },
                     {% endif %}
                 {% elif val == '2' %}
@@ -320,6 +386,7 @@ html, body, #container555 {
             "</span><br/>" + this.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     });
 
+
     // configure tooltips
     chart.tooltip().format(function() {
 
@@ -335,9 +402,26 @@ html, body, #container555 {
     chart.container("container555");
     chart.headers(false);
 
+
+    var element = document.querySelector('#export63')
+    element.addEventListener('click',function(){
+
+            chart.saveAsPng();
+
+        });
+
+
     // initiate drawing the chart
     chart.draw();
+
 });
+
+
 </script>
+<script>
+    var elmnt = document.getElementById("content555");
+    elmnt.scrollIntoView();
+</script>
+
 
 {% endblock %}
