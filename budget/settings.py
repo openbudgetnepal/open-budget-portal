@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django_filters',
     'import_export',
     'ckeditor',
+    'django.contrib.humanize',
 ]
 
 MIDDLEWARE = [

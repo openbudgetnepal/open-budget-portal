@@ -5,6 +5,7 @@ from django.db import models
 import pandas as pd
 from django.contrib import messages
 from ckeditor.fields import RichTextField
+from django.core.exceptions import ValidationError
 
 
 class ActiveCommonManager(models.Manager):
@@ -109,11 +110,11 @@ class Province(models.Model):
     name = models.CharField(max_length=250, unique=True, blank=True, null=True)
     image = models.FileField(upload_to='pics', blank=True, null=True)
     code = models.IntegerField(blank=True, null=True)
-    total_budget = models.BigIntegerField(blank=True, null=True)
-    male_population = models.BigIntegerField(blank=True, null=True)
-    female_population = models.BigIntegerField(blank=True, null=True)
-    total_population = models.BigIntegerField(blank=True, null=True)
-    revenue_collected = models.BigIntegerField(blank=True, null=True)
+    total_budget = models.CharField(max_length=200, blank=True, null=True)
+    male_percentage = models.CharField(max_length=200, blank=True, null=True)
+    female_percentage = models.CharField(max_length=200, blank=True, null=True)
+    total_population = models.CharField(max_length=200, blank=True, null=True)
+    male_percentage = models.CharField(max_length=200, blank=True, null=True)
     economic_growth = models.CharField(max_length=100, blank=True, null=True)
     share_in_domestic_product = models.CharField(max_length=100, blank=True, null=True)
     human_development_index = models.CharField(max_length=100, blank=True, null=True)
@@ -197,3 +198,17 @@ class Contact(models.Model):
 
 class AboutMission(models.Model):
     missions = RichTextField(blank=True, null=True)
+
+
+class ExtraNecessaryData(models.Model):
+    overallpopulation = models.CharField(max_length=200, blank=True, null=True)
+
+    def save(self, *args, **kwargs):
+        if not self.pk and ExtraNecessaryData.objects.exists():
+            # if you'll not check for self.pk
+            # then error will also raised in update of exists model
+            raise ValidationError('There is can be only one ExtraNecessaryDAta instance')
+        return super(ExtraNecessaryData, self).save(*args, **kwargs)
+
+
+

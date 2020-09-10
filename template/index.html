@@ -1,4 +1,5 @@
 {% load static %}
+{% load humanize %}
 <!doctype html>
 <html lang="en">
 
@@ -99,11 +100,7 @@
                         <div class="common-title">
                             <h2 class="title">
                                 The total budget of Nepal for the year 2020/21 is
-                                        <script>
-                                                var x = {{ total_budget_nepal }}
-                                                document.write('<span class="title-span"><span class="is-white">NRP </span><span class="is-lg">'.concat(x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),'</span></span>'));
-
-                                        </script>
+                                    <span class="title-span"><span class="is-white">NRP </span>{{ total_budget_nepal.overallpopulation }}<span class="is-lg"></span>
                             </h2>
                         </div>
                         <ul class="budget-list-wrap">
@@ -111,13 +108,7 @@
                             <li class="budget-items">
 
                                 <span><a style="color:white" href="budgetvisualization/{{data.id}}">NRP</a></span>
-                                <span>
-                                <script>
-                                                var x = {{ data.total_budget }}
-                                                document.write('<a style="color:#DF6D45;font-size:20" href="budgetvisualization/{{data.id}}">'.concat(x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),'</a>'));
-
-                                </script>
-                                </span>
+                                <span>{{ data.total_budget }}</span>
                                 <span><a style="color:white" href="budgetvisualization/{{data.id}}">{{data.name}}</a></span>
                             </li>
                             {% endfor %}

@@ -8,7 +8,7 @@ from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 from .models import Province, ProvinceSource, ProvinceBudget, Contact, Year, TotalBudget, ActualExpenditure, Blog, \
-    AboutMission, Glossary
+    AboutMission, Glossary, ExtraNecessaryData
 
 
 class BudgetVisualization(DetailView):
@@ -20,12 +20,6 @@ class BudgetVisualization(DetailView):
         context = super(BudgetVisualization, self).get_context_data(**kwargs)
         calculation = Province.objects.order_by('id')
         test5 = ProvinceSource.objects.all()
-        for data in calculation:
-            percentage_male1 = (data.male_population) / (data.male_population + data.female_population)
-            percentage_female1 = (data.female_population) / (data.male_population + data.female_population)
-            percentage_male = str(round(percentage_male1, 2))
-            percentage_female = str(round(percentage_female1, 2))
-            total_population = data.male_population + data.female_population
         source = ProvinceSource.objects.filter(province_name=self.kwargs['pk'])
         budget = ProvinceBudget.objects.filter(province_name=self.kwargs['pk']).values('province_name__name',
                                                                                        'office_name',
@@ -47,9 +41,6 @@ class BudgetVisualization(DetailView):
         context['topdata'] = topdata
         context['first_date'] = str(first_date)
         context['budget'] = budget
-        context['percentage_male'] = percentage_male
-        context['percentage_female'] = percentage_female
-        context['total_population'] = total_population
         context['date'] = date
         context['tot_bug'] = tot_bug
         context['act_exp'] = act_exp
@@ -69,13 +60,6 @@ class BudgetVisualization(DetailView):
         calculation = Province.objects.order_by('id')
         topdata = Province.objects.filter(id=self.kwargs['pk'])
         date = Year.objects.all()
-        for data in calculation:
-            percentage_male1 = (data.male_population) / (data.male_population + data.female_population)
-            percentage_female1 = (data.female_population) / (data.male_population + data.female_population)
-            percentage_male = str(round(percentage_male1, 2))
-            percentage_female = str(round(percentage_female1, 2))
-
-            total_population = data.male_population + data.female_population
         source = ProvinceSource.objects.filter(province_name=self.kwargs['pk'])
         budget = ProvinceBudget.objects.filter(province_name=self.kwargs['pk']).values('province_name__name',
                                                                                        'office_name',
@@ -95,9 +79,6 @@ class BudgetVisualization(DetailView):
                 'topdata': topdata,
                 'source': source,
                 'budget': budget,
-                'percentage_male': percentage_male,
-                'percentage_female': percentage_female,
-                'total_population': total_population,
                 'date': date,
                 'first_date': data1,
                 'object1': self.kwargs['pk'],
@@ -113,9 +94,6 @@ class BudgetVisualization(DetailView):
                 'topdata': topdata,
                 'source': source,
                 'budget': budget,
-                'percentage_male': percentage_male,
-                'percentage_female': percentage_female,
-                'total_population': total_population,
                 'date': date,
                 'first_date': data1,
                 'object1': self.kwargs['pk'],
@@ -130,9 +108,7 @@ class HomePage(TemplateView):
     def get(self, request, *args, **kwargs):
         province_data = Province.objects.order_by('id')
         provincefilter = Province.objects.filter().first()
-        total_budget_nepal = 0
-        for data in province_data:
-            total_budget_nepal = data.total_budget + total_budget_nepal
+        total_budget_nepal = ExtraNecessaryData.objects.filter().first()
         blog = Blog.objects.all()
         paginator = Paginator(blog, 3)
         page_number = request.GET.get('page')

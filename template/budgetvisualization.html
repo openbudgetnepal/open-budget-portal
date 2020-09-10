@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load humanize %}
 {% block link %}
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href='{% static "css/bootstrap-grid.min.css" %}'>
@@ -74,21 +75,17 @@ html, body, #container555 {
                             <div class="info-category">
                                 <div class="category-column">
                                     <span class="data-label">Population</span>
-                                    <script>
-                                                var x = {{ data.total_population }}
-                                                document.write('<h4 class="data">'.concat(x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),'</h4>'));
-
-                                    </script>
+                                    <h4 class="data">{{ data.total_population }}</h4>
                                 </div>
 
                                 <div class="category-column">
                                     <span class="data-label">Male</span>
-                                    <h4 class="data">{{ percentage_male }} <span>%</span></h4>
+                                    <h4 class="data">{{ data.male_percentage }} </h4>
                                 </div>
 
                                 <div class="category-column">
                                     <span class="data-label">Female</span>
-                                    <h4 class="data">{{ percentage_female }} <span>%</span></h4>
+                                    <h4 class="data">{{ data.female_percentage }} </h4>
                                 </div>
 
                                 <div class="category-column">
@@ -155,11 +152,7 @@ html, body, #container555 {
                                     <div class="chart-data">
                                         <span class="data-label is-dark">{{ data.source }}</span>
                                         <span class="rate is-dark">NRP</span>
-                                        <script>
-                                                var x = {{ data.budget }}
-                                                document.write('<h4 class="data">'.concat(x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),'</h4>'));
-
-                                        </script>
+                                        <h4 class="data">{{data.budget|intcomma}}</h4>
                                     </div>
                                     {% endfor %}
 
