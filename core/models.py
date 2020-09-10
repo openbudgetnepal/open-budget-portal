@@ -121,6 +121,7 @@ class Province(models.Model):
     multidimensional_poverty_index = models.CharField(max_length=100, blank=True, null=True)
     total_gross_domestic_product = models.CharField(max_length=100, blank=True, null=True)
     per_capital_income = models.CharField(max_length=100,blank=True, null=True)
+    revenue_collected = models.CharField(max_length=100,blank=True, null=True)
 
     def __str__(self):
         return self.name
