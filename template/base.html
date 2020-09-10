@@ -24,7 +24,29 @@
     <meta name="twitter:image" content="preview.html">
 
     <!--title-->
-    <title>Budget Viz</title>
+    {% if 'budgetvisualization' in request.path %}
+    {% if '/budgetvisualization/1' in request.path %}
+    <title>Province 1 | Open Budget Nepal</title>
+    {% elif '/budgetvisualization/2' in request.path %}
+    <title>Province 2 | Open Budget Nepal</title>
+    {% elif '/budgetvisualization/3' in request.path %}
+    <title>Province 3 | Open Budget Nepal</title>
+    {% elif '/budgetvisualization/4' in request.path %}
+    <title>Province 4 | Open Budget Nepal</title>
+    {% elif '/budgetvisualization/5' in request.path %}
+    <title>Province 5 | Open Budget Nepal</title>
+    {% elif '/budgetvisualization/6' in request.path %}
+    <title>Province 6 | Open Budget Nepal</title>
+    {% elif '/budgetvisualization/7' in request.path %}
+    <title>Province 7 | Open Budget Nepal</title>
+    {% endif %}
+    {% elif 'glossary' in request.path %}
+    <title>Glossary | Open Budget Nepal</title>
+    {% elif 'blog' in request.path %}
+    <title>Blog | Open Budget Nepal</title>
+    {% else %}
+    <title>About | Open Budget Nepal</title>
+    {% endif %}
 
     <!-- faveicon start   -->
     <!-- <link rel="icon" type="image/png" href="img/favicon.png" sizes="32x32"> -->

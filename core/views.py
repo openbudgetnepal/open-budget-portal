@@ -109,7 +109,7 @@ class HomePage(TemplateView):
         province_data = Province.objects.order_by('id')
         provincefilter = Province.objects.filter().first()
         total_budget_nepal = ExtraNecessaryData.objects.filter().first()
-        blog = Blog.objects.all()
+        blog = Blog.objects.order_by('id')
         paginator = Paginator(blog, 3)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
