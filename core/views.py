@@ -41,7 +41,8 @@ class BudgetVisualization(DetailView):
         act_exp = ActualExpenditure.objects.filter(province_name=self.kwargs['pk'])
         topdata = Province.objects.filter(id=self.kwargs['pk'])
         date = Year.objects.all()
-        first_date = Year.objects.filter().first()
+        first_date1 = Year.objects.filter().first()
+        first_date = first_date1.year
         context['source'] = source
         context['topdata'] = topdata
         context['first_date'] = str(first_date)
@@ -53,7 +54,7 @@ class BudgetVisualization(DetailView):
         context['tot_bug'] = tot_bug
         context['act_exp'] = act_exp
         context['object1'] = self.kwargs['pk']
-        context['datatosend1'] = 'Total Budget'
+        context['datatosend1'] = 'Actual Expenditure'
         context['data1'] = '2015/2016'
 
         return context
