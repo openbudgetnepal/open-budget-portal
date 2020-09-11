@@ -81,13 +81,13 @@
                                 {% else  %}
 
 
-                                <a href="/blogdetail/{{data.id }}" style="color:black"><li class="budget-items mainbudget-items" style="background-image: url('{{ data.photo.url }}')"></a>
-                                    <div class="info">
-                                        <a href="/blogdetail/{{data.id }}" style="color:black"><span class="date">13 Feb 2020</span></a>
+                                <li class="budget-items mainbudget-items" style="background-image: url('{{ data.photo.url }}')">
+                                    <a href="/blogdetail/{{data.id }}" class="info">
+                                        <span class="date">{{ data.publish }}</span>
                                         <div class="common-title">
-                                            <a href="/blogdetail/{{data.id }}" style="color:black"><h4 class="section-title">Nepal Budget 2077/78: Lots of Promises to Make Nepal Digital  </h4></a>
+                                            <h4 class="section-title">{% autoescape off %}{{ data.meta_title }}{% endautoescape %} </h4>
                                         </div>
-                                    </div>
+                                    </a>
                                 </li>
                                 {% endif %}
                                 {% endif %}
