@@ -201,7 +201,7 @@ class AboutMission(models.Model):
 
 
 class ExtraNecessaryData(models.Model):
-    overallpopulation = models.CharField(max_length=200, blank=True, null=True)
+    overallbudget = models.CharField(max_length=200, blank=True, null=True)
 
     def save(self, *args, **kwargs):
         if not self.pk and ExtraNecessaryData.objects.exists():
