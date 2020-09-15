@@ -4,7 +4,6 @@ from django.conf import settings
 from django.db import models
 import pandas as pd
 from django.contrib import messages
-from ckeditor.fields import RichTextField
 from django.core.exceptions import ValidationError
 
 
@@ -15,7 +14,7 @@ class ActiveCommonManager(models.Manager):
 
 class Glossary(models.Model):
     title = models.CharField(max_length=200)
-    description = RichTextField(blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True,
                                    db_index=True,
@@ -52,11 +51,11 @@ class Blog(models.Model):
         (1, 'Publish'),
         (2, 'UnPublish'),
     )
-    title = RichTextField(max_length=250)
+    title = models.TextField(blank=True, null=True)
     author = models.ForeignKey(settings.AUTH_USER_MODEL,
                                on_delete=models.CASCADE,
                                related_name='content_author')
-    content = RichTextField()
+    content = models.TextField(blank=True, null=True)
     publish = models.DateTimeField(default=timezone.now, blank=True, null=True)
     status = models.IntegerField(choices=STATUS_CHOICES,
                                  default=0,help_text='Only Numeric Value Without Comma')
@@ -64,13 +63,13 @@ class Blog(models.Model):
                                  related_name='article_categories', blank=True,
                                  null=True)
     photo = models.FileField(upload_to=get_upload_blog, blank=True)
-    tag = RichTextField()
+    tag = models.TextField(blank=True, null=True)
     """
         For seo purpose
     """
-    meta_title = RichTextField(null=True, blank=True)
-    meta_keywords = RichTextField(null=True, blank=True)
-    meta_description = RichTextField(null=True, blank=True)
+    meta_title = models.TextField(blank=True, null=True)
+    meta_keywords = models.TextField(blank=True, null=True)
+    meta_description = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True,
                                    db_index=True,
@@ -191,14 +190,14 @@ class Contact(models.Model):
     name = models.CharField(max_length=100, blank=True, null=True)
     email = models.EmailField(blank=True, null=True)
     phone = models.CharField(max_length=250, blank=True, null=True)
-    message = RichTextField(blank=True, null=True)
+    message = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return self.name
 
 
 class AboutMission(models.Model):
-    missions = RichTextField(blank=True, null=True)
+    missions = models.TextField(blank=True, null=True)
 
 
 class ExtraNecessaryData(models.Model):
