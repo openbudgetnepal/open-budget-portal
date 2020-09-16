@@ -64,13 +64,11 @@ class Blog(models.Model):
                                  related_name='article_categories', blank=True,
                                  null=True)
     photo = models.FileField(upload_to=get_upload_blog, blank=True)
-    tag = RichTextField(blank=True, null=True)
+    list_title = RichTextField(blank=True, null=True)
+    list_description = RichTextField(blank=True, null=True)
     """
         For seo purpose
     """
-    meta_title = RichTextField(blank=True, null=True)
-    meta_keywords = RichTextField(blank=True, null=True)
-    meta_description = RichTextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True,
                                    db_index=True,
