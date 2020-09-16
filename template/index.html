@@ -100,7 +100,7 @@
                         <div class="common-title">
                             <h2 class="title">
                                 The total budget of Nepal for the year 2020/21 is
-                                    <span class="title-span"><span class="is-white">NRP </span>{{ total_budget_nepal.overallpopulation }}<span class="is-lg"></span>
+                                    <span class="title-span"><span class="is-white">NRP </span>{{ total_budget_nepal.overallbudget }}<span class="is-lg"></span>
                             </h2>
                         </div>
                         <ul class="budget-list-wrap">
@@ -108,8 +108,8 @@
                             <li class="budget-items">
 
                                 <span><a style="color:white" href="budgetvisualization/{{data.id}}">NRP</a></span>
-                                <span><a style="color:white" href="budgetvisualization/{{data.id}}">{{ data.total_budget }}</a></span>
-                                <span><a style="color:white" href="budgetvisualization/{{data.id}}">{{data.name}}</a></span>
+                                <span><a style="color:#DF6D45" href="budgetvisualization/{{data.id}}">{{ data.total_budget }}</a></span>
+                                <span><a style="color:#DF6D45" href="budgetvisualization/{{data.id}}">{{data.name}}</a></span>
                             </li>
                             {% endfor %}
                         </ul>
