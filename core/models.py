@@ -5,6 +5,7 @@ from django.db import models
 import pandas as pd
 from django.contrib import messages
 from django.core.exceptions import ValidationError
+from ckeditor.fields import RichTextField
 
 
 class ActiveCommonManager(models.Manager):
@@ -51,11 +52,11 @@ class Blog(models.Model):
         (1, 'Publish'),
         (2, 'UnPublish'),
     )
-    title = models.TextField(blank=True, null=True)
+    title = RichTextField(blank=True, null=True)
     author = models.ForeignKey(settings.AUTH_USER_MODEL,
                                on_delete=models.CASCADE,
                                related_name='content_author')
-    content = models.TextField(blank=True, null=True)
+    content = RichTextField(blank=True, null=True)
     publish = models.DateTimeField(default=timezone.now, blank=True, null=True)
     status = models.IntegerField(choices=STATUS_CHOICES,
                                  default=0,help_text='Only Numeric Value Without Comma')
@@ -63,13 +64,13 @@ class Blog(models.Model):
                                  related_name='article_categories', blank=True,
                                  null=True)
     photo = models.FileField(upload_to=get_upload_blog, blank=True)
-    tag = models.TextField(blank=True, null=True)
+    tag = RichTextField(blank=True, null=True)
     """
         For seo purpose
     """
-    meta_title = models.TextField(blank=True, null=True)
-    meta_keywords = models.TextField(blank=True, null=True)
-    meta_description = models.TextField(blank=True, null=True)
+    meta_title = RichTextField(blank=True, null=True)
+    meta_keywords = RichTextField(blank=True, null=True)
+    meta_description = RichTextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True,
                                    db_index=True,
