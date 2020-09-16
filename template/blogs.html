@@ -67,25 +67,28 @@
                                 {% if data.status == 1 %}
                                 {% if forloop.counter != 3 and forloop.counter != 6 and forloop.counter != 9 and forloop.counter != 12 and forloop.counter != 15 and forloop.counter != 18%}
                                 <li class="budget-items">
-                                    <figure>
-                                        <a href="/blogdetail/{{data.id }}" style="color:black"> <img src='{{ data.photo.url }}'alt="blog-img"></a>
-                                    </figure>
-                                    <div class="info">
-                                        <a href="/blogdetail/{{data.id }}" style="color:black"><span class="date">{% autoescape off %}{{ data.publish }}{% endautoescape %}</span></a>
-                                        <div class="common-title">
-                                            <a href="/blogdetail/{{data.id }}" style="color:black"><h4 class="section-title">{% autoescape off %}{{ data.list_title }}{% endautoescape %}</h4></a>
+                                    <a href="blogdetail/{{ data.id }}">
+                                        <figure>
+                                            <img src="{{ data.photo.url }}" alt="blog-img">
+                                        </figure>
+                                        <div class="info">
+                                            <span class="date">{{ data.publish }}</span>
+                                            <div class="common-title">
+                                                <h4 class="section-title">{% autoescape off %}{{ data.list_title }}{% endautoescape %}</h4>
+                                            </div>
+                                            <p class="news-para" >{% autoescape off %}{{ data.list_description }}{% endautoescape %}</p>
                                         </div>
-                                        <a href="/blogdetail/{{data.id }}" style="color:black"><p class="news-para">{% autoescape off %}{{ data.list_description }}{% endautoescape %}</p></a>
-                                    </div>
+                                    </a>
                                 </li>
                                 {% else  %}
 
 
-                                <li class="budget-items mainbudget-items" style="background-image: url('{{ data.photo.url }}')">
-                                    <a href="/blogdetail/{{data.id }}" class="info">
+
+                                <li class="budget-items mainbudget-items" style="background-image: url({{ data.photo.url }})">
+                                    <a class="info">
                                         <span class="date">{{ data.publish }}</span>
                                         <div class="common-title">
-                                            <h4 class="section-title">{% autoescape off %}{{ data.meta_title }}{% endautoescape %} </h4>
+                                            <h4 class="section-title">{% autoescape off %}{{data.list_title}}{% endautoescape %} </h4>
                                         </div>
                                     </a>
                                 </li>
