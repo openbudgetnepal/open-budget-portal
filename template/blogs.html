@@ -81,7 +81,7 @@
                                     </a>
                                 </li>
                                 {% else  %}
-                                <li class="budget-items mainbudget-items" style="background-image: url({{ data.photo.url }})">
+                                <li class="budget-items mainbudget-items" style="background-image: url({{ data.photo.url }});background-repeat: no-repeat;background-size:cover">
                                     <a  class="info" href="blogdetail/{{ data.id }}">
                                         <span class="date">{{ data.publish }}</span>
                                         <div class="common-title">
