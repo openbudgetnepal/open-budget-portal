@@ -65,7 +65,11 @@ html, body, #container555 {
     <section class="viz-header background-dark">
         <div class="container">
             <div class="wrapper">
-                <h3 class="title">{{ data.name }}</span></h3>
+                  <select  onchange="location = this.value;">
+                      {% for data2 in calculation %}
+                      <option value="/budgetvisualization/{{ data2.id }}" {% if data2.id == data.id %}selected="selected" {% endif %}>{{ data2.name }}</option>
+                      {% endfor %}
+                  </select>
                 <div class="row gx-2 gy-2 viz-row">
                     <div class="col-lg-3 col-md-12">
                         <figure><img src='{{ data.image.url }}' alt="Province1" ></figure>
@@ -249,8 +253,10 @@ html, body, #container555 {
                                     <p class="note">All Rupees amounts shown here represent {{ data.name }} reported obligated amounts
                                         amounts.</p>
                                     {% endfor %}
+
                                     <div   class="btn-wrap">
-                                        <button id="export63"  class="common-button is-bg">Export</button>
+                                        <button id="export63"  class="common-button is-bg">Export PNG</button>
+                                        <button  id="export64"  class="common-button is-bg">Export CSV</button>
                                     </div>
                                 </div>
                             </div>
@@ -292,7 +298,6 @@ html, body, #container555 {
 <script src='{% static "js/filesaver.js" %}'></script>
 <script src='{% static "js/jquery-3.4.1.min.js" %}'></script>
 <script src='{% static "js/html2canvas.js" %}'></script>
-
 
 
 
@@ -392,10 +397,16 @@ html, body, #container555 {
     anychart.exports.filename('{{ datatosend1 }}-{{first_date}}');
 
 
-    var element = document.querySelector('#export63')
-    element.addEventListener('click',function(){
+    var element1 = document.querySelector('#export63')
+    element1.addEventListener('click',function(){
 
             chart.saveAsPng();
+
+        });
+
+    var element2 = document.querySelector('#export64')
+    element2.addEventListener('click',function(){
+            chart.saveAsCsv();
 
         });
 

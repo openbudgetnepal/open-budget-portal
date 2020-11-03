@@ -66,39 +66,95 @@
                                 </div>
                                 <div class="search-content">
                                     <div class="index-search">
-                                        <a href="#0">0</a>
+                                        {% if A %}
                                         <a href="#a" class="current">A</a>
+                                        {% endif %}
+                                        {% if B %}
                                         <a href="#b">B</a>
+                                        {% endif %}
+                                        {% if C %}
                                         <a href="#c">C</a>
+                                        {% endif %}
+                                        {% if D %}
                                         <a href="#d">D</a>
+                                        {% endif %}
+                                        {% if E %}
                                         <a href="#e">E</a>
+                                        {% endif %}
+                                        {% if F %}
                                         <a href="#f">F</a>
+                                        {% endif %}
+                                        {% if G %}
                                         <a href="#g">G</a>
+                                        {% endif %}
+                                        {% if H %}
                                         <a href="#h">H</a>
+                                        {% endif %}
+                                        {% if I %}
                                         <a href="#i">I</a>
+                                        {% endif %}
+                                        {% if J %}
                                         <a href="#j">j</a>
+                                        {% endif %}
+                                        {% if K %}
                                         <a href="#k">k</a>
+                                        {% endif %}
+                                        {% if L %}
                                         <a href="#l">l</a>
+                                        {% endif %}
+                                        {% if M %}
                                         <a href="#m">m</a>
+                                        {% endif %}
+                                        {% if N %}
                                         <a href="#n">n</a>
+                                        {% endif %}
+                                        {% if O %}
                                         <a href="#o">o</a>
+                                        {% endif %}
+                                        {% if P %}
                                         <a href="#p">p</a>
+                                        {% endif %}
+                                        {% if Q %}
                                         <a href="#q">q</a>
+                                        {% endif %}
+                                        {% if R %}
                                         <a href="#r">r</a>
+                                        {% endif %}
+                                        {% if S %}
                                         <a href="#s">s</a>
+                                        {% endif %}
+                                        {% if T %}
                                         <a href="#t">t</a>
+                                        {% endif %}
+                                        {% if U %}
                                         <a href="#u">u</a>
+                                        {% endif %}
+                                        {% if V %}
                                         <a href="#v">v</a>
+                                        {% endif %}
+                                        {% if W %}
                                         <a href="#w">w</a>
+                                        {% endif %}
+                                        {% if X %}
                                         <a href="#x">x</a>
+                                        {% endif %}
+                                        {% if Y %}
                                         <a href="#y">y</a>
+                                        {% endif %}
+                                        {% if Z %}
                                         <a href="#z">z</a>
+                                        {% endif %}
+                                        {% if zero %}
+                                        <a href="#0">0</a>
+                                        {% endif %}
                                     </div>
                                     <div class="index-content">
                                         <ul class="index-li" id="theList">
                                             <li class="index-item">
                                                 <a id="a">
+                                                    {% if A %}
                                                     <span class="index-letter">A</span>
+                                                    {% endif %}
                                                     <ul class="inner-list" >
                                                         {% for data in findletter %}
                                                         {% if data.title|make_list|first == 'A' or data.title|make_list|first == 'a' %}
@@ -113,7 +169,9 @@
                                             </li>
                                             <li class="index-item">
                                                 <a id="b">
+                                                    {% if B %}
                                                     <span class="index-letter">B</span>
+                                                    {% endif %}
                                                     <ul class="inner-list">
                                                         {% for data in findletter %}
                                                         {% if data.title|make_list|first == 'B' or data.title|make_list|first == 'b' %}
@@ -128,7 +186,9 @@
                                             </li>
                                             <li class="index-item">
                                                 <a id="c">
+                                                    {% if C %}
                                                     <span class="index-letter">C</span>
+                                                    {% endif %}
                                                     <ul class="inner-list">
                                                         {% for data in findletter %}
                                                         {% if data.title|make_list|first == 'C' or data.title|make_list|first == 'c'%}
@@ -143,7 +203,9 @@
                                             </li>
                                             <li class="index-item">
                                                 <a id="d">
+                                                    {% if D %}
                                                     <span class="index-letter">D</span>
+                                                    {% endif %}
                                                     <ul class="inner-list">
                                                         {% for data in findletter %}
                                                         {% if data.title|make_list|first == 'D' or data.title|make_list|first == 'd'%}
@@ -158,7 +220,9 @@
                                             </li>
                                             <li class="index-item">
                                                 <a id="e">
+                                                    {% if E %}
                                                     <span class="index-letter">E</span>
+                                                    {% endif %}
                                                     <ul class="inner-list">
                                                         {% for data in findletter %}
                                                         {% if data.title|make_list|first == 'E' or data.title|make_list|first == 'e'%}
@@ -173,7 +237,9 @@
                                             </li>
                                             <li class="index-item">
                                                 <a id="f">
+                                                    {% if F %}
                                                     <span class="index-letter">F</span>
+                                                    {% endif %}
                                                     <ul class="inner-list">
                                                         {% for data in findletter %}
                                                         {% if data.title|make_list|first == 'F' or data.title|make_list|first == 'f' %}
@@ -188,7 +254,9 @@
                                             </li>
                                             <li class="index-item">
                                                 <a id="g">
+                                                    {% if G %}
                                                     <span class="index-letter">G</span>
+                                                    {% endif %}
                                                     <ul class="inner-list">
                                                         {% for data in findletter %}
                                                         {% if data.title|make_list|first == 'G' or data.title|make_list|first == 'g' %}
@@ -203,7 +271,9 @@
                                             </li>
                                             <li class="index-item">
                                                 <a id="h">
+                                                    {% if H %}
                                                     <span class="index-letter">H</span>
+                                                    {% endif %}
                                                     <ul class="inner-list">
                                                         {% for data in findletter %}
                                                         {% if data.title|make_list|first == 'H' or data.title|make_list|first == 'h' %}
@@ -218,7 +288,9 @@
                                             </li>
                                             <li class="index-item">
                                                 <a id="i">
+                                                    {% if I %}
                                                     <span class="index-letter">I</span>
+                                                    {% endif %}
                                                     <ul class="inner-list">
                                                         {% for data in findletter %}
                                                         {% if data.title|make_list|first == 'I' or data.title|make_list|first == 'i' %}
@@ -233,7 +305,9 @@
                                             </li>
                                             <li class="index-item">
                                                 <a id="j">
+                                                    {% if J %}
                                                     <span class="index-letter">J</span>
+                                                    {% endif %}
                                                     <ul class="inner-list">
                                                         {% for data in findletter %}
                                                         {% if data.title|make_list|first == 'J' or data.title|make_list|first == 'j' %}
@@ -248,7 +322,9 @@
                                             </li>
                                             <li class="index-item">
                                                 <a id="k">
+                                                    {% if K %}
                                                     <span class="index-letter">K</span>
+                                                    {% endif %}
                                                     <ul class="inner-list">
                                                         {% for data in findletter %}
                                                         {% if data.title|make_list|first == 'K' or data.title|make_list|first == 'k' %}
@@ -263,7 +339,9 @@
                                             </li>
                                             <li class="index-item">
                                                 <a id="l">
+                                                    {% if L %}
                                                     <span class="index-letter">L</span>
+                                                    {% endif %}
                                                     <ul class="inner-list">
                                                         {% for data in findletter %}
                                                         {% if data.title|make_list|first == 'L' or data.title|make_list|first == 'l' %}
@@ -278,7 +356,9 @@
                                             </li>
                                             <li class="index-item">
                                                 <a id="m">
+                                                    {% if M %}
                                                     <span class="index-letter">M</span>
+                                                    {% endif %}
                                                     <ul class="inner-list">
                                                         {% for data in findletter %}
                                                         {% if data.title|make_list|first == 'M' or data.title|make_list|first == 'm' %}
@@ -293,7 +373,9 @@
                                             </li>
                                             <li class="index-item">
                                                 <a id="n">
+                                                    {% if N %}
                                                     <span class="index-letter">N</span>
+                                                    {% endif %}
                                                     <ul class="inner-list">
                                                         {% for data in findletter %}
                                                         {% if data.title|make_list|first == 'N' or data.title|make_list|first == 'n' %}
@@ -308,7 +390,9 @@
                                             </li>
                                             <li class="index-item">
                                                 <a id="o">
+                                                    {% if O %}
                                                     <span class="index-letter">O</span>
+                                                    {% endif %}
                                                     <ul class="inner-list">
                                                         {% for data in findletter %}
                                                         {% if data.title|make_list|first == 'O' or data.title|make_list|first == 'o' %}
@@ -323,7 +407,9 @@
                                             </li>
                                             <li class="index-item">
                                                 <a id="p">
+                                                    {% if P %}
                                                     <span class="index-letter">P</span>
+                                                    {% endif %}
                                                     <ul class="inner-list">
                                                         {% for data in findletter %}
                                                         {% if data.title|make_list|first == 'P' or data.title|make_list|first == 'P' %}
@@ -338,7 +424,9 @@
                                             </li>
                                             <li class="index-item">
                                                 <a id="q">
+                                                    {% if Q %}
                                                     <span class="index-letter">Q</span>
+                                                    {% endif %}
                                                     <ul class="inner-list">
                                                         {% for data in findletter %}
                                                         {% if data.title|make_list|first == 'Q' or data.title|make_list|first == 'q' %}
@@ -353,7 +441,9 @@
                                             </li>
                                             <li class="index-item">
                                                 <a id="r">
+                                                    {% if R %}
                                                     <span class="index-letter">R</span>
+                                                    {% endif %}
                                                     <ul class="inner-list">
                                                         {% for data in findletter %}
                                                         {% if data.title|make_list|first == 'R' or data.title|make_list|first == 'r' %}
@@ -368,7 +458,9 @@
                                             </li>
                                             <li class="index-item">
                                                 <a id="s">
+                                                    {% if S %}
                                                     <span class="index-letter">S</span>
+                                                    {% endif %}
                                                     <ul class="inner-list">
                                                         {% for data in findletter %}
                                                         {% if data.title|make_list|first == 'S' or data.title|make_list|first == 's' %}
@@ -383,7 +475,9 @@
                                             </li>
                                             <li class="index-item">
                                                 <a id="t">
+                                                    {% if T %}
                                                     <span class="index-letter">t</span>
+                                                    {% endif %}
                                                     <ul class="inner-list">
                                                         {% for data in findletter %}
                                                         {% if data.title|make_list|first == 'T' or data.title|make_list|first == 't' %}
@@ -398,7 +492,9 @@
                                             </li>
                                             <li class="index-item">
                                                 <a id="u">
+                                                    {% if U %}
                                                     <span class="index-letter">U</span>
+                                                    {% endif %}
                                                     <ul class="inner-list">
                                                         {% for data in findletter %}
                                                         {% if data.title|make_list|first == 'U' or data.title|make_list|first == 'u' %}
@@ -413,7 +509,9 @@
                                             </li>
                                             <li class="index-item">
                                                 <a id="v">
+                                                    {% if V %}
                                                     <span class="index-letter">V</span>
+                                                    {% endif %}
                                                     <ul class="inner-list">
                                                         {% for data in findletter %}
                                                         {% if data.title|make_list|first == 'V' or data.title|make_list|first == 'v' %}
@@ -428,7 +526,9 @@
                                             </li>
                                             <li class="index-item">
                                                 <a id="w">
+                                                    {% if W %}
                                                     <span class="index-letter">W</span>
+                                                    {% endif %}
                                                     <ul class="inner-list">
                                                         {% for data in findletter %}
                                                         {% if data.title|make_list|first == 'W' or data.title|make_list|first == 'w' %}
@@ -443,7 +543,9 @@
                                             </li>
                                             <li class="index-item">
                                                 <a id="x">
+                                                    {% if X %}
                                                     <span class="index-letter">X</span>
+                                                    {% endif %}
                                                     <ul class="inner-list">
                                                         {% for data in findletter %}
                                                         {% if data.title|make_list|first == 'X' or data.title|make_list|first == 'x' %}
@@ -458,7 +560,9 @@
                                             </li>
                                             <li class="index-item">
                                                 <a id="y">
+                                                    {% if Y %}
                                                     <span class="index-letter">Y</span>
+                                                    {% endif %}
                                                     <ul class="inner-list">
                                                         {% for data in findletter %}
                                                         {% if data.title|make_list|first == 'Y' or data.title|make_list|first == 'y' %}
@@ -473,7 +577,9 @@
                                             </li>
                                             <li class="index-item">
                                                 <a id="z">
+                                                    {% if Z %}
                                                     <span class="index-letter">z</span>
+                                                    {% endif %}
                                                     <ul class="inner-list">
                                                         {% for data in findletter %}
                                                         {% if data.title|make_list|first == 'Z' or data.title|make_list|first == 'z' %}
