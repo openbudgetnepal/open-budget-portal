@@ -2,7 +2,6 @@ import os
 from django.utils import timezone
 from django.conf import settings
 from django.db import models
-import pandas as pd
 from django.contrib import messages
 from django.core.exceptions import ValidationError
 from ckeditor.fields import RichTextField

@@ -42,6 +42,7 @@ class BudgetVisualization(DetailView):
         context['first_date'] = str(first_date)
         context['budget'] = budget
         context['date'] = date
+        context['calculation'] = calculation
         context['tot_bug'] = tot_bug
         context['act_exp'] = act_exp
         context['object1'] = self.kwargs['pk']
@@ -58,6 +59,7 @@ class BudgetVisualization(DetailView):
         if str(data2) == str(1):
             datatosend1 = 'Total Budget'
         calculation = Province.objects.order_by('id')
+        print(calculation)
         topdata = Province.objects.filter(id=self.kwargs['pk'])
         date = Year.objects.all()
         source = ProvinceSource.objects.filter(province_name=self.kwargs['pk'])
@@ -77,6 +79,7 @@ class BudgetVisualization(DetailView):
                 'datatosend1': datatosend1,
                 'data1': data1,
                 'topdata': topdata,
+                'calculation': calculation,
                 'source': source,
                 'budget': budget,
                 'date': date,
@@ -180,11 +183,122 @@ class GlossaryView(TemplateView):
         provincefilter = Province.objects.filter().first()
         glossarydate = Glossary.objects.latest('updated_at')
         findletter = Glossary.objects.order_by('id')
+        A = []
+        B = []
+        C = []
+        D = []
+        E = []
+        F = []
+        G = []
+        H = []
+        I = []
+        J = []
+        K = []
+        L = []
+        M = []
+        N = []
+        O = []
+        P = []
+        Q = []
+        R = []
+        S = []
+        T = []
+        U = []
+        V = []
+        W = []
+        X = []
+        Y = []
+        Z = []
+        zero = []
+        for data in findletter:
+            test = data.title[0][0]
+            if test == "A" or test == "a":
+                A = test
+            elif test == "B" or test == "b":
+                B = test
+            elif test == "C" or test == "c":
+                C = test
+            elif test == "D" or test == "d":
+                D = test
+            elif test == "E" or test == "e":
+                E = test
+            elif test == "F" or test == "f":
+                F = test
+            elif test == "G" or test == "g":
+                G = test
+            elif test == "H" or test == "h":
+                H = test
+            elif test == "I" or test == "i":
+                I = test
+            elif test == "J" or test == "j":
+                J = test
+            elif test == "K" or test == "k":
+                K = test
+            elif test == "L" or test == "l":
+                L = test
+            elif test == "M" or test == "m":
+                M = test
+            elif test == "N" or test == "n":
+                N = test
+            elif test == "O" or test == "o":
+                O = test
+            elif test == "P" or test == "p":
+                P = test
+            elif test == "Q" or test == "q":
+                Q = test
+            elif test == "R" or test == "r":
+                R = test
+            elif test == "S" or test == "s":
+                S = test
+            elif test == "T" or test == "t":
+                T = test
+            elif test == "U" or test == "u":
+                U = test
+            elif test == "V" or test == "v":
+                V = test
+            elif test == "W" or test == "w":
+                W = test
+            elif test == "X" or test == "x":
+                X = test
+            elif test == "Y" or test == "y":
+                Y = test
+            elif test == "Z" or test == "z":
+                Z = test
+            else:
+                zero = 0
 
         context = {
             'findletter': findletter,
             'glossary': glossarydate,
-            'provincefilter': provincefilter
+            'provincefilter': provincefilter,
+            'A': A,
+            'B': B,
+            'C': C,
+            'D': D,
+            'E': E,
+            'F': F,
+            'G': G,
+            'H': H,
+            'I': I,
+            'J': J,
+            'K': K,
+            'L': L,
+            'M': M,
+            'N': N,
+            'O': O,
+            'P': P,
+            'Q': Q,
+            'R': R,
+            'S': S,
+            'T': T,
+            'U': U,
+            'V': V,
+            'W': W,
+            'X': X,
+            'Y': Y,
+            'Z': Z,
+            'zero': zero
+
         }
         return render(request, 'glossary.html', context)
 
