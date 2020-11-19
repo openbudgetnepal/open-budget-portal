@@ -60,7 +60,7 @@ html, body, #container555 {
             </div>
         </div>
     </header>
-    {% for data in topdata %}
+      {% for data in topdata %}
     <section class="viz-header background-dark">
         <div class="container">
             <div class="wrapper">
@@ -209,8 +209,9 @@ html, body, #container555 {
                                     {% endfor %}
                                     <div   class="btn-wrap">
                                         <button id="export63"  class="common-button is-bg">Export PNG</button>
-                                        <button  id="export64"  class="common-button is-bg">Export CSV</button>
-
+                                    </div>
+                                    <div   class="btn-wrap">
+                                        <button id="export64"  class="common-button is-bg">Export CSV</button>
                                     </div>
                                 </div>
                             </div>
@@ -254,10 +255,11 @@ html, body, #container555 {
                                     <p class="note">All Rupees amounts shown here represent {{ data.name }} reported obligated amounts
                                         amounts.</p>
                                     {% endfor %}
-
                                     <div   class="btn-wrap">
                                         <button id="export63"  class="common-button is-bg">Export PNG</button>
-                                        <button  id="export64"  class="common-button is-bg">Export CSV</button>
+                                    </div>
+                                    <div   class="btn-wrap">
+                                        <button id="export64"  class="common-button is-bg">Export CSV</button>
                                     </div>
                                 </div>
                             </div>
@@ -299,6 +301,7 @@ html, body, #container555 {
 <script src='{% static "js/filesaver.js" %}'></script>
 <script src='{% static "js/jquery-3.4.1.min.js" %}'></script>
 <script src='{% static "js/html2canvas.js" %}'></script>
+
 
 
 
@@ -396,7 +399,6 @@ html, body, #container555 {
     chart.container("container555");
     chart.headers(false);
     anychart.exports.filename('{{ datatosend1 }}-{{first_date}}');
-
 
     var element1 = document.querySelector('#export63')
     element1.addEventListener('click',function(){
