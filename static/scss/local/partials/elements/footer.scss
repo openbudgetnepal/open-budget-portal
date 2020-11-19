@@ -209,4 +209,35 @@ footer{
             }
         }
     }
+
+    .footer-marquee{
+        margin-top: 20px;
+        marquee{
+            p{
+                color: $white-color;
+                margin: 0 15px;
+                display: inline-block;
+                a{
+                    position: relative;
+                    padding-left: 5px;
+                    color: $primary-color;
+                    &::after{
+                        content: '';
+                        position: absolute;
+                        bottom: -2px;
+                        left: 0;
+                        height: 1px;
+                        width: 0;
+                        background: $primary-color;
+                        @include transition(all .3s ease);
+                    }
+                    &:hover{
+                        &::after{
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
