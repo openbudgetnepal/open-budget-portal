@@ -7981,4 +7981,269 @@ footer.site-footer {
               width: 50px;
               height: 18px; } }
 
+.glossary {
+  padding: 180px 0 110px; }
+  @media only screen and (max-width: 1560px) {
+    .glossary {
+      padding: 155px 0 90px; } }
+  @media only screen and (max-width: 1440px) {
+    .glossary {
+      padding: 130px 0 70px; } }
+  @media only screen and (max-width: 576px) {
+    .glossary {
+      padding: 115px 0 70px; } }
+  .glossary .row-wrap {
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center; }
+  .glossary .section-title-wrap {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    margin-bottom: 70px; }
+    @media only screen and (max-width: 1560px) {
+      .glossary .section-title-wrap {
+        margin-bottom: 60px; } }
+    @media only screen and (max-width: 1440px) {
+      .glossary .section-title-wrap {
+        margin-bottom: 50px; } }
+    .glossary .section-title-wrap .date span {
+      font-size: 13px;
+      color: #000000;
+      font-family: "Oswald", sans-serif;
+      text-transform: uppercase;
+      letter-spacing: .8px; }
+      @media only screen and (max-width: 1560px) {
+        .glossary .section-title-wrap .date span {
+          font-size: 11px; } }
+      @media only screen and (max-width: 1440px) {
+        .glossary .section-title-wrap .date span {
+          font-size: 9px; } }
+  .glossary .section-content .search-title-bar .form-group {
+    position: relative; }
+    .glossary .section-content .search-title-bar .form-group input {
+      color: #757575;
+      -webkit-border-radius: 0;
+      -moz-border-radius: 0;
+      -ms-border-radius: 0;
+      border-radius: 0;
+      border: 0;
+      border-bottom: 1px solid #e6e6e6;
+      padding: 10px 0;
+      padding-left: 30px;
+      height: 34px;
+      min-height: 34px; }
+      @media only screen and (max-width: 1560px) {
+        .glossary .section-content .search-title-bar .form-group input {
+          padding-left: 25px;
+          height: 30px;
+          min-height: 30px; } }
+      @media only screen and (max-width: 1440px) {
+        .glossary .section-content .search-title-bar .form-group input {
+          height: 28px;
+          min-height: 28px; } }
+      .glossary .section-content .search-title-bar .form-group input:focus {
+        border-bottom: 1px solid #DF6D45;
+        color: #DF6D45; }
+        .glossary .section-content .search-title-bar .form-group input:focus ~ i {
+          color: #DF6D45; }
+      .glossary .section-content .search-title-bar .form-group input ~ i {
+        -webkit-transition: all 0.4s ease;
+        -o-transition: all 0.4s ease;
+        transition: all 0.4s ease;
+        font-size: 18px;
+        color: #8f8f8f;
+        position: absolute;
+        top: 8px;
+        left: 0; }
+        @media only screen and (max-width: 1560px) {
+          .glossary .section-content .search-title-bar .form-group input ~ i {
+            font-size: 16px; } }
+        @media only screen and (max-width: 1440px) {
+          .glossary .section-content .search-title-bar .form-group input ~ i {
+            font-size: 14px;
+            top: 5px; } }
+  .glossary .section-content .search-content {
+    margin-top: 35px;
+    background: #F2F3F5;
+    padding: 0 40px;
+    padding-right: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex; }
+    @media only screen and (max-width: 1560px) {
+      .glossary .section-content .search-content {
+        margin-top: 25px;
+        padding: 0 30px;
+        padding-right: 0; } }
+    @media only screen and (max-width: 1440px) {
+      .glossary .section-content .search-content {
+        margin-top: 20px;
+        padding-right: 0; } }
+    @media only screen and (max-width: 576px) {
+      .glossary .section-content .search-content {
+        padding: 0 20px;
+        padding-right: 0; } }
+    .glossary .section-content .search-content .index-search {
+      padding: 50px 0;
+      flex: 0 0 14%;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+      flex-direction: column; }
+      @media only screen and (max-width: 1440px) {
+        .glossary .section-content .search-content .index-search {
+          padding: 30px 0; } }
+      .glossary .section-content .search-content .index-search a {
+        font-size: 16px;
+        line-height: 28px;
+        font-weight: 600;
+        color: #C0BFC4;
+        text-transform: uppercase;
+        -webkit-transition: all 0.4s ease;
+        -o-transition: all 0.4s ease;
+        transition: all 0.4s ease;
+        width: 26px;
+        height: 26px;
+        text-align: center; }
+        .glossary .section-content .search-content .index-search a:not(:last-child) {
+          margin-bottom: 25px; }
+        .glossary .section-content .search-content .index-search a:active {
+          background: rgba(223, 109, 69, 0.2);
+          color: #DF6D45;
+          -webkit-border-radius: 50%;
+          -moz-border-radius: 50%;
+          -ms-border-radius: 50%;
+          border-radius: 50%; }
+        .glossary .section-content .search-content .index-search a:hover, .glossary .section-content .search-content .index-search a.current {
+          color: #DF6D45; }
+        @media only screen and (max-width: 1560px) {
+          .glossary .section-content .search-content .index-search a {
+            font-size: 12px; }
+            .glossary .section-content .search-content .index-search a:not(:last-child) {
+              margin-bottom: 15px; } }
+        @media only screen and (max-width: 1440px) {
+          .glossary .section-content .search-content .index-search a {
+            font-size: 10px;
+            line-height: 20px;
+            width: 20px;
+            height: 20px; }
+            .glossary .section-content .search-content .index-search a:not(:last-child) {
+              margin-bottom: 10px; } }
+    .glossary .section-content .search-content .index-content {
+      padding: 50px 0;
+      height: 1700px;
+      overflow-y: scroll;
+      scroll-behavior: smooth; }
+      .glossary .section-content .search-content .index-content::-webkit-scrollbar {
+        width: 4px; }
+        @media only screen and (max-width: 1440px) {
+          .glossary .section-content .search-content .index-content::-webkit-scrollbar {
+            width: 3px; } }
+      .glossary .section-content .search-content .index-content::-webkit-scrollbar-track {
+        background: #f0f0f0; }
+      .glossary .section-content .search-content .index-content::-webkit-scrollbar-thumb {
+        background: #dcdcdc;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        -ms-border-radius: 10px;
+        border-radius: 10px; }
+      @media only screen and (max-width: 1560px) {
+        .glossary .section-content .search-content .index-content {
+          padding: 40px 0; } }
+      @media only screen and (max-width: 1440px) {
+        .glossary .section-content .search-content .index-content {
+          padding: 30px 0; } }
+      @media only screen and (max-width: 991px) {
+        .glossary .section-content .search-content .index-content {
+          height: 1500px; } }
+      .glossary .section-content .search-content .index-content ul.index-li {
+        padding-right: 80px; }
+        @media only screen and (max-width: 1199px) {
+          .glossary .section-content .search-content .index-content ul.index-li {
+            padding-right: 30px; } }
+        @media only screen and (max-width: 480px) {
+          .glossary .section-content .search-content .index-content ul.index-li {
+            padding-right: 20px; } }
+        .glossary .section-content .search-content .index-content ul.index-li li.index-item:not(:last-child) {
+          margin-bottom: 80px; }
+          @media only screen and (max-width: 1560px) {
+            .glossary .section-content .search-content .index-content ul.index-li li.index-item:not(:last-child) {
+              margin-bottom: 60px; } }
+          @media only screen and (max-width: 1440px) {
+            .glossary .section-content .search-content .index-content ul.index-li li.index-item:not(:last-child) {
+              margin-bottom: 40px; } }
+        .glossary .section-content .search-content .index-content ul.index-li li.index-item a {
+          display: block; }
+          .glossary .section-content .search-content .index-content ul.index-li li.index-item a .index-letter {
+            text-transform: uppercase;
+            font-size: 55px;
+            line-height: 40px;
+            font-weight: 400;
+            color: #000000;
+            font-family: "Playfair Display", serif; }
+            @media only screen and (max-width: 1560px) {
+              .glossary .section-content .search-content .index-content ul.index-li li.index-item a .index-letter {
+                font-size: 40px;
+                line-height: 60px; } }
+            @media only screen and (max-width: 1440px) {
+              .glossary .section-content .search-content .index-content ul.index-li li.index-item a .index-letter {
+                font-size: 34px;
+                line-height: 32px; } }
+            @media only screen and (max-width: 991px) {
+              .glossary .section-content .search-content .index-content ul.index-li li.index-item a .index-letter {
+                text-align: center;
+                font-size: 26px; } }
+          .glossary .section-content .search-content .index-content ul.index-li li.index-item a ul.inner-list {
+            margin-top: 40px; }
+            @media only screen and (max-width: 1560px) {
+              .glossary .section-content .search-content .index-content ul.index-li li.index-item a ul.inner-list {
+                margin-top: 30px; } }
+            @media only screen and (max-width: 1440px) {
+              .glossary .section-content .search-content .index-content ul.index-li li.index-item a ul.inner-list {
+                margin-top: 20px; } }
+            .glossary .section-content .search-content .index-content ul.index-li li.index-item a ul.inner-list li {
+              margin-bottom: 40px; }
+              .glossary .section-content .search-content .index-content ul.index-li li.index-item a ul.inner-list li b {
+                text-transform: capitalize;
+                font-size: 16px;
+                line-height: 28px;
+                font-weight: 600; }
+              .glossary .section-content .search-content .index-content ul.index-li li.index-item a ul.inner-list li p {
+                text-transform: capitalize;
+                margin-top: 12px;
+                font-size: 14px;
+                line-height: 24px; }
+              @media only screen and (max-width: 1560px) {
+                .glossary .section-content .search-content .index-content ul.index-li li.index-item a ul.inner-list li {
+                  margin-bottom: 30px; }
+                  .glossary .section-content .search-content .index-content ul.index-li li.index-item a ul.inner-list li b {
+                    font-size: 13px;
+                    line-height: 24px; }
+                  .glossary .section-content .search-content .index-content ul.index-li li.index-item a ul.inner-list li p {
+                    margin-top: 8px;
+                    font-size: 11px;
+                    line-height: 20px; } }
+              @media only screen and (max-width: 1440px) {
+                .glossary .section-content .search-content .index-content ul.index-li li.index-item a ul.inner-list li {
+                  margin-bottom: 20px; }
+                  .glossary .section-content .search-content .index-content ul.index-li li.index-item a ul.inner-list li b {
+                    font-size: 10px;
+                    line-height: 20px; }
+                  .glossary .section-content .search-content .index-content ul.index-li li.index-item a ul.inner-list li p {
+                    font-size: 9px;
+                    line-height: 16px; } }
+
 /*# sourceMappingURL=style.css.map */
