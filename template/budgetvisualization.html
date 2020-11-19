@@ -36,7 +36,8 @@ html, body, #container555 {
                         <div class="menu">
                             <ul>
                                 <li>
-                                    <a href="/budgetvisualization/{{ object1 }}" class="active">Open Budget Nepal</a>
+                                    <a href="/budgetvisualization/{{ object1 }}" class="active">Budget
+                                        Visualization</a>
                                 </li>
                                 <li>
                                     <a href="/glossary" class="">Glossary</a>
@@ -60,7 +61,7 @@ html, body, #container555 {
             </div>
         </div>
     </header>
-    {% for data in topdata %}
+      {% for data in topdata %}
     <section class="viz-header background-dark">
         <div class="container">
             <div class="wrapper">
@@ -209,8 +210,9 @@ html, body, #container555 {
                                     {% endfor %}
                                     <div   class="btn-wrap">
                                         <button id="export63"  class="common-button is-bg">Export PNG</button>
-                                        <button  id="export64"  class="common-button is-bg">Export CSV</button>
-
+                                    </div>
+                                    <div   class="btn-wrap">
+                                        <button id="export64"  class="common-button is-bg">Export CSV</button>
                                     </div>
                                 </div>
                             </div>
@@ -255,7 +257,10 @@ html, body, #container555 {
                                         amounts.</p>
                                     {% endfor %}
                                     <div   class="btn-wrap">
-                                        <button id="export63"  class="common-button is-bg">Export</button>
+                                        <button id="export63"  class="common-button is-bg">Export PNG</button>
+                                    </div>
+                                    <div   class="btn-wrap">
+                                        <button id="export64"  class="common-button is-bg">Export CSV</button>
                                     </div>
                                 </div>
                             </div>
@@ -395,7 +400,6 @@ html, body, #container555 {
     chart.container("container555");
     chart.headers(false);
     anychart.exports.filename('{{ datatosend1 }}-{{first_date}}');
-
 
     var element1 = document.querySelector('#export63')
     element1.addEventListener('click',function(){
