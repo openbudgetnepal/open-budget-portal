@@ -66,7 +66,7 @@ html, body, #container555 {
             <div class="wrapper">
                   <select  onchange="location = this.value;">
                       {% for data2 in calculation %}
-                      <option value="/budgetvisualization/{{ data2.id }}" {% if data2.id == data.id %}selected="selected" {% endif %}>{{ data2.name }}</option>
+                      <option value="/budgetvisualization/{{ data2.id }}" {% if data2.id == pk %}selected="selected" {% endif %}>{{ data2.name }}</option>
                       {% endfor %}
                   </select>
                 <div class="row gx-2 gy-2 viz-row">

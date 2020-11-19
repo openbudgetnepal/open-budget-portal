@@ -48,6 +48,7 @@ class BudgetVisualization(DetailView):
         context['object1'] = self.kwargs['pk']
         context['datatosend1'] = 'Actual Expenditure'
         context['data1'] = '2015/2016'
+        context['pk'] = self.kwargs['pk']
 
         return context
 
@@ -85,7 +86,8 @@ class BudgetVisualization(DetailView):
                 'date': date,
                 'first_date': data1,
                 'object1': self.kwargs['pk'],
-                'val': '1'
+                'val': '1',
+                'pk': self.kwargs['pk']
 
             }
             return render(request, 'budgetvisualization.html', context)
@@ -93,6 +95,7 @@ class BudgetVisualization(DetailView):
 
             context = {
                 'datatosend1': datatosend1,
+                'calculation': calculation,
                 'data1': data1,
                 'topdata': topdata,
                 'source': source,
@@ -100,7 +103,8 @@ class BudgetVisualization(DetailView):
                 'date': date,
                 'first_date': data1,
                 'object1': self.kwargs['pk'],
-                'val': '2'
+                'val': '2',
+                'pk': self.kwargs['pk']
 
             }
             return render(request, 'budgetvisualization.html', context)
