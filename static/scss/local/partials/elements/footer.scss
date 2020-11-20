@@ -210,13 +210,21 @@ footer{
         }
     }
 
-    .footer-marquee{
+    .footer-sources{
         margin-top: 20px;
-        marquee{
+        // marquee{
+            text-align: center;
             p{
                 color: $white-color;
-                margin: 0 15px;
+                padding-right: 10px;
                 display: inline-block;
+                font-size: 12px;
+                @media #{$breakpoint-lg-desktop}{
+                    font-size: 11px;
+                }
+                @media #{$breakpoint-desktop}{
+                    font-size: 10px;
+                }
                 a{
                     position: relative;
                     padding-left: 5px;
@@ -238,6 +246,6 @@ footer{
                     }
                 }
             }
-        }
+        // }
     }
 }

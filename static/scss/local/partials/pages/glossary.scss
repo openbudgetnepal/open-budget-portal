@@ -170,7 +170,7 @@
                 &::-webkit-scrollbar-thumb{
                     background: $border-light;
                     @include radius(10px);
-                }
+                } 
                 @media #{$breakpoint-lg-desktop}{
                     padding: 40px 0;
                 }

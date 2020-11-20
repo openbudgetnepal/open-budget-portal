@@ -1,9 +1,9 @@
 .contact_section{
     background: $secondary-color;
     .contact-content{
-        margin-top: 35px;
-        @media #{$breakpoint-desktop}{
-            margin-top: 25px;
+        margin-top: 20px;
+        @media #{$breakpoint-lg-desktop}{
+            margin-top: 20px;
         }
     }
     .contact-row{

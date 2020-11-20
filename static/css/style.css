@@ -4484,17 +4484,25 @@ footer {
         text-transform: uppercase; }
         footer .footer-copyright span a:hover {
           color: #DF6D45; }
-  footer .footer-marquee {
-    margin-top: 20px; }
-    footer .footer-marquee marquee p {
+  footer .footer-sources {
+    margin-top: 20px;
+    text-align: center; }
+    footer .footer-sources p {
       color: #ffffff;
-      margin: 0 15px;
-      display: inline-block; }
-      footer .footer-marquee marquee p a {
+      padding-right: 10px;
+      display: inline-block;
+      font-size: 12px; }
+      @media only screen and (max-width: 1560px) {
+        footer .footer-sources p {
+          font-size: 11px; } }
+      @media only screen and (max-width: 1440px) {
+        footer .footer-sources p {
+          font-size: 10px; } }
+      footer .footer-sources p a {
         position: relative;
         padding-left: 5px;
         color: #DF6D45; }
-        footer .footer-marquee marquee p a::after {
+        footer .footer-sources p a::after {
           content: '';
           position: absolute;
           bottom: -2px;
@@ -4505,7 +4513,7 @@ footer {
           -webkit-transition: all 0.3s ease;
           -o-transition: all 0.3s ease;
           transition: all 0.3s ease; }
-        footer .footer-marquee marquee p a:hover::after {
+        footer .footer-sources p a:hover::after {
           width: 100%; }
 
 .scroll-animate {
@@ -6468,10 +6476,10 @@ footer.site-footer {
 .contact_section {
   background: #22264D; }
   .contact_section .contact-content {
-    margin-top: 35px; }
-    @media only screen and (max-width: 1440px) {
+    margin-top: 20px; }
+    @media only screen and (max-width: 1560px) {
       .contact_section .contact-content {
-        margin-top: 25px; } }
+        margin-top: 20px; } }
   .contact_section .contact-row {
     margin-top: 30px; }
     @media only screen and (max-width: 1440px) {
