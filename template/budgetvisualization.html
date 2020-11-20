@@ -375,6 +375,9 @@ html, body, #container555 {
 
     // enable HTML for labels
     chart.labels().useHtml(true);
+    noDataLabel = chart.noData().label().enabled(true);
+    noDataLabel.enabled(true);
+    noDataLabel.text("No Data Available");
 
     // configure labels
     chart.labels().format(function() {
