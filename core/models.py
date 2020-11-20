@@ -57,7 +57,7 @@ class Blog(models.Model):
     content = RichTextField(blank=True, null=True)
     publish = models.DateTimeField(default=timezone.now, blank=True, null=True)
     status = models.IntegerField(choices=STATUS_CHOICES,
-                                 default=0,help_text='Only Numeric Value Without Comma')
+                                 default=0, help_text='Only Numeric Value Without Comma')
     category = models.ForeignKey('BlogCategory', on_delete=models.CASCADE,
                                  related_name='article_categories', blank=True,
                                  null=True)
@@ -105,7 +105,7 @@ class Information(models.Model):
 class Province(models.Model):
     name = models.CharField(max_length=250, unique=True, blank=True, null=True)
     image = models.FileField(upload_to='pics', blank=True, null=True)
-    code = models.IntegerField(blank=True, null=True,help_text='Only Numeric Value Without Comma')
+    code = models.FloatField(blank=True, null=True, help_text='Only Numeric Value Without Comma')
     total_budget = models.CharField(max_length=200, blank=True, null=True)
     male_percentage = models.CharField(max_length=200, blank=True, null=True)
     female_percentage = models.CharField(max_length=200, blank=True, null=True)
@@ -116,8 +116,8 @@ class Province(models.Model):
     human_development_index = models.CharField(max_length=100, blank=True, null=True)
     multidimensional_poverty_index = models.CharField(max_length=100, blank=True, null=True)
     total_gross_domestic_product = models.CharField(max_length=100, blank=True, null=True)
-    per_capital_income = models.CharField(max_length=100,blank=True, null=True)
-    revenue_collected = models.CharField(max_length=100,blank=True, null=True)
+    per_capital_income = models.CharField(max_length=100, blank=True, null=True)
+    revenue_collected = models.CharField(max_length=100, blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -134,12 +134,12 @@ class ProvinceSource(models.Model):
     province_name = models.ForeignKey(Province, on_delete=models.CASCADE, related_name='data6', blank=True,
                                       null=True)
     source = models.CharField(max_length=500, blank=True, null=True)
-    budget = models.BigIntegerField(blank=True, null=True,help_text='Only Numeric Value Without Comma')
+    budget = models.FloatField(blank=True, null=True, help_text='Only Numeric Value Without Comma')
     year = models.ForeignKey(Year, on_delete=models.CASCADE, blank=True, null=True, related_name='data7',
                              help_text='Please select a recent year... ')
 
     def __str__(self):
-        return self.source
+        return self.source + ' ' + "for year " + ' ' + self.year.year + ' ' + "of" + ' ' + self.province_name.name
 
 
 class ActualExpenditure(models.Model):
@@ -148,9 +148,9 @@ class ActualExpenditure(models.Model):
     office_name = models.CharField(max_length=500, blank=True, null=True)
 
     year = models.ForeignKey(Year, on_delete=models.CASCADE, related_name='data8', blank=True, null=True)
-    total = models.BigIntegerField(blank=True, null=True,help_text='Only Numeric Value Without Comma')
-    current = models.BigIntegerField(blank=True, null=True,help_text='Only Numeric Value Without Comma')
-    capital = models.BigIntegerField(blank=True, null=True,help_text='Only Numeric Value Without Comma')
+    total = models.FloatField(blank=True, null=True, help_text='Only Numeric Value Without Comma')
+    current = models.FloatField(blank=True, null=True, help_text='Only Numeric Value Without Comma')
+    capital = models.FloatField(blank=True, null=True, help_text='Only Numeric Value Without Comma')
 
     def __str__(self):
         return self.province_name.name + ' ' + self.office_name + ' ' + str(self.year.year)
@@ -162,9 +162,9 @@ class TotalBudget(models.Model):
     office_name = models.CharField(max_length=500, blank=True, null=True)
 
     year = models.ForeignKey(Year, on_delete=models.CASCADE, related_name='data1', blank=True, null=True)
-    total = models.BigIntegerField(blank=True, null=True,help_text='Only Numeric Value Without Comma')
-    current = models.BigIntegerField(blank=True, null=True,help_text='Only Numeric Value Without Comma')
-    capital = models.BigIntegerField(blank=True, null=True,help_text='Only Numeric Value Without Comma')
+    total = models.FloatField(blank=True, null=True, help_text='Only Numeric Value Without Comma')
+    current = models.FloatField(blank=True, null=True, help_text='Only Numeric Value Without Comma')
+    capital = models.FloatField(blank=True, null=True, help_text='Only Numeric Value Without Comma')
 
     def __str__(self):
         return self.province_name.name + ' ' + self.office_name + ' ' + str(self.year.year)
@@ -206,6 +206,3 @@ class ExtraNecessaryData(models.Model):
             # then error will also raised in update of exists model
             raise ValidationError('There is can be only one ExtraNecessaryDAta instance')
         return super(ExtraNecessaryData, self).save(*args, **kwargs)
-
-
-
